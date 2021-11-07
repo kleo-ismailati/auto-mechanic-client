@@ -1,8 +1,55 @@
-<div class="container-fluid">
+<div class="container-fluid vertical-center bg-light">
     <div class="row">
         <h1 class="display-5 text-center">Your Car Mechanic</h1>
     </div>
-    <div class="row">
+    <div class="row pb-5">
         <h1 class="lead text-center">Repair status tracking for your car</h1>
+    </div>
+
+    <div class="row col-sm-4 mx-auto active-dark">
+        <div class="input-group mb-3">
+            <input type="search" class="form-control bg-light rounded-3" placeholder="Search..." aria-label="Search" aria-describedby="button-search" [(ngModel)]="searchTerm">
+            <button class="btn rounded-3" type="button" id="button-search" (click)="search()">
+                <i class="pi pi-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="container pt-md-5" *ngIf="this.result">
+        <div class="row">
+            <h1 class="lead text-center"> Tracking Status </h1>
+        </div>
+        <table class="table table-bordered w-auto mx-auto">
+            <tbody>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Name:</td>
+                    <td>{{this.data.firstName}}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Surname:</td>
+                    <td>{{this.data.lastName}}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Car:</td>
+                    <td>{{this.data.car}}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Car Description:</td>
+                    <td>{{this.data.carDescription}}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Repair Cost:</td>
+                    <td>{{this.data.repairCost}}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Repair Detaild:</td>
+                    <td>{{this.data.repairDetails}}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Repair Status:</td>
+                    <td>{{this.data.repairStatus}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
