@@ -1,6 +1,6 @@
-import { Car } from "./car.model";
+import { CarDto } from "./car-dto";
 
-export interface Client {
+export interface ClientDto {
 
 	id?: number;
     firstName: string;
@@ -8,6 +8,6 @@ export interface Client {
 	email: string;
 	phoneNumber: string;
 	address: string;
-	car?: Car;
+	carDto?: CarDto;
 
 }

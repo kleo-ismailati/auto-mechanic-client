@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/core/services/api.service';
-import { Client } from 'src/app/core/models/client.model';
+import { RepairBookingDto } from 'src/app/core/models/dto/repair-booking-dto';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,7 @@ import { Client } from 'src/app/core/models/client.model';
 })
 export class HomeComponent implements OnInit {
 
-  data: Client | any;
+  data: RepairBookingDto | any;
   searchTerm: String = '';
   result: Boolean = false;
 
@@ -20,8 +20,8 @@ export class HomeComponent implements OnInit {
   }
 
   search(){
-    this.api.get('/client/' + this.searchTerm).subscribe(
-      (data) => {
+    this.api.get('/api/repair_booking/' + this.searchTerm).subscribe(
+      (data:RepairBookingDto) => {
         this.data = data;
         if(this.data && this.searchTerm !== ''){
           this.result = true;

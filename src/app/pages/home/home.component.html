@@ -8,7 +8,8 @@
 
     <div class="row col-sm-4 mx-auto active-dark">
         <div class="input-group mb-3">
-            <input type="search" class="form-control bg-light rounded-3" placeholder="Search..." aria-label="Search" aria-describedby="button-search" [(ngModel)]="searchTerm">
+            <input type="search" class="form-control bg-light rounded-3" placeholder="Search..." aria-label="Search" aria-describedby="button-search" 
+            [(ngModel)]="searchTerm" (keyup.enter)="search()">
             <button class="btn rounded-3" type="button" id="button-search" (click)="search()">
                 <i class="pi pi-search"></i>
             </button>
@@ -23,31 +24,31 @@
             <tbody>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Name:</td>
-                    <td>{{this.data.firstName}}</td>
+                    <td>{{this.data.clientDto?.firstName}}</td>
                 </tr>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Surname:</td>
-                    <td>{{this.data.lastName}}</td>
+                    <td>{{this.data.clientDto?.lastName}}</td>
                 </tr>
                 <tr>
-                    <td class="fw-bold col-sm-2 text-end">Car:</td>
-                    <td>{{this.data.car}}</td>
+                    <td class="fw-bold col-sm-2 text-end">Car Type:</td>
+                    <td>{{this.data.clientDto?.carDto?.carType}}</td>
                 </tr>
                 <tr>
-                    <td class="fw-bold col-sm-2 text-end">Car Description:</td>
-                    <td>{{this.data.carDescription}}</td>
+                    <td class="fw-bold col-sm-2 text-end">Car Model:</td>
+                    <td>{{this.data.clientDto?.carDto?.carModel}}</td>
                 </tr>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Repair Cost:</td>
-                    <td>{{this.data.repairCost}}</td>
+                    <td>{{this.data.totalPrice}}</td>
                 </tr>
                 <tr>
-                    <td class="fw-bold col-sm-2 text-end">Repair Detaild:</td>
-                    <td>{{this.data.repairDetails}}</td>
+                    <td class="fw-bold col-sm-2 text-end">Repair date:</td>
+                    <td>{{this.data.date}}</td>
                 </tr>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Repair Status:</td>
-                    <td>{{this.data.repairStatus}}</td>
+                    <td>{{this.data.status}}</td>
                 </tr>
             </tbody>
         </table>

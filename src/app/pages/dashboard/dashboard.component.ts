@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/core/services/api.service';
-import { Client } from 'src/app/core/models/client.model';
+import { RepairBookingViewDto } from 'src/app/core/models/list-dto/repair-booking-view-dto';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +10,14 @@ import { Client } from 'src/app/core/models/client.model';
 })
 export class DashboardComponent implements OnInit {
 
-  data : Client[] = [];
+  data : RepairBookingViewDto[] = [];
 
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     
-    this.api.get('/client').subscribe(
-      (data) => {
+    this.api.get('/api/repair_booking').subscribe(
+      (data: RepairBookingViewDto[]) => {
         this.data = data;
         console.log(this.data);
       }
