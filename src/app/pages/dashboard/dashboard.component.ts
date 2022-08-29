@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/core/services/api.service';
 import { RepairBooking } from 'src/app/core/models/repair-booking.model';
+import { PagedResponse } from 'src/app/core/models/paged.response.model';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +12,19 @@ import { RepairBooking } from 'src/app/core/models/repair-booking.model';
 })
 export class DashboardComponent implements OnInit {
 
-  data : RepairBooking[] = [];
+  data : PagedResponse<RepairBooking> = {
+    page: 0,
+    size: 0,
+    total: 0,
+    result: []
+  };
 
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     
     this.api.get('/api/repair_booking').subscribe(
-      (data: RepairBooking[]) => {
+      (data: PagedResponse<RepairBooking>) => {
         this.data = data;
         console.log(this.data);
       }
@@ -31,6 +38,15 @@ export class DashboardComponent implements OnInit {
         this.ngOnInit();
       }
     )
+  }
+
+  paginate(event: any) {
+    this.api.get(`/api/repair_booking?page=${event.page}`).subscribe(
+      (data: PagedResponse<RepairBooking>) => {
+        this.data = data;
+        console.log(this.data);
+      }
+    );
   }
 
 }

@@ -2,3 +2,12 @@
 .btn-table{
     width: 80px !important;
 }
+
+.default-container{
+    height: 86vh;
+}
+
+.container-can-scroll{
+    overflow-y: scroll;
+    height: 60vh;
+}

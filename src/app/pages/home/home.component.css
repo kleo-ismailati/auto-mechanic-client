@@ -1,6 +1,3 @@
-.container-fluid{
-    height: 91.5vh;
-}
 .vertical-center {  
     display: flex;
     flex-direction: column;

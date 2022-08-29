@@ -1,4 +1,4 @@
-<div class="container-fluid vertical-center bg-light">
+<div class="container-fluid default-container vertical-center bg-light">
     <div class="row">
         <h1 class="display-5 text-center">Your Car Mechanic</h1>
     </div>
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="container pt-md-5" *ngIf="this.result">
+    <div class="container container-can-scroll pt-md-5" *ngIf="this.result">
         <div class="row">
             <h1 class="lead text-center"> Tracking Status </h1>
         </div>
@@ -24,23 +24,23 @@
             <tbody>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Name:</td>
-                    <td>{{this.data.clientDto?.firstName}}</td>
+                    <td>{{this.data.client?.firstName}}</td>
                 </tr>
                 <tr>
-                    <td class="fw-bold col-sm-2 text-end">Surname:</td>
-                    <td>{{this.data.clientDto?.lastName}}</td>
+                    <td class="fw-bold col-sm-2 text-end">Lastname:</td>
+                    <td>{{this.data.client?.lastName}}</td>
                 </tr>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Car Type:</td>
-                    <td>{{this.data.clientDto?.carDto?.carType}}</td>
+                    <td>{{this.data.car?.carType}}</td>
                 </tr>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Car Model:</td>
-                    <td>{{this.data.clientDto?.carDto?.carModel}}</td>
+                    <td>{{this.data.car?.carModel}}</td>
                 </tr>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Repair Cost:</td>
-                    <td>{{this.data.totalPrice}}</td>
+                    <td>{{this.data.totalPrice | currency:'USD'}}</td>
                 </tr>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Repair date:</td>
