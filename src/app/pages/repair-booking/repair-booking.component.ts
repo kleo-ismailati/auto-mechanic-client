@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { ApiService } from 'src/app/core/services/api.service';
-import { RepairBooking } from 'src/app/core/models/repair-booking.model';
-import { PagedResponse } from 'src/app/core/models/paged.response.model';
-
+import {PagedResponse} from "../../core/models/paged.response.model";
+import {RepairBooking} from "../../core/models/repair-booking.model";
+import {ApiService} from "../../core/services/api.service";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-repair-booking',
+  templateUrl: './repair-booking.component.html',
+  styleUrls: ['./repair-booking.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class RepairBookingComponent implements OnInit {
 
   data : PagedResponse<RepairBooking> = {
     page: 0,
@@ -23,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.api.get('/api/repair_booking/tbd').subscribe(
+    this.api.get('/api/repair_booking').subscribe(
       (data: PagedResponse<RepairBooking>) => {
         this.data = data;
         console.log(this.data);
@@ -48,5 +46,4 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
 }
