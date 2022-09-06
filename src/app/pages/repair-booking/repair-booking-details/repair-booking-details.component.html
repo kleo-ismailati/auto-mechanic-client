@@ -1,1 +1,51 @@
-<p>repair-booking-details works!</p>
+<app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
+</app-breadcrumb>
+<div class="container crumb-container">
+  <div class="container" *ngIf="this.data">
+    <div class="row">
+      <h1 class="lead fw-bold text-center">Booking Details</h1>
+    </div>
+    <table class="table table-bordered w-auto mx-auto">
+      <tbody>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Client name</td>
+        <td >{{this.data.client?.firstName}}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Client lastname</td>
+        <td>{{this.data.client?.lastName}}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Car type</td>
+        <td>{{this.data.car?.carType}}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Car model</td>
+        <td>{{this.data.car?.carModel}}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Repair cost</td>
+        <td>{{this.data.totalPrice | currency:'USD'}}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Booking date</td>
+        <td>{{this.data.date | date}}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Repair status</td>
+        <td>{{this.data.status}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="float-end">
+      <button class="btn btn-outline-success me-2" (click)="enableEdit()">Edit Booking</button>
+      <a routerLink="../../">
+        <button class="btn btn-outline-secondary">
+          Back
+        </button>
+      </a>
+
+    </div>
+
+  </div>
+</div>

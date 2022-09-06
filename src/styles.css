@@ -4,10 +4,18 @@
 }
 
 .default-container{
-    height: 86vh;
+    min-height: 86vh;
+}
+
+.crumb-bar{
+  min-height: 8vh;
+}
+
+.crumb-container{
+  min-height: 78vh;
 }
 
 .container-can-scroll{
     overflow-y: scroll;
-    height: 60vh;
+    height: 50vh;
 }

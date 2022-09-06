@@ -1,0 +1,14 @@
+<div class="container-fluid crumb-bar">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page" *ngFor="let parent of parentsList;">
+          <a class="fw-bold" [routerLink]="[parent.link]">{{parent.label}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <span class="fw-bold">{{currentPage}}</span>
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>

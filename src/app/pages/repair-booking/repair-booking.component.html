@@ -1,4 +1,8 @@
-<div class="container default-container">
+<app-breadcrumb [currentPage]="'Bookings'">
+</app-breadcrumb>
+
+
+<div class="container crumb-container">
   <div class="row">
     <h1 class="display-5 text-center">Repair Bookings</h1>
   </div>
@@ -6,8 +10,8 @@
     <h1 class="lead text-center"> Repair Booking List</h1>
   </div>
   <div class="container-can-scroll container-fluid">
-    <table class="table table-striped table-bordered">
-      <thead>
+    <table class="table table-hover table-bordered">
+      <thead class="table-light">
       <tr>
         <th>First Name</th>
         <th>Last Name</th>

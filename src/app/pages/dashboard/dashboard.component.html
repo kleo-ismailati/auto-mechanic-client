@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4>
-                        Total Bookings Active: 0
+                        Total Bookings Active: {{data.totalRepairBookingsActive}}
                     </h4>
                     <a routerLink="/repair-booking">View Bookings</a>
                 </div>
@@ -21,7 +21,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4>
-                        Total Clients: 0
+                        Total Clients: {{data.totalClients}}
                     </h4>
                     <a routerLink="/client">View Clients</a>
                 </div>
@@ -33,7 +33,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4>
-                        Total Cars: 0
+                        Total Cars: {{data.totalCars}}
                     </h4>
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4>
-                        Total Income: 0
+                        Total Income: {{data.totalIncome | currency:'USD'}}
                     </h4>
                 </div>
             </div>
