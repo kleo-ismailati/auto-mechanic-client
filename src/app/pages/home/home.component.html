@@ -8,8 +8,9 @@
 
     <div class="row col-sm-4 mx-auto active-dark">
         <div class="input-group mb-3">
-            <input type="search" class="form-control bg-light rounded-3" placeholder="Search..." aria-label="Search" aria-describedby="button-search"
-            [(ngModel)]="searchTerm" (keyup.enter)="search()">
+            <input type="search" class="form-control bg-light rounded-3"
+                   placeholder="Please enter reference code" aria-label="Search" aria-describedby="button-search"
+                   [(ngModel)]="searchTerm" (keyup.enter)="search()">
             <button class="btn rounded-3" type="button" id="button-search" (click)="search()">
                 <i class="pi pi-search"></i>
             </button>
@@ -48,7 +49,7 @@
                 </tr>
                 <tr>
                     <td class="fw-bold col-sm-2 text-end">Repair status</td>
-                    <td>{{this.data.status}}</td>
+                    <td>{{repairStatus[this.data.status]}}</td>
                 </tr>
             </tbody>
         </table>

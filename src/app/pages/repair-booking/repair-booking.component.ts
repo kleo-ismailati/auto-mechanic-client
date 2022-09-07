@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PagedResponse} from "../../core/models/paged.response.model";
 import {RepairBooking} from "../../core/models/repair-booking.model";
 import {ApiService} from "../../core/services/api.service";
+import {RepairStatus} from "../../core/models/repair-status-enum";
 
 @Component({
   selector: 'app-repair-booking',
@@ -16,6 +17,8 @@ export class RepairBookingComponent implements OnInit {
     total: 0,
     result: []
   };
+
+  repairStatus = RepairStatus;
 
   constructor(private api: ApiService) { }
 

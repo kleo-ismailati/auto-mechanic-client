@@ -31,7 +31,7 @@
         <td>{{repairBooking.car?.carModel}}</td>
         <td>{{repairBooking.totalPrice | currency:'USD'}}</td>
         <td>{{repairBooking.date | date}}</td>
-        <td>{{repairBooking.status}}</td>
+        <td>{{repairStatus[repairBooking.status]}}</td>
         <td>
           <div class="row">
             <div class="col">

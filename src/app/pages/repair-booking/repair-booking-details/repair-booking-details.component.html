@@ -5,47 +5,106 @@
     <div class="row">
       <h1 class="lead fw-bold text-center">Booking Details</h1>
     </div>
-    <table class="table table-bordered w-auto mx-auto">
-      <tbody>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Client name</td>
-        <td >{{this.data.client?.firstName}}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Client lastname</td>
-        <td>{{this.data.client?.lastName}}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Car type</td>
-        <td>{{this.data.car?.carType}}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Car model</td>
-        <td>{{this.data.car?.carModel}}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Repair cost</td>
-        <td>{{this.data.totalPrice | currency:'USD'}}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Booking date</td>
-        <td>{{this.data.date | date}}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Repair status</td>
-        <td>{{this.data.status}}</td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="float-end">
-      <button class="btn btn-outline-success me-2" (click)="enableEdit()">Edit Booking</button>
-      <a routerLink="../../">
-        <button class="btn btn-outline-secondary">
-          Back
-        </button>
-      </a>
 
+    <div class="row">
+      <table class="table table-bordered w-75 mx-auto">
+        <tbody>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Client name</td>
+          <td >{{this.data.client?.firstName}}</td>
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Client lastname</td>
+          <td>{{this.data.client?.lastName}}</td>
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Car type</td>
+          <td>{{this.data.car?.carType}}</td>
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Car model</td>
+          <td>{{this.data.car?.carModel}}</td>
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Full repair cost</td>
+          <td>{{this.data.totalPrice | currency:'USD'}}</td>
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Booking date</td>
+          <td>{{this.data.date | date}}</td>
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Repair status</td>
+          <td *ngIf="!isEdit">{{repairStatus[this.data.status]}}</td>
+          <select *ngIf="isEdit" [(ngModel)] = "this.data.status" class="form-select" aria-label="Set status">
+            <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
+                    [selected]="this.data.status == symbol">
+              {{repairStatus[symbol]}}
+            </option>
+          </select>
+        </tr>
+        </tbody>
+      </table>
     </div>
+    <div class="row mx-auto my-2 w-75">
+      <div class="d-flex justify-content-end">
+        <button *ngIf="!isEdit" class="btn btn-outline-success me-2" (click)="enableEdit()">Edit Booking</button>
+        <button *ngIf="isEdit" class="btn btn-success me-2" (click)="submit()">Save</button>
+        <a routerLink="../../">
+          <button class="btn btn-outline-secondary">
+            Back
+          </button>
+        </a>
+      </div>
+    </div>
+    <h1 class="lead fw-bold text-center">List of repairs</h1>
+    <div class="row" *ngFor="let repair of this.data.repairs; let i = index">
+      <table class="table table-bordered w-75 mx-auto">
+        <thead class="table-light">
+        <tr>
+          <th class="fw-bold col-sm-2 text-end">Repair #{{i+1}}</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Repair type</td>
+          <td *ngIf="!isRepairEdit(repair.id)">{{repair.repairType}}</td>
+          <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairType"
+                 type="text" class="form-control" aria-label="Repair Type">
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Repair details</td>
+          <td *ngIf="!isRepairEdit(repair.id)">{{repair.repairDetails}}</td>
+          <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairDetails"
+                 type="text" class="form-control" aria-label="Repair Details">
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Repair cost</td>
+          <td *ngIf="!isRepairEdit(repair.id)">{{repair.repairCost | currency:'USD'}}</td>
+          <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairCost"
+                 type="number" class="form-control" aria-label="Repair Cost">
+        </tr>
+        <tr>
+          <td class="fw-bold col-sm-2 text-end">Repair status</td>
+          <td *ngIf="!isRepairEdit(repair.id)">{{repairStatus[repair.repairStatus]}}</td>
+          <select *ngIf="isRepairEdit(repair.id)" [(ngModel)] = "repair.repairStatus" class="form-select" aria-label="Set status">
+            <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
+                    [selected]="repair.repairStatus == symbol">
+              {{repairStatus[symbol]}}
+            </option>
+          </select>
+        </tr>
+        </tbody>
+      </table>
 
+      <div class="mx-auto my-2 w-75">
+        <div class="d-flex justify-content-end">
+          <button *ngIf="!isRepairEdit(repair.id)" class="btn btn-outline-success me-2" (click)="enableRepairEdit(repair.id)">Edit Repair</button>
+          <button *ngIf="!isRepairEdit(repair.id)" class="btn btn-outline-danger me-2" (click)="deleteRepair(repair.id)">Delete Repair</button>
+          <button *ngIf="isRepairEdit(repair.id)" class="btn btn-success me-2" (click)="submitRepair(repair)">Save</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

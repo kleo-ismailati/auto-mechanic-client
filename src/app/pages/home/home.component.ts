@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/core/services/api.service';
 import { RepairBooking } from 'src/app/core/models/repair-booking.model';
+import {RepairStatus} from "../../core/models/repair-status-enum";
 
 @Component({
   selector: 'app-home',
@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   data: RepairBooking | any;
   searchTerm: String = '';
   result: Boolean = false;
+  repairStatus = RepairStatus;
 
   constructor(private api: ApiService) { }
 
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   search(){
-    this.api.get('/api/repair_booking/' + this.searchTerm).subscribe(
+    this.api.get('/api/repair_booking/view/' + this.searchTerm).subscribe(
       (data:RepairBooking) => {
         this.data = data;
         if(this.data && this.searchTerm !== ''){
