@@ -7,6 +7,7 @@ import {ClientRoutingModule} from "./client-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import { ClientListComponent } from './client-list/client-list.component';
 import { CarListComponent } from './car-list/car-list.component';
+import {PaginatorModule} from "primeng/paginator";
 
 
 
@@ -21,6 +22,7 @@ import { CarListComponent } from './car-list/car-list.component';
   imports: [
     CommonModule,
     ClientRoutingModule,
+    PaginatorModule,
     SharedModule
   ]
 })

@@ -1,1 +1,41 @@
-<p>clients works!</p>
+<app-breadcrumb [currentPage]="'Clients'">
+</app-breadcrumb>
+
+<div class="container crumb-container">
+  <div class="row">
+    <h1 class="display-5 text-center">Our Clients</h1>
+  </div>
+  <div class="row">
+    <h1 class="lead text-center"> Car Mechanic Clients Listed</h1>
+  </div>
+  <div class="container-can-scroll container-fluid">
+    <table class="table table-hover table-bordered">
+      <thead class="table-light">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let client of this.data?.result">
+        <td>{{client?.firstName}}</td>
+        <td>{{client?.lastName}}</td>
+        <td style="width:40%">{{client?.email}}</td>
+        <td style="width:10%">
+          <div class="row">
+            <div class="col">
+              <a routerLink="./{{client.id}}">
+                <button type="button" class="btn btn-outline-primary btn-table">View</button>
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
+               (onPageChange)="paginate($event)"></p-paginator>
+</div>

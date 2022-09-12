@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 .btn-table{
-    width: 80px !important;
+  width: 80px !important;
 }
 
 .default-container{
-    min-height: 86vh;
+  min-height: 86vh;
 }
 
 .crumb-bar{
@@ -16,6 +16,6 @@
 }
 
 .container-can-scroll{
-    overflow-y: scroll;
-    height: 50vh;
+  overflow-y: scroll;
+  height: 50vh;
 }
