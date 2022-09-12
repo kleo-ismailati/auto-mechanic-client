@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {NewRepairBookingComponent} from "./new-repair-booking/new-repair-booking.component";
 import {RepairBookingDetailsComponent} from "./repair-booking-details/repair-booking-details.component";
-import {RepairBookingComponent} from "./repair-booking.component";
+import {RepairBookingListComponent} from "./repair-booking-list/repair-booking-list.component";
 
 const routes: Routes = [
-  { path: '', component: RepairBookingComponent },
-  { path: 'new-rb', component: NewRepairBookingComponent},
+  { path: '', component: RepairBookingListComponent },
   { path: 'rb-details/:id', component: RepairBookingDetailsComponent},
   { path: '**', redirectTo: '' }
 ];

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {PagedResponse} from "../../core/models/paged.response.model";
-import {RepairBooking} from "../../core/models/repair-booking.model";
-import {ApiService} from "../../core/services/api.service";
-import {RepairStatus} from "../../core/models/repair-status-enum";
+import {PagedResponse} from "../../../core/models/paged.response.model";
+import {RepairBooking} from "../../../core/models/repair-booking.model";
+import {ApiService} from "../../../core/services/api.service";
+import {RepairStatus} from "../../../core/models/repair-status-enum";
 
 @Component({
-  selector: 'app-repair-booking',
-  templateUrl: './repair-booking.component.html',
-  styleUrls: ['./repair-booking.component.css']
+  selector: 'app-repair-booking-list',
+  templateUrl: './repair-booking-list.component.html',
+  styleUrls: ['./repair-booking-list.component.css']
 })
-export class RepairBookingComponent implements OnInit {
+export class RepairBookingListComponent implements OnInit {
 
   data : PagedResponse<RepairBooking> = {
     page: 0,

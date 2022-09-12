@@ -7,7 +7,7 @@ import {HelperService} from "../../../core/services/helper.service";
 import {Repair} from "../../../core/models/repair.model";
 
 @Component({
-  selector: 'app-repair-booking-details',
+  selector: 'app-repair-booking-list-details',
   templateUrl: './repair-booking-details.component.html',
   styleUrls: ['./repair-booking-details.component.css']
 })
@@ -15,7 +15,7 @@ export class RepairBookingDetailsComponent implements OnInit {
 
   breadcrumbParentsList = [
     {
-      link: "/repair-booking",
+      link: "/repair-booking-list",
       label: "Bookings",
     }
   ];
