@@ -48,6 +48,7 @@
     </div>
     <div class="row mx-auto my-2 w-75">
       <div class="d-flex justify-content-end">
+        <button *ngIf="(!isEdit&&!addingNewRepair)" class="btn btn-outline-primary me-2" (click)="addRepair()">Add Repair</button>
         <button *ngIf="!isEdit" class="btn btn-outline-success me-2" (click)="enableEdit()">Edit Booking</button>
         <button *ngIf="isEdit" class="btn btn-success me-2" (click)="submit()">Save</button>
         <a routerLink="../../">
@@ -55,6 +56,26 @@
             Back
           </button>
         </a>
+      </div>
+    </div>
+    <div *ngIf="addingNewRepair" class="row mx-auto my-2 w-75 card p-2">
+      <div class="card-title"><h1 class="lead fw-bold text-center">New Repair</h1></div>
+      <div class="form-group col">
+        <label for="repairType">Repair Type</label>
+        <input [(ngModel)]="newRepair.repairType" type="text" class="form-control" id="repairType" name="repairType">
+      </div>
+      <div class="form-group col">
+        <label>Repair Cost</label>
+        <input [(ngModel)]="newRepair.repairCost" type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Repair Details</label>
+        <textarea [(ngModel)]="newRepair.repairDetails" type="text" rows="2" class="form-control"></textarea>
+      </div>
+
+      <div class="d-flex justify-content-end mt-2">
+        <button  class="btn btn-success me-2" (click)="submitNewRepair()">Add</button>
+        <button  class="btn btn-secondary me-2" (click)="cancelNewRepair()">Cancel</button>
       </div>
     </div>
     <h1 class="lead fw-bold text-center">List of repairs</h1>

@@ -3,7 +3,7 @@ import { Car } from "./car.model";
 export interface Client {
 
 	id?: number;
-    firstName: string;
+  firstName: string;
 	lastName: string;
 	email: string;
 	phoneNumber: string;

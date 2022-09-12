@@ -24,6 +24,10 @@ export class RepairBookingDetailsComponent implements OnInit {
   repairStatus = RepairStatus;
   repairStatusKeys: number[] = this.helperService.getEnumKeysArray(this.repairStatus);
   isEdit: boolean = false;
+  addingNewRepair: boolean = false;
+  newRepair = {
+    repairCost: 0, repairDetails: "", repairType: ""
+  }
   private repairEditId = -1;
 
   constructor(
@@ -80,6 +84,27 @@ export class RepairBookingDetailsComponent implements OnInit {
         this.ngOnInit();
       }
     )
+  }
+  submitNewRepair(){
+    this.api.post('/api/repair/add/' + this.data.id, this.newRepair).subscribe(
+      () => {
+        this.addingNewRepair = false;
+        this.ngOnInit();
+      }
+    )
+  }
+
+  cancelNewRepair() {
+    this.newRepair = {
+      repairCost: 0,
+      repairDetails: "",
+      repairType: ""
+    }
+    this.addingNewRepair = false;
+  }
+
+  addRepair(){
+    this.addingNewRepair = true;
   }
 
   isRepairEdit(id: number) {

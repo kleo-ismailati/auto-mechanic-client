@@ -4,8 +4,8 @@ export interface Repair {
 
   id: number;
   repairType: string;
-  repairCost : string;
+  repairCost : number;
   repairDetails : string;
-  repairStatus : RepairStatus;
+  repairStatus: RepairStatus;
   carId?: string;
 }
