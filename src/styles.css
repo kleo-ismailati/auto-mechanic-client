@@ -3,8 +3,12 @@
   width: 80px !important;
 }
 
+th{
+  white-space: nowrap;
+}
+
 .default-container{
-  min-height: 86vh;
+  min-height: 58vh;
 }
 
 .crumb-bar{
@@ -12,10 +16,51 @@
 }
 
 .crumb-container{
-  min-height: 78vh;
+  min-height: 48vh;
 }
 
 .container-can-scroll{
   overflow-y: scroll;
   height: 50vh;
+}
+
+.banner-bg {
+  background-image: url("assets/banner.png");
+  width: 100%;
+}
+
+/* Paginator Styling */
+.p-paginator {
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  border-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+  background: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+  color: white !important;
+}
+.p-paginator-first, .p-paginator-last, .p-paginator-next, .p-paginator-page, .p-paginator-prev {
+  color: black !important;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+  border-radius: 2px;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;
+  height: 12px;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 0;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
 }

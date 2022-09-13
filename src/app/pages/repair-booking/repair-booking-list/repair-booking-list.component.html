@@ -1,53 +1,47 @@
-<app-breadcrumb [currentPage]="'Bookings'">
-</app-breadcrumb>
-
-
-<div class="container crumb-container">
-  <div class="row">
-    <h1 class="display-5 text-center">Our Repair Bookings</h1>
+<div class="banner-bg py-3">
+  <h1 class="display-5 text-center fw-bold text-white my-4">Our Repair Bookings</h1>
+  <h1 class="lead fw-bold text-white text-center">Car Mechanic Repair Booking Listed</h1>
+</div>
+<div class="bg-light border-5 border-top border-dark">
+  <app-breadcrumb [currentPage]="'Bookings'">
+  </app-breadcrumb>
+  <div class="container crumb-container">
+    <div class="container-fluid p-4 card">
+      <div class="container-can-scroll">
+        <table class="table table-hover table-bordered">
+          <thead class="table-secondary">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Car Type</th>
+            <th>Car Model</th>
+            <th>Repair Cost</th>
+            <th>Date added</th>
+            <th>Repair Status</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let repairBooking of this.data?.result">
+            <td><span *ngIf="repairBooking.client as client">{{client?.firstName}}</span></td>
+            <td>{{repairBooking.client?.lastName}}</td>
+            <td>{{repairBooking.car?.carType}}</td>
+            <td>{{repairBooking.car?.carModel}}</td>
+            <td>{{repairBooking.totalPrice | currency:'USD'}}</td>
+            <td>{{repairBooking.date | date}}</td>
+            <td>{{repairStatus[repairBooking.status]}}</td>
+            <td style="width:20%">
+              <a routerLink="./rb-details/{{repairBooking.id}}">
+                <button type="button" class="btn btn-outline-primary btn-table mx-1">View</button>
+              </a>
+              <button (click)="delete(repairBooking.id)" type="button" class="btn btn-outline-danger btn-table mx-1">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
+                 (onPageChange)="paginate($event)"></p-paginator>
   </div>
-  <div class="row">
-    <h1 class="lead text-center">Car Mechanic Repair Booking Listed</h1>
-  </div>
-  <div class="container-can-scroll container-fluid">
-    <table class="table table-hover table-bordered">
-      <thead class="table-light">
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Car Type</th>
-        <th>Car Model</th>
-        <th>Repair Cost</th>
-        <th>Date added</th>
-        <th>Repair Status</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let repairBooking of this.data?.result">
-        <td><span *ngIf="repairBooking.client as client">{{client?.firstName}}</span></td>
-        <td>{{repairBooking.client?.lastName}}</td>
-        <td>{{repairBooking.car?.carType}}</td>
-        <td>{{repairBooking.car?.carModel}}</td>
-        <td>{{repairBooking.totalPrice | currency:'USD'}}</td>
-        <td>{{repairBooking.date | date}}</td>
-        <td>{{repairStatus[repairBooking.status]}}</td>
-        <td style="width:20%">
-          <div class="row">
-            <div class="col">
-                <a routerLink="./rb-details/{{repairBooking.id}}">
-                    <button type="button" class="btn btn-outline-primary btn-table">View</button>
-                </a>
-            </div>
-            <div class="col">
-              <button (click)="delete(repairBooking.id)" type="button" class="btn btn-outline-danger btn-table">Delete</button>
-            </div>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
-               (onPageChange)="paginate($event)"></p-paginator>
 </div>

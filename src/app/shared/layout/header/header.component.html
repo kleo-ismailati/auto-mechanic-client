@@ -1,7 +1,10 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" routerLink="/">Car Mechanic</a>
+          <a class="navbar-brand" routerLink="/">
+            <img src="assets/repair.png" alt="" width="35" height="35">
+            Car Mechanic
+          </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -10,42 +13,42 @@
             <ul class="nav navbar-nav ms-auto">
 
               <li class="nav-item">
-                <a class="nav-link"
+                <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                   routerLink="/">
                   Home
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link"
+                <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                   routerLink="/dashboard">
                   Dashboard
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link"
+                <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                    routerLink="/repair-booking">
                   Bookings
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link"
+                <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                    routerLink="/client">
                   Clients
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link"
+                <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                    routerLink="/user">
                   Users
                 </a>
               </li>
             </ul>
 
-            <a routerLink="/login">
+            <a routerLink="/login" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show">
               <button class="btn btn-sm btn-outline-success">Sign in</button>
             </a>
 

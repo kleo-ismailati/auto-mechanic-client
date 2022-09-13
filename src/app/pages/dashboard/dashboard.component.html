@@ -1,51 +1,52 @@
-<div class="container default-container">
-    <div class="row">
-        <h1 class="display-5 text-center my-4">Admin Dashboard</h1>
-    </div>
-    <div class="row">
-        <h1 class="lead text-center">Car Mechanic Booking Statistics</h1>
-    </div>
+<div class="banner-bg py-3">
+  <h1 class="display-5 fw-bold text-center text-white my-4">Admin Dashboard</h1>
+  <h1 class="lead fw-bold text-white text-center">Car Mechanic Booking Statistics</h1>
+</div>
+<div class="bg-light border-5 border-top border-dark">
+  <div class="container default-container">
     <div class="col-xs-12" style="height:50px;"></div>
     <div class="row m-3 h-25">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4>
-                        Total Bookings Active: {{data.totalRepairBookingsActive}}
-                    </h4>
-                    <a routerLink="/repair-booking">View Bookings</a>
-                </div>
-            </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h4>
+              Total Bookings Active: {{data.totalRepairBookingsActive}}
+            </h4>
+            <a routerLink="/repair-booking">View Bookings</a>
+          </div>
         </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4>
-                        Total Clients: {{data.totalClients}}
-                    </h4>
-                    <a routerLink="/client">View Clients</a>
-                </div>
-            </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h4>
+              Total Clients: {{data.totalClients}}
+            </h4>
+            <a routerLink="/client">View Clients</a>
+          </div>
         </div>
+      </div>
     </div>
     <div class="row m-3 h-25">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4>
-                        Total Cars: {{data.totalCars}}
-                    </h4>
-                </div>
-            </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h4>
+              Total Cars: {{data.totalCars}}
+            </h4>
+          </div>
         </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4>
-                        Total Income: {{data.totalIncome | currency:'USD'}}
-                    </h4>
-                </div>
-            </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h4>
+              Total Income: {{data.totalIncome | currency:'USD'}}
+            </h4>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+

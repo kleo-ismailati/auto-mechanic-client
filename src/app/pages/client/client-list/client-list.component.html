@@ -1,41 +1,38 @@
-<app-breadcrumb [currentPage]="'Clients'">
-</app-breadcrumb>
-
-<div class="container crumb-container">
-  <div class="row">
-    <h1 class="display-5 text-center">Our Clients</h1>
-  </div>
-  <div class="row">
-    <h1 class="lead text-center"> Car Mechanic Clients Listed</h1>
-  </div>
-  <div class="container-can-scroll container-fluid">
-    <table class="table table-hover table-bordered">
-      <thead class="table-light">
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let client of this.data?.result">
-        <td>{{client?.firstName}}</td>
-        <td>{{client?.lastName}}</td>
-        <td style="width:40%">{{client?.email}}</td>
-        <td style="width:10%">
-          <div class="row">
-            <div class="col">
+<div class="banner-bg py-3">
+  <h1 class="display-5 fw-bold text-white text-center my-4">Our Clients</h1>
+  <h1 class="lead fw-bold text-white text-center"> Car Mechanic Clients Listed</h1>
+</div>
+<div class="bg-light border-5 border-top border-dark">
+  <app-breadcrumb [currentPage]="'Clients'">
+  </app-breadcrumb>
+  <div class="container crumb-container">
+    <div class="container-fluid p-4 card">
+      <div class="container-can-scroll">
+        <table class="table table-hover table-bordered">
+          <thead class="table-secondary">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let client of this.data?.result">
+            <td>{{client?.firstName}}</td>
+            <td>{{client?.lastName}}</td>
+            <td style="width:40%">{{client?.email}}</td>
+            <td style="width:10%">
               <a routerLink="./{{client.id}}">
-                <button type="button" class="btn btn-outline-primary btn-table">View</button>
+                <button type="button" class="btn btn-outline-primary btn-table mx-1">View</button>
               </a>
-            </div>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
+                 (onPageChange)="paginate($event)"></p-paginator>
   </div>
-  <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
-               (onPageChange)="paginate($event)"></p-paginator>
 </div>
