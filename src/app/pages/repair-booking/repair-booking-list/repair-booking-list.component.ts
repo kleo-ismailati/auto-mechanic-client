@@ -3,6 +3,7 @@ import {PagedResponse} from "../../../core/models/paged.response.model";
 import {RepairBooking} from "../../../core/models/repair-booking.model";
 import {ApiService} from "../../../core/services/api.service";
 import {RepairStatus} from "../../../core/models/repair-status-enum";
+import {AlertService} from "../../../core/services/alert.service";
 
 @Component({
   selector: 'app-repair-booking-list',
@@ -20,22 +21,22 @@ export class RepairBookingListComponent implements OnInit {
 
   repairStatus = RepairStatus;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,
+              private alertService: AlertService) { }
 
   ngOnInit(): void {
 
     this.api.get('/api/repair_booking').subscribe(
       (data: PagedResponse<RepairBooking>) => {
         this.data = data;
-        console.log(this.data);
       }
     );
   }
 
   delete(id: number | undefined): void{
     this.api.delete(`/api/repair_booking/${id}`).subscribe(
-      response => {
-        console.log(response);
+      () => {
+        this.alertService.warn("Repair Booking with id " + id + " deleted!", { autoClose: true })
         this.ngOnInit();
       }
     )
@@ -45,7 +46,6 @@ export class RepairBookingListComponent implements OnInit {
     this.api.get(`/api/repair_booking?page=${event.page}`).subscribe(
       (data: PagedResponse<RepairBooking>) => {
         this.data = data;
-        console.log(this.data);
       }
     );
   }
