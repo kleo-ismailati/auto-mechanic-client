@@ -6,7 +6,6 @@ import {NewRepairBookingComponent} from "./new-repair-booking/new-repair-booking
 import {ClientRoutingModule} from "./client-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import { ClientListComponent } from './client-list/client-list.component';
-import { CarListComponent } from './car-list/car-list.component';
 import {PaginatorModule} from "primeng/paginator";
 
 
@@ -16,8 +15,7 @@ import {PaginatorModule} from "primeng/paginator";
     ClientComponent,
     CarComponent,
     NewRepairBookingComponent,
-    ClientListComponent,
-    CarListComponent
+    ClientListComponent
   ],
   imports: [
     CommonModule,

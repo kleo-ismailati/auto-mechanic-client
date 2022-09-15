@@ -2,7 +2,7 @@ import { Repair } from "./repair.model";
 
 export interface Car {
 
-    id?: number;
+    id: number;
     carType: string;
     carModel: string;
     year: string;

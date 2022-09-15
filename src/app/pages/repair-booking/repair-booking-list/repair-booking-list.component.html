@@ -12,10 +12,9 @@
         <table class="table table-hover table-bordered">
           <thead class="table-secondary">
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Car Type</th>
-            <th>Car Model</th>
+            <th></th>
+            <th>Name</th>
+            <th>Car</th>
             <th>Repair Cost</th>
             <th>Date added</th>
             <th>Repair Status</th>
@@ -23,11 +22,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let repairBooking of this.data?.result">
-            <td><span *ngIf="repairBooking.client as client">{{client?.firstName}}</span></td>
-            <td>{{repairBooking.client?.lastName}}</td>
-            <td>{{repairBooking.car?.carType}}</td>
-            <td>{{repairBooking.car?.carModel}}</td>
+          <tr *ngFor="let repairBooking of this.data?.result; let idx = index">
+            <td>{{idx+1}}</td>
+            <td>
+              <span *ngIf="repairBooking.client as client">
+                {{client?.firstName}} {{repairBooking.client?.lastName}}
+              </span>
+            </td>
+            <td>{{repairBooking.car?.carModel}} {{repairBooking.car?.carType}}</td>
             <td>{{repairBooking.totalPrice | currency:'USD'}}</td>
             <td>{{repairBooking.date | date}}</td>
             <td>{{repairStatus[repairBooking.status]}}</td>

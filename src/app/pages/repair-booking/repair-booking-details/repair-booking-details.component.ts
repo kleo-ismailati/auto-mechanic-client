@@ -41,7 +41,6 @@ export class RepairBookingDetailsComponent implements OnInit {
     this.api.get('/api/repair_booking/' + id).subscribe(
       (data:RepairBooking) => {
         this.data = data;
-        console.log(this.data);
       }
     );
   }

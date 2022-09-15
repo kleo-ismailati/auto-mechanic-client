@@ -1,5 +1,134 @@
-<app-breadcrumb [currentPage]="'Clients'">
-</app-breadcrumb>
-<div class="container crumb-container">
-  <p>Client and car information + CRUD</p>
+<div class="bg-light">
+  <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
+  </app-breadcrumb>
+  <div class="container crumb-container-no-banner">
+    <div class="container card my-2 py-2" *ngIf="this.data">
+      <div class="row">
+        <h1 class="lead fw-bold text-center">Client Details</h1>
+      </div>
+      <div class="row">
+        <table class="table table-bordered w-75 mx-auto">
+          <tbody>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Firstname</td>
+            <td *ngIf="!isEdit">{{this.data?.firstName}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.firstName" type="text" class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Lastname</td>
+            <td *ngIf="!isEdit">{{this.data?.lastName}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.lastName" type="text" class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Email</td>
+            <td *ngIf="!isEdit">{{this.data?.email}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.email" type="email" class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Phone</td>
+            <td *ngIf="!isEdit">{{this.data?.phoneNumber}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.phoneNumber" type="tel" class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Address</td>
+            <td *ngIf="!isEdit">{{this.data?.address}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.address" type="text" class="form-control">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mx-auto my-2 w-75">
+        <div class="d-flex justify-content-end">
+          <button *ngIf="!isEdit" class="btn btn-outline-success me-2" (click)="enableEdit()">
+            Edit Client
+          </button>
+          <button *ngIf="isEdit" class="btn btn-success me-2" (click)="submit()">Save</button>
+          <a routerLink="../">
+            <button class="btn btn-outline-secondary">
+              Back
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid p-4 card">
+      <div class="row">
+        <h1 class="lead fw-bold text-center">Cars Owned By Client</h1>
+      </div>
+      <div class="container-can-scroll">
+        <table class="table table-hover table-bordered">
+          <thead class="table-secondary">
+          <tr>
+            <th></th>
+            <th>Car</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let car of this.data?.cars; let idx=index">
+            <td>{{idx+1}}</td>
+            <td>{{car?.carModel}} {{car?.carType}}</td>
+            <td style="width:30%">{{car?.year}}</td>
+            <td style="width:30%">{{car?.color}}</td>
+            <td style="width:10%">
+              <a routerLink="./cars/{{car.id}}">
+                <button type="button" class="btn btn-outline-primary btn-table mx-1">View</button>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row my-2">
+        <div class="d-flex justify-content-end">
+          <button *ngIf="(!isEdit&&!addingNewCar)" class="btn btn-success me-2" (click)="addCar()">
+            Add Car
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="addingNewCar" class="container-fluid p-4 my-2 card">
+      <div class="row my-2 p-2">
+        <div class="card-title"><h1 class="lead fw-bold text-center">Add New Car</h1></div>
+        <div class="form-group col">
+          <label for="carModel">Car Model</label>
+          <input [(ngModel)]="newCar.carModel" type="text" class="form-control" id="carModel" name="carModel">
+        </div>
+        <div class="form-group col">
+          <label>Car Type</label>
+          <input [(ngModel)]="newCar.carType" type="text" class="form-control">
+        </div>
+        <div class="form-group col">
+          <label>Car Year</label>
+          <input [(ngModel)]="newCar.year" type="number" class="form-control">
+        </div>
+        <div class="form-group col">
+          <label>Car Color</label>
+          <input [(ngModel)]="newCar.color" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Car Description</label>
+          <textarea [(ngModel)]="newCar.carDescription" type="text" rows="2" class="form-control"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-end mt-2">
+          <button  class="btn btn-success me-2" (click)="submitNewCar()">Add</button>
+          <button  class="btn btn-secondary me-2" (click)="cancelNewCar()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

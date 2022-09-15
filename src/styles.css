@@ -19,9 +19,13 @@ th{
   min-height: 55vh;
 }
 
+.crumb-container-no-banner{
+  min-height: 80vh;
+}
+
 .container-can-scroll{
   overflow-y: scroll;
-  height: 35vh;
+  height: 40vh;
   border: 2px solid gray;
 }
 
