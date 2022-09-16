@@ -17,11 +17,11 @@ import {PaginatorModule} from "primeng/paginator";
     NewRepairBookingComponent,
     ClientListComponent
   ],
-  imports: [
-    CommonModule,
-    ClientRoutingModule,
-    PaginatorModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        ClientRoutingModule,
+        PaginatorModule,
+        SharedModule
+    ]
 })
 export class ClientModule { }

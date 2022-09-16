@@ -2,6 +2,16 @@
   <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
   </app-breadcrumb>
   <div class="container crumb-container-no-banner">
+    <div class="d-flex justify-content-start">
+      <a class="justify-content-end" routerLink="../">
+        <button class="btn btn-sm btn-outline-dark">
+          <span class="d-inline-flex align-items-center">
+            <i class="pi align-middle pi-arrow-circle-left me-1"></i>
+            Go back
+          </span>
+        </button>
+      </a>
+    </div>
     <div class="container card my-2 py-2" *ngIf="this.data">
       <div class="row">
         <h1 class="lead fw-bold text-center">Client Details</h1>
@@ -13,35 +23,35 @@
             <td class="fw-bold col-sm-2 text-end">Firstname</td>
             <td *ngIf="!isEdit">{{this.data?.firstName}}</td>
             <td *ngIf="isEdit">
-              <input [(ngModel)]="this.data.firstName" type="text" class="form-control">
+              <input [(ngModel)]="this.data.firstName" type="text" class="form-control form-control-sm bg-light">
             </td>
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Lastname</td>
             <td *ngIf="!isEdit">{{this.data?.lastName}}</td>
             <td *ngIf="isEdit">
-              <input [(ngModel)]="this.data.lastName" type="text" class="form-control">
+              <input [(ngModel)]="this.data.lastName" type="text" class="form-control form-control-sm bg-light">
             </td>
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Email</td>
             <td *ngIf="!isEdit">{{this.data?.email}}</td>
             <td *ngIf="isEdit">
-              <input [(ngModel)]="this.data.email" type="email" class="form-control">
+              <input [(ngModel)]="this.data.email" type="email" class="form-control form-control-sm bg-light">
             </td>
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Phone</td>
             <td *ngIf="!isEdit">{{this.data?.phoneNumber}}</td>
             <td *ngIf="isEdit">
-              <input [(ngModel)]="this.data.phoneNumber" type="tel" class="form-control">
+              <input [(ngModel)]="this.data.phoneNumber" type="tel" class="form-control form-control-sm bg-light">
             </td>
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Address</td>
             <td *ngIf="!isEdit">{{this.data?.address}}</td>
             <td *ngIf="isEdit">
-              <input [(ngModel)]="this.data.address" type="text" class="form-control">
+              <input [(ngModel)]="this.data.address" type="text" class="form-control form-control-sm bg-light">
             </td>
           </tr>
           </tbody>
@@ -49,53 +59,11 @@
       </div>
       <div class="row mx-auto my-2 w-75">
         <div class="d-flex justify-content-end">
-          <button *ngIf="!isEdit" class="btn btn-outline-success me-2" (click)="enableEdit()">
+          <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">
             Edit Client
           </button>
-          <button *ngIf="isEdit" class="btn btn-success me-2" (click)="submit()">Save</button>
-          <a routerLink="../">
-            <button class="btn btn-outline-secondary">
-              Back
-            </button>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid p-4 card">
-      <div class="row">
-        <h1 class="lead fw-bold text-center">Cars Owned By Client</h1>
-      </div>
-      <div class="container-can-scroll">
-        <table class="table table-hover table-bordered">
-          <thead class="table-secondary">
-          <tr>
-            <th></th>
-            <th>Car</th>
-            <th>Year</th>
-            <th>Color</th>
-            <th>Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let car of this.data?.cars; let idx=index">
-            <td>{{idx+1}}</td>
-            <td>{{car?.carModel}} {{car?.carType}}</td>
-            <td style="width:30%">{{car?.year}}</td>
-            <td style="width:30%">{{car?.color}}</td>
-            <td style="width:10%">
-              <a routerLink="./cars/{{car.id}}">
-                <button type="button" class="btn btn-outline-primary btn-table mx-1">View</button>
-              </a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="row my-2">
-        <div class="d-flex justify-content-end">
-          <button *ngIf="(!isEdit&&!addingNewCar)" class="btn btn-success me-2" (click)="addCar()">
-            Add Car
-          </button>
+          <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="submit()">Save</button>
+          <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
         </div>
       </div>
     </div>
@@ -124,9 +92,47 @@
         </div>
 
         <div class="d-flex justify-content-end mt-2">
-          <button  class="btn btn-success me-2" (click)="submitNewCar()">Add</button>
-          <button  class="btn btn-secondary me-2" (click)="cancelNewCar()">Cancel</button>
+          <button  class="btn btn-sm btn-success me-2" (click)="submitNewCar()">Add</button>
+          <button  class="btn btn-sm btn-secondary me-2" (click)="cancelNewCar()">Cancel</button>
         </div>
+      </div>
+    </div>
+    <div class="container-fluid p-4 card">
+      <div class="row">
+        <h1 class="lead fw-bold text-center">Cars Owned By Client</h1>
+      </div>
+      <div class="row my-2">
+        <div class="d-flex justify-content-end">
+          <button *ngIf="(!isEdit&&!addingNewCar)" class="btn btn-sm btn-success me-2" (click)="addCar()">
+            Add Car
+          </button>
+        </div>
+      </div>
+      <div class="container-can-scroll">
+        <table class="table table-sm table-hover table-bordered">
+          <thead class="table-secondary">
+          <tr>
+            <th></th>
+            <th>Car</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let car of this.data?.cars; let idx=index">
+            <td>{{idx+1}}</td>
+            <td>{{car?.carModel}} {{car?.carType}}</td>
+            <td style="width:30%">{{car?.year}}</td>
+            <td style="width:30%">{{car?.color}}</td>
+            <td style="width:10%">
+              <a routerLink="./cars/{{car.id}}">
+                <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

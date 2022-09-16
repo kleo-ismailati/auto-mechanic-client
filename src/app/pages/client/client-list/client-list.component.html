@@ -7,8 +7,15 @@
   </app-breadcrumb>
   <div class="container crumb-container">
     <div class="container-fluid p-4 card">
+      <div class="row my-2">
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-sm btn-success" (click)="modalService.open(content)">
+            Add Client
+          </button>
+        </div>
+      </div>
       <div class="container-can-scroll">
-        <table class="table table-hover table-bordered">
+        <table class="table table-sm table-hover table-bordered">
           <thead class="table-secondary">
           <tr>
             <th></th>
@@ -26,7 +33,7 @@
             <td style="width:30%">{{client?.phoneNumber}}</td>
             <td style="width:10%">
               <a routerLink="./{{client.id}}">
-                <button type="button" class="btn btn-outline-primary btn-table mx-1">View</button>
+                <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
               </a>
             </td>
           </tr>
@@ -37,4 +44,43 @@
     <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
                  (onPageChange)="paginate($event)"></p-paginator>
   </div>
+
+  <!-- Modal -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Add Client</h5>
+      <button type="button" (click)="cancelAddNewClient()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body modal-can-scroll">
+      <label class="form-label">First Name</label>
+      <div class="input-group mb-3">
+        <input [(ngModel)]="newClient.firstName" placeholder="First Name"
+               type="text" class="form-control" aria-label="First Name">
+      </div>
+      <label class="form-label">Last Name</label>
+      <div class="input-group mb-3">
+        <input [(ngModel)]="newClient.lastName" placeholder="Last Name"
+               type="text" class="form-control" aria-label="Last Name">
+      </div>
+      <label class="form-label">Phone Number</label>
+      <div class="input-group mb-3">
+        <input [(ngModel)]="newClient.phoneNumber" placeholder="Phone Number"
+               type="tel" class="form-control" aria-label="Phone Number">
+      </div>
+      <label class="form-label">Email</label>
+      <div class="input-group mb-3">
+        <input [(ngModel)]="newClient.email" placeholder="Email"
+               type="email" class="form-control" aria-label="Email">
+      </div>
+      <label class="form-label">Address</label>
+      <div class="input-group mb-3">
+        <input [(ngModel)]="newClient.address" placeholder="Address"
+               type="text" class="form-control" aria-label="Address">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" (click)="addNewClient()" class="btn btn-sm btn-success">Add</button>
+      <button type="button" (click)="cancelAddNewClient()" class="btn btn-sm btn-secondary">Cancel</button>
+    </div>
+  </ng-template>
 </div>

@@ -29,6 +29,11 @@ th{
   border: 2px solid gray;
 }
 
+.modal-can-scroll{
+  overflow-y: scroll;
+  height: 60vh;
+}
+
 .banner-bg {
   background-image: url("assets/banner.png");
   width: 100%;

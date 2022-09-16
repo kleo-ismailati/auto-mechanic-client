@@ -133,4 +133,9 @@ export class ClientComponent implements OnInit {
       }
     )
   }
+
+  cancel() {
+    this.isEdit = false;
+    this.ngOnInit();
+  }
 }

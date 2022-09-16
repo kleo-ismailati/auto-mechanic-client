@@ -1,6 +1,18 @@
 <div class="bg-light">
   <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
   </app-breadcrumb>
+  <div class="container">
+    <div class="d-flex justify-content-start">
+      <a class="justify-content-end" routerLink="../../">
+        <button class="btn btn-sm btn-outline-dark">
+          <span class="d-inline-flex align-items-center">
+            <i class="pi align-middle pi-arrow-circle-left me-1"></i>
+            Go back
+          </span>
+        </button>
+      </a>
+    </div>
+  </div>
   <div class="container crumb-container-no-banner">
     <div class="container card my-2 py-2" *ngIf="this.data">
       <div class="row">
@@ -28,7 +40,7 @@
           <tr>
             <td class="fw-bold col-sm-2 text-end">Repair status</td>
             <td *ngIf="!isEdit">{{repairStatus[this.data.status]}}</td>
-            <select *ngIf="isEdit" [(ngModel)] = "this.data.status" class="form-select" aria-label="Set status">
+            <select *ngIf="isEdit" [(ngModel)] = "this.data.status" class="form-select bg-light" aria-label="Set status">
               <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
                       [selected]="this.data.status == symbol">
                 {{repairStatus[symbol]}}
@@ -40,17 +52,15 @@
       </div>
       <div class="row mx-auto my-2 w-75">
         <div class="d-flex justify-content-end">
-          <button *ngIf="(!isEdit&&!addingNewRepair)" class="btn btn-outline-primary me-2" (click)="addRepair()">Add Repair</button>
-          <button *ngIf="!isEdit" class="btn btn-outline-success me-2" (click)="enableEdit()">Edit Booking</button>
-          <button *ngIf="isEdit" class="btn btn-success me-2" (click)="submit()">Save</button>
-          <a routerLink="../../">
-            <button class="btn btn-outline-secondary">
-              Back
-            </button>
-          </a>
+          <button *ngIf="(!isEdit&&!addingNewRepair)" class="btn btn-sm btn-primary me-2" (click)="addRepair()">Add Repair</button>
+          <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">Edit Booking</button>
+          <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="submit()">Save</button>
+          <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
         </div>
       </div>
-      <div *ngIf="addingNewRepair" class="row mx-auto my-2 w-75 card p-2">
+    </div>
+    <div *ngIf="addingNewRepair" class="container card my-2 py-2">
+      <div class="row mx-auto">
         <div class="card-title"><h1 class="lead fw-bold text-center">New Repair</h1></div>
         <div class="form-group col">
           <label for="repairType">Repair Type</label>
@@ -66,12 +76,15 @@
         </div>
 
         <div class="d-flex justify-content-end mt-2">
-          <button  class="btn btn-success me-2" (click)="submitNewRepair()">Add</button>
-          <button  class="btn btn-secondary me-2" (click)="cancelNewRepair()">Cancel</button>
+          <button  class="btn btn-sm btn-success me-2" (click)="submitNewRepair()">Add</button>
+          <button  class="btn btn-sm btn-secondary me-2" (click)="cancelNewRepair()">Cancel</button>
         </div>
       </div>
-      <h1 class="lead fw-bold text-center">List of repairs</h1>
+    </div>
+    <div class="container card my-2 py-2">
+      <h1 class="lead fw-bold text-center py-2">List of repairs</h1>
       <div class="row" *ngFor="let repair of this.data.repairs; let i = index">
+        <hr>
         <table class="table table-bordered w-75 mx-auto">
           <thead class="table-light">
           <tr>
@@ -84,24 +97,24 @@
             <td class="fw-bold col-sm-2 text-end">Repair type</td>
             <td *ngIf="!isRepairEdit(repair.id)">{{repair.repairType}}</td>
             <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairType"
-                   type="text" class="form-control" aria-label="Repair Type">
+                   type="text" class="form-control bg-light" aria-label="Repair Type">
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Repair details</td>
             <td *ngIf="!isRepairEdit(repair.id)">{{repair.repairDetails}}</td>
             <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairDetails"
-                   type="text" class="form-control" aria-label="Repair Details">
+                   type="text" class="form-control bg-light" aria-label="Repair Details">
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Repair cost</td>
             <td *ngIf="!isRepairEdit(repair.id)">{{repair.repairCost | currency:'USD'}}</td>
             <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairCost"
-                   type="number" class="form-control" aria-label="Repair Cost">
+                   type="number" class="form-control bg-light" aria-label="Repair Cost">
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Repair status</td>
             <td *ngIf="!isRepairEdit(repair.id)">{{repairStatus[repair.repairStatus]}}</td>
-            <select *ngIf="isRepairEdit(repair.id)" [(ngModel)] = "repair.repairStatus" class="form-select" aria-label="Set status">
+            <select *ngIf="isRepairEdit(repair.id)" [(ngModel)] = "repair.repairStatus" class="form-select bg-light" aria-label="Set status">
               <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
                       [selected]="repair.repairStatus == symbol">
                 {{repairStatus[symbol]}}
@@ -113,9 +126,10 @@
 
         <div class="mx-auto my-2 w-75">
           <div class="d-flex justify-content-end">
-            <button *ngIf="!isRepairEdit(repair.id)" class="btn btn-outline-success me-2" (click)="enableRepairEdit(repair.id)">Edit Repair</button>
-            <button *ngIf="!isRepairEdit(repair.id)" class="btn btn-outline-danger me-2" (click)="deleteRepair(repair.id)">Delete Repair</button>
-            <button *ngIf="isRepairEdit(repair.id)" class="btn btn-success me-2" (click)="submitRepair(repair)">Save</button>
+            <button *ngIf="!isRepairEdit(repair.id)" class="btn btn-sm btn-success me-2" (click)="enableRepairEdit(repair.id)">Edit Repair</button>
+            <button *ngIf="!isRepairEdit(repair.id)" class="btn btn-sm btn-danger me-2" (click)="deleteRepair(repair.id)">Delete Repair</button>
+            <button *ngIf="isRepairEdit(repair.id)" class="btn btn-sm btn-success me-2" (click)="submitRepair(repair)">Save</button>
+            <button *ngIf="isRepairEdit(repair.id)" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
           </div>
         </div>
       </div>

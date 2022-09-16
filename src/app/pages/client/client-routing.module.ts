@@ -8,8 +8,8 @@ import {ClientListComponent} from "./client-list/client-list.component";
 const routes: Routes = [
   { path: '', component: ClientListComponent },
   { path: ':id', component: ClientComponent },
-  { path: ':id/cars/:carsId', component: CarComponent },
-  { path: ':id/cars/:carsId/add-rb', component: NewRepairBookingComponent}
+  { path: ':id/cars/:carId', component: CarComponent },
+  { path: ':id/cars/:carId/add-rb', component: NewRepairBookingComponent}
 ];
 
 @NgModule({

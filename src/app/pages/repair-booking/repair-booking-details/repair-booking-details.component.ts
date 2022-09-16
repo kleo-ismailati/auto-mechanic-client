@@ -117,4 +117,10 @@ export class RepairBookingDetailsComponent implements OnInit {
       }
     )
   }
+
+  cancel() {
+    this.repairEditId = -1;
+    this.isEdit = false;
+    this.ngOnInit();
+  }
 }

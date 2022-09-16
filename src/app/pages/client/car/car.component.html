@@ -1,1 +1,102 @@
-<p>car works!</p>
+<div class="bg-light">
+  <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
+  </app-breadcrumb>
+  <div class="container crumb-container-no-banner">
+    <div class="d-flex justify-content-start">
+      <a class="justify-content-end" routerLink="../../">
+        <button class="btn btn-sm btn-outline-dark">
+          <span class="d-inline-flex align-items-center">
+            <i class="pi align-middle pi-arrow-circle-left me-1"></i>
+            Go back
+          </span>
+        </button>
+      </a>
+    </div>
+    <div class="container card my-2 py-2" *ngIf="this.data">
+      <div class="row">
+        <h1 class="lead fw-bold text-center">Car Details</h1>
+      </div>
+      <div class="row">
+        <table class="table table-bordered w-75 mx-auto">
+          <tbody>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Model</td>
+            <td *ngIf="!isEdit">{{this.data?.carModel}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.carModel" type="text" class="form-control form-control-sm bg-light">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Type</td>
+            <td *ngIf="!isEdit">{{this.data?.carType}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.carType" type="text" class="form-control form-control-sm bg-light">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Year</td>
+            <td *ngIf="!isEdit">{{this.data?.year}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.year" type="email" class="form-control form-control-sm bg-light">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Color</td>
+            <td *ngIf="!isEdit">{{this.data?.color}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.color" type="tel" class="form-control form-control-sm bg-light">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Description</td>
+            <td *ngIf="!isEdit">{{this.data?.carDescription}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.carDescription" type="text" class="form-control form-control-sm bg-light">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mx-auto my-2 w-75">
+        <div class="d-flex justify-content-end">
+          <button *ngIf="!isEdit&&!isAddRb" class="btn btn-sm btn-primary me-2" (click)="addNewRb()">
+            Add Booking
+          </button>
+          <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">
+            Edit Car
+          </button>
+          <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="submit()">Save</button>
+          <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isAddRb" class="w-50 mx-auto">
+      <div class="container card my-2 py-2">
+        <div class="card-title"><h1 class="lead fw-bold text-center">New Repair Booking</h1></div>
+      </div>
+      <div *ngFor="let repair of newRb.repairs; let idx=index" class="container card my-2 py-2">
+        <div class="row">
+          <div class="card-title"><h1 class="lead fw-bold text-center">Car repair nr.{{idx+1}}</h1></div>
+          <div class="form-group col">
+            <label for="repairType">Repair Type</label>
+            <input [(ngModel)]="repair.repairType" type="text" class="form-control" id="repairType" name="repairType">
+          </div>
+          <div class="form-group col">
+            <label>Repair Cost</label>
+            <input [(ngModel)]="repair.repairCost" type="number" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Repair Details</label>
+            <textarea [(ngModel)]="repair.repairDetails" type="text" rows="2" class="form-control"></textarea>
+          </div>
+        </div>
+        <div *ngIf="lastOfList(idx)" class="d-flex justify-content-end mt-2">
+          <button  class="btn btn-sm btn-success me-2" (click)="submitNewRB()">Save</button>
+          <button  class="btn btn-sm btn-primary me-2" (click)="addOther()">Add Repair</button>
+          <button  class="btn btn-sm btn-secondary me-2" (click)="cancelNewRB()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

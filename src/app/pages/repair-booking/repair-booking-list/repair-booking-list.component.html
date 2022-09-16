@@ -9,7 +9,7 @@
   <div class="container crumb-container">
     <div class="container-fluid p-4 card">
       <div class="container-can-scroll">
-        <table class="table table-hover table-bordered">
+        <table class="table table-sm table-hover table-bordered">
           <thead class="table-secondary">
           <tr>
             <th></th>
@@ -35,9 +35,9 @@
             <td>{{repairStatus[repairBooking.status]}}</td>
             <td style="width:20%">
               <a routerLink="./rb-details/{{repairBooking.id}}">
-                <button type="button" class="btn btn-outline-primary btn-table mx-1">View</button>
+                <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
               </a>
-              <button (click)="delete(repairBooking.id)" type="button" class="btn btn-outline-danger btn-table mx-1">Delete</button>
+              <button (click)="delete(repairBooking.id)" type="button" class="btn btn-sm btn-outline-danger btn-table mx-1">Delete</button>
             </td>
           </tr>
           </tbody>
