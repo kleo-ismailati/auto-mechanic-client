@@ -1,1 +1,34 @@
-<p>login works!</p>
+<div class="banner-bg py-2">
+  <h1 class="display-5 fw-bold text-center text-white my-3 mb-5">Admin Login</h1>
+</div>
+<div class="bg-light border-5 border-top border-dark">
+  <div class="container-fluid mt-5 w-50 default-container">
+    <form>
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="username">Username</label>
+        <input [(ngModel)]="user.username" type="text" id="username" name="email" class="form-control"/>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="userPass">Password</label>
+        <input [(ngModel)]="user.password" type="password" id="userPass" name="password" class="form-control"/>
+      </div>
+
+      <!-- 2 column grid layout for inline styling -->
+      <div class="row mb-4">
+        <div class="col d-flex justify-content-center">
+          <!-- Checkbox -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" (change)="rememberMe=!rememberMe" id="rememberMe" [checked]="rememberMe" />
+            <label class="form-check-label" for="rememberMe"> Remember me </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <button type="button" class="btn btn-primary btn-block" (click)="doLogin()">Sign in</button>
+    </form>
+  </div>
+</div>

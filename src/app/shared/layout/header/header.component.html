@@ -48,8 +48,12 @@
               </li>
             </ul>
 
-            <a routerLink="/login" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show">
+            <a *ngIf="!(loggedUser|async)?.token" routerLink="/login" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show">
               <button class="btn btn-sm btn-outline-success">Sign in</button>
+            </a>
+            <a *ngIf="(loggedUser|async)?.token" routerLink="/"
+               data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show" (click)="logout()">
+              <button class="btn btn-sm btn-outline-success">Sign out</button>
             </a>
 
           </div>

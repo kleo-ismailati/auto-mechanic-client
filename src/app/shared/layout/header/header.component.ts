@@ -1,4 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {UserService} from "../../../core/services/user-service";
+import {UserSession} from "../../../core/models/user.model";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -8,9 +11,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  loggedUser!: Observable<UserSession>;
+
+  constructor(private userService: UserService) {
+    this.loggedUser = this.userService.loggedUser
+  }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.userService.logoutUser();
+  }
 }
