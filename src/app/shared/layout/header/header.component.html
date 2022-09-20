@@ -10,37 +10,32 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-            <ul class="nav navbar-nav ms-auto">
-
+            <ul class="nav navbar-nav ms-auto me-2">
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                   routerLink="/">
                   Home
                 </a>
               </li>
-
-              <li class="nav-item">
+              <li *ngIf="(loggedUser|async)?.token" class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                   routerLink="/dashboard">
                   Dashboard
                 </a>
               </li>
-
-              <li class="nav-item">
+              <li *ngIf="(loggedUser|async)?.token" class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                    routerLink="/repair-booking">
                   Bookings
                 </a>
               </li>
-
-              <li class="nav-item">
+              <li *ngIf="(loggedUser|async)?.token" class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                    routerLink="/client">
                   Clients
                 </a>
               </li>
-
-              <li class="nav-item">
+              <li *ngIf="(loggedUser|async)?.token" class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                    routerLink="/user">
                   Users
@@ -53,10 +48,19 @@
             </a>
             <a *ngIf="(loggedUser|async)?.token" routerLink="/"
                data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show" (click)="logout()">
-              <button class="btn btn-sm btn-outline-success">Sign out</button>
+              <button class="btn btn-sm btn-outline-danger">Sign out</button>
             </a>
 
           </div>
         </div>
     </nav>
 </header>
+<div *ngIf="(loggedUser|async)?.token" class="my-0 bg-dark text-secondary text-end">
+  <span class="small align-top">
+    User :
+    <span class="text-success fst-italic">
+      {{(loggedUser|async)?.email}} - {{(loggedUser|async)?.username}}
+      <i class="pi align-middle small pi-user mx-1"></i>
+    </span>
+  </span>
+</div>

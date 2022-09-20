@@ -1,1 +1,61 @@
-<p>usr works!</p>
+<div class="bg-light">
+  <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
+  </app-breadcrumb>
+  <div class="container crumb-container-no-banner">
+    <div class="d-flex justify-content-start">
+      <a class="justify-content-end" routerLink="../">
+        <button class="btn btn-sm btn-outline-dark">
+          <span class="d-inline-flex align-items-center">
+            <i class="pi align-middle pi-arrow-circle-left me-1"></i>
+            Go back
+          </span>
+        </button>
+      </a>
+    </div>
+    <div class="container card my-2 py-2" *ngIf="this.data">
+      <div class="row">
+        <h1 class="lead fw-bold text-center">User Details</h1>
+      </div>
+      <div class="row">
+        <table class="table table-bordered w-75 mx-auto">
+          <tbody>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end w-25">Username</td>
+            <td *ngIf="!isEdit">{{this.data?.username}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.username" type="text" class="form-control form-control-sm bg-light">
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold col-sm-2 text-end">Email</td>
+            <td *ngIf="!isEdit">{{this.data?.email}}</td>
+            <td *ngIf="isEdit">
+              <input [(ngModel)]="this.data.email" type="email" class="form-control form-control-sm bg-light">
+            </td>
+          </tr>
+          <tr *ngIf="isEdit">
+            <td class="fw-bold col-sm-2 text-end">
+              <label class="form-check-label me-2">New Password</label>
+              <input class="form-check-input" type="checkbox"
+                     (change)="addNewPassword=!addNewPassword" id="rememberMe"
+                     [checked]="addNewPassword" />
+            </td>
+            <td>
+              <input [disabled]="!addNewPassword" [(ngModel)]="this.newPassword" type="password" class="form-control form-control-sm bg-light">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mx-auto my-2 w-75">
+        <div class="d-flex justify-content-end">
+          <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">
+            Edit User
+          </button>
+          <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="submit()">Save</button>
+          <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

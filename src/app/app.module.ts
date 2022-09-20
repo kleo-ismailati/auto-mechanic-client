@@ -10,6 +10,8 @@ import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from "@angular/forms";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -24,9 +26,12 @@ import {FormsModule} from "@angular/forms";
     CoreModule,
     SharedModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

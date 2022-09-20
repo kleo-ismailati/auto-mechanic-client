@@ -8,7 +8,7 @@ th{
 }
 
 .default-container{
-  min-height: 62vh;
+  min-height: calc(100vh - 200px)
 }
 
 .crumb-bar{
@@ -16,11 +16,11 @@ th{
 }
 
 .crumb-container{
-  min-height: 55vh;
+  min-height: calc(92vh - 200px);
 }
 
 .crumb-container-no-banner{
-  min-height: 80vh;
+  min-height: calc(92vh - 100px);
 }
 
 .container-can-scroll{

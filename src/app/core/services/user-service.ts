@@ -14,7 +14,7 @@ export class UserService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): UserSession {
+  public get currentUserValue(): UserSession | undefined {
     return this.currentUserSubject.value;
   }
 
@@ -46,7 +46,11 @@ export class UserService {
     }
   }
 
+  getToken(): string | undefined{
+    return this.currentUserValue?.token;
+  }
+
   isLoggedIn(): boolean{
-    return (this.currentUserValue.token!='')
+    return (!!this.currentUserValue?.token)
   }
 }
