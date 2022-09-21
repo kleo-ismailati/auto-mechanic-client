@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
           this.userService.setRememberMe(this.user.username,  this.user.password);
         }
         this.router.navigate(['dashboard']).then();
-      }, error => {console.log(error)}
+      }, error => {
+        console.log(error);
+      }
     )
   }
 }

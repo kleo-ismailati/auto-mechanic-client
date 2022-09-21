@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit {
     this.api.get('/api/stats').subscribe(
       (data: Stats) => {
         this.data = data;
-        console.log(this.data);
       }
     );
   }

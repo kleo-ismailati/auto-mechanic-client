@@ -53,7 +53,6 @@ export class RepairBookingDetailsComponent implements OnInit {
     let data : RepairBooking = {
       status : Number(this.data.status)
     };
-    console.log(this.data?.status);
     let id = this.route.snapshot.paramMap.get('id');
     this.api.put('/api/repair_booking/' + id, data).subscribe(
       () => {

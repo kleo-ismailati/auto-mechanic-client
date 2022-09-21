@@ -24,12 +24,7 @@ export class HomeComponent implements OnInit {
     this.api.get('/api/repair_booking/view/' + this.searchTerm).subscribe(
       (data:RepairBooking) => {
         this.data = data;
-        if(this.data && this.searchTerm !== ''){
-          this.result = true;
-        }else{
-          this.result = false;
-        }
-        console.log(this.data);
+        this.result = !!(this.data && this.searchTerm !== '');
       }
     );
   }
