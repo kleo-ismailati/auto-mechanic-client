@@ -13,9 +13,7 @@ export class AlertComponent implements OnInit, OnDestroy {
   alertSubscription!: Subscription;
   routeSubscription!: Subscription;
 
-  constructor(private router: Router, private alertService: AlertService) { }
-
-  ngOnInit() {
+  constructor(private router: Router, private alertService: AlertService) {
     // subscribe to new alert notifications
     this.alertSubscription = this.alertService.onAlert(this.id)
       .subscribe(alert => {
@@ -37,7 +35,9 @@ export class AlertComponent implements OnInit, OnDestroy {
           setTimeout(() => this.removeAlert(alert), 3000);
         }
       });
+  }
 
+  ngOnInit() {
     // clear alerts on location change
     this.routeSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {

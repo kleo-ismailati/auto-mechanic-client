@@ -1,4 +1,4 @@
-<div *ngFor="let alert of alerts" class="alert align-content-center alert-dismissible mx-5" [ngClass]=cssClass(alert) role="alert">
+<div *ngFor="let alert of alerts" class="alert align-content-center alert-dismissible m-2" [ngClass]=cssClass(alert) role="alert">
   <span [innerHTML]="alert.message"></span>
   <button type="button" class="btn-close" (click)="removeAlert(alert)" aria-label="Close"></button>
 </div>

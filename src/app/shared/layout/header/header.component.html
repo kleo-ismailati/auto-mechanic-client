@@ -46,7 +46,7 @@
             <a *ngIf="!(loggedUser|async)?.token" routerLink="/login" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show">
               <button class="btn btn-sm btn-outline-success">Sign in</button>
             </a>
-            <a *ngIf="(loggedUser|async)?.token" routerLink="/"
+            <a *ngIf="(loggedUser|async)?.token"
                data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show" (click)="logout()">
               <button class="btn btn-sm btn-outline-danger">Sign out</button>
             </a>

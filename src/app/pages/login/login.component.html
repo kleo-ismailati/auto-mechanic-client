@@ -2,18 +2,40 @@
   <h1 class="display-5 fw-bold text-center text-white my-3 mb-5">Admin Login</h1>
 </div>
 <div class="bg-light border-5 border-top border-dark">
+  <alert></alert>
   <div class="container-fluid mt-5 w-50 default-container">
-    <form>
-      <!-- Email input -->
+    <form [formGroup]="loginForm">
+      <!-- Username input -->
       <div class="form-outline mb-4">
         <label class="form-label" for="username">Username</label>
-        <input [(ngModel)]="user.username" type="text" id="username" name="email" class="form-control"/>
+        <input  formControlName="username" [ngClass]="{ 'is-invalid': f.username.errors && f.username.touched }"
+               class="form-control" id="username" name="email" type="text"/>
+        <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)"
+             class="text-danger small">
+          <div *ngIf="f.username.errors?.['required']">
+            Username is required.
+          </div>
+          <div *ngIf="f.username.errors?.['minlength']">
+            Username must be at least 4 characters long.
+          </div>
+        </div>
       </div>
 
       <!-- Password input -->
       <div class="form-outline mb-4">
         <label class="form-label" for="userPass">Password</label>
-        <input [(ngModel)]="user.password" type="password" id="userPass" name="password" class="form-control"/>
+        <input [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }"
+               class="form-control" formControlName="password" id="userPass" name="password" type="password"/>
+        <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)"
+             class="text-danger small">
+
+          <div *ngIf="f.password.errors?.['required']">
+            Password is required.
+          </div>
+          <div *ngIf="f.password.errors?.['minlength']">
+            Password must be at least 8 characters long.
+          </div>
+        </div>
       </div>
 
       <!-- 2 column grid layout for inline styling -->
@@ -28,7 +50,7 @@
       </div>
 
       <!-- Submit button -->
-      <button type="button" class="btn btn-primary btn-block" (click)="doLogin()">Sign in</button>
+      <button type="button" class="btn btn-primary btn-block" [disabled]="loginForm.invalid" (click)="doLogin()">Sign in</button>
     </form>
   </div>
 </div>

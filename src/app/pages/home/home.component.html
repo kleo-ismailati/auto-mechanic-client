@@ -3,20 +3,22 @@
   <h1 class="lead fw-bold text-white text-center">Repair status tracking for your car</h1>
 </div>
 <div class="bg-light border-5 border-top border-dark">
+  <alert></alert>
   <div class="container-fluid h-50 default-container vertical-center">
     <div class="row col-sm-4 mx-auto active-dark">
-      <h1 class="lead fw-bold text-center pb-4">Reference Code Search</h1>
+      <h1 class="lead fw-bold text-center mt-2 pb-4">View booking status</h1>
       <div class="input-group mb-3">
         <input type="search" class="form-control bg-light rounded-3"
-               placeholder="Please enter reference code" aria-label="Search" aria-describedby="button-search"
-               [(ngModel)]="searchTerm" (keyup.enter)="search()">
-        <button class="btn rounded-3" type="button" id="button-search" (click)="search()">
+               placeholder="Reference code" aria-label="Search" aria-describedby="button-search"
+               [(ngModel)]="refID" (keyup.enter)="viewBooking()">
+        <button class="btn btn-outline-success rounded-3 ms-2" type="button" id="button-search" (click)="viewBooking()">
           <i class="pi pi-search"></i>
         </button>
       </div>
+      <div class="text-danger small" *ngIf="refIDWarning">Please enter a valid reference code</div>
     </div>
 
-    <div class="container pt-md-5" *ngIf="this.result">
+    <div class="container pt-md-5" *ngIf="this.data">
       <table class="table table-bordered w-auto mx-auto">
         <thead class="table-secondary text-center">
          <tr>
@@ -25,20 +27,12 @@
         </thead>
         <tbody>
         <tr>
-          <td class="fw-bold w-50 text-end">Client name</td>
-          <td>{{this.data.client?.firstName}}</td>
+          <td class="fw-bold w-50 text-end">Client</td>
+          <td>{{this.data.client?.firstName}} {{this.data.client?.lastName}}</td>
         </tr>
         <tr>
-          <td class="fw-bold text-end">Client lastname</td>
-          <td>{{this.data.client?.lastName}}</td>
-        </tr>
-        <tr>
-          <td class="fw-bold text-end">Car type</td>
-          <td>{{this.data.car?.carType}}</td>
-        </tr>
-        <tr>
-          <td class="fw-bold text-end">Car model</td>
-          <td>{{this.data.car?.carModel}}</td>
+          <td class="fw-bold text-end">Car details</td>
+          <td>{{this.data.car?.carModel}} {{this.data.car?.carType}}</td>
         </tr>
         <tr>
           <td class="fw-bold text-end">Repair cost</td>

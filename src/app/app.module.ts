@@ -9,7 +9,7 @@ import { HeaderComponent } from './shared/layout/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 
@@ -20,15 +20,16 @@ import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
     FooterComponent,
     LoginComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CoreModule,
-    SharedModule,
-    NgbModule,
-    FormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        CoreModule,
+        SharedModule,
+        NgbModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
