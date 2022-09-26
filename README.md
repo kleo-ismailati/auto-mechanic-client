@@ -1,6 +1,6 @@
 # CarMechanicFrontend
 
-Angular Frontend for Car-Mechanic Project
+Angular 12 Frontend for Car-Mechanic
 
 ## Styling
 
@@ -8,7 +8,7 @@ Bootstrap 5.0
 
 ## Dependencies
 
-PrimeNG, NgBootstrap
+PrimeNG, NgBootstrap, NgxSpinner, PrimeIcons
 
 ## Development
 

@@ -5,6 +5,7 @@ import {UserService} from "../../core/services/user-service";
 import {Router} from "@angular/router";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AlertService} from "../../core/services/alert.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private alertService: AlertService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService
   ) {
     this.loginForm = this.formBuilder.group({
       username: new FormControl(this.user.username, [
@@ -52,22 +54,28 @@ export class LoginComponent implements OnInit {
     }
     this.user.username = this.loginForm.value["username"];
     this.user.password = this.loginForm.value["password"];
-      this.api.post('/auth/login', this.user).subscribe(
-      (response: UserSession)=>{
-        this.userService.loginUser(response);
-        if (this.rememberMe){
-          this.userService.setRememberMe(this.user.username,  this.user.password);
-        }
-        this.router.navigate(['dashboard']).then(
-          () => {
-            this.alertService.success("Logged in successfully!", { autoClose: true })
+    this.spinner.show();
+    setTimeout(
+      ()=>{
+        this.spinner.hide();
+        this.api.post('/auth/login', this.user).subscribe(
+          (response: UserSession)=>{
+            this.userService.loginUser(response);
+            if (this.rememberMe){
+              this.userService.setRememberMe(this.user.username,  this.user.password);
+            }
+            this.router.navigate(['dashboard']).then(
+              () => {
+                this.alertService.success("Logged in successfully!", { autoClose: true })
+              }
+            );
+          }, error => {
+            if(error.status=="INTERNAL_SERVER_ERROR"){
+              this.alertService.error("Bad credentials - could not login!", { autoClose: true })
+            }
           }
-        );
-      }, error => {
-        if(error.status=="INTERNAL_SERVER_ERROR"){
-          this.alertService.error("Bad credentials - could not login!", { autoClose: true })
-        }
-      }
+        )
+      },2000
     )
   }
 }

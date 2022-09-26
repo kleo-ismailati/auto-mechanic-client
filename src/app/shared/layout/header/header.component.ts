@@ -4,6 +4,7 @@ import {UserSession} from "../../../core/models/user.model";
 import {Observable} from "rxjs";
 import {AlertService} from "../../../core/services/alert.service";
 import {Router} from "@angular/router";
+import {NgxSpinner, NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
     ) {
     this.loggedUser = this.userService.loggedUser
   }
@@ -27,11 +29,16 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logoutUser();
-    this.router.navigate(['']).then(
-      () => {
-        this.alertService.success("Logged out successfully", { autoClose: true, keepAfterRouteChange: true });
-      }
-    );
+    this.spinner.show();
+    setTimeout(()=> {
+        this.userService.logoutUser();
+        this.spinner.hide();
+        this.router.navigate(['']).then(
+          () => {
+            this.alertService.success("Logged out successfully", { autoClose: true, keepAfterRouteChange: true });
+          })
+    }
+    ,2000);
+
   }
 }
