@@ -4,6 +4,7 @@ import {RepairBooking} from "../../../core/models/repair-booking.model";
 import {ApiService} from "../../../core/services/api.service";
 import {RepairStatus} from "../../../core/models/repair-status-enum";
 import {AlertService} from "../../../core/services/alert.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-repair-booking-list',
@@ -20,11 +21,16 @@ export class RepairBookingListComponent implements OnInit {
   };
 
   repairStatus = RepairStatus;
+  deleteId = -1;
 
-  constructor(private api: ApiService,
-              private alertService: AlertService) { }
+  constructor(
+    private api: ApiService,
+    private alertService: AlertService,
+    public modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
+    this.deleteId = -1;
 
     this.api.get('/api/repair_booking').subscribe(
       (data: PagedResponse<RepairBooking>) => {
@@ -33,10 +39,11 @@ export class RepairBookingListComponent implements OnInit {
     );
   }
 
-  delete(id: number | undefined): void{
-    this.api.delete(`/api/repair_booking/${id}`).subscribe(
+  delete(): void{
+    this.modalService.dismissAll();
+    this.api.delete(`/api/repair_booking/${this.deleteId}`).subscribe(
       () => {
-        this.alertService.warn("Repair Booking with id " + id + " deleted!", { autoClose: true })
+        this.alertService.warn("Repair Booking with id " + this.deleteId + " deleted!", { autoClose: true })
         this.ngOnInit();
       }
     )
@@ -48,5 +55,14 @@ export class RepairBookingListComponent implements OnInit {
         this.data = data;
       }
     );
+  }
+
+  confirmDelete(id: number | undefined) {
+    this.deleteId = id || -1;
+  }
+
+  cancelDelete() {
+    this.modalService.dismissAll();
+    this.deleteId = -1;
   }
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../../core/services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../../../core/models/user.model";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AlertService} from "../../../core/services/alert.service";
 
 @Component({
   selector: 'app-user',
@@ -24,7 +26,9 @@ export class UserComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertService: AlertService,
+    public modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +48,7 @@ export class UserComponent implements OnInit {
   }
 
   submit() {
+    this.modalService.dismissAll();
     let data : User = {
       email: this.data.email,
       id: 0,
@@ -56,12 +61,14 @@ export class UserComponent implements OnInit {
     this.api.put('/user/' + id, data).subscribe(
       () => {
         this.isEdit = false;
+        this.alertService.success('User was updated successfully', {autoClose: true})
         this.ngOnInit();
       }
     );
   }
 
   cancel() {
+    this.modalService.dismissAll();
     this.isEdit = false;
     this.ngOnInit();
   }

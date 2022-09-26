@@ -5,6 +5,9 @@ import {ActivatedRoute} from "@angular/router";
 import {RepairStatus} from "../../../core/models/repair-status-enum";
 import {HelperService} from "../../../core/services/helper.service";
 import {Repair} from "../../../core/models/repair.model";
+import {AlertService} from "../../../core/services/alert.service";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-repair-booking-list-details',
@@ -19,30 +22,75 @@ export class RepairBookingDetailsComponent implements OnInit {
       label: "Bookings",
     }
   ];
-
-  data: RepairBooking = {status: RepairStatus["To Be Done"]};
-  repairStatus = RepairStatus;
-  repairStatusKeys: number[] = this.helperService.getEnumKeysArray(this.repairStatus);
-  isEdit: boolean = false;
-  addingNewRepair: boolean = false;
+  data!: RepairBooking;
+  newRepairForm: FormGroup;
   newRepair = {
     repairCost: 0, repairDetails: "", repairType: ""
   }
-  private repairEditId = -1;
+  repairStatus = RepairStatus;
+  repairStatusKeys: number[] = this.helperService.getEnumKeysArray(this.repairStatus);
+
+  isEdit: boolean = false;
+  addingNewRepair: boolean = false;
+  repairEditId = -1;
+  repairDeleteId = -1;
 
   constructor(
     private api: ApiService,
     private helperService: HelperService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private alertService: AlertService,
+    private formBuilder: FormBuilder,
+    public modalService: NgbModal
+  ) {
+    this.newRepairForm = this.formBuilder.group({
+      repairType: new FormControl("", [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)
+      ]),
+      repairCost: new FormControl(0, [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(99999)
+      ]),
+      repairDetails: new FormControl("", [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(200)
+      ]),
+    });
+  }
 
   ngOnInit(): void {
+
+    this.isEdit = false;
+    this.addingNewRepair = false;
+    this.repairEditId = -1;
+    this.repairDeleteId = -1;
+
+    this.newRepairForm.reset(
+      {
+        repairCost:0
+      }
+    );
+
+    this.newRepair = {
+      repairCost: 0,
+      repairDetails: "",
+      repairType: ""
+    }
+
     let id = this.route.snapshot.paramMap.get('id');
     this.api.get('/api/repair_booking/' + id).subscribe(
       (data:RepairBooking) => {
         this.data = data;
       }
     );
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.newRepairForm.controls;
   }
 
   enableEdit() {
@@ -56,15 +104,15 @@ export class RepairBookingDetailsComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     this.api.put('/api/repair_booking/' + id, data).subscribe(
       () => {
-        this.isEdit = false;
+        this.alertService.success("Booking was updated successfully!", { autoClose: true });
         this.ngOnInit();
       }
     );
   }
 
-  enableRepairEdit(id: number) {
+  enableRepairEdit(repair: Repair) {
     if(this.repairEditId == -1){
-      this.repairEditId = id;
+      this.repairEditId = repair.id;
     }
   }
 
@@ -78,15 +126,30 @@ export class RepairBookingDetailsComponent implements OnInit {
     }
     this.api.put('/api/repair/'+ repair.id, repairPayload).subscribe(
       ()=> {
-        this.repairEditId = -1;
+        this.alertService.success("Repair was updated successfully!", { autoClose: true });
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         this.ngOnInit();
       }
     )
   }
   submitNewRepair(){
+    this.newRepair = {
+      repairType: this.newRepairForm.value['repairType'],
+      repairDetails: this.newRepairForm.value['repairDetails'],
+      repairCost: this.newRepairForm.value['repairCost']
+    }
     this.api.post('/api/repair/add/' + this.data.id, this.newRepair).subscribe(
       () => {
-        this.addingNewRepair = false;
+        this.alertService.success("New repair was added successfully!", { autoClose: true });
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         this.ngOnInit();
       }
     )
@@ -105,21 +168,35 @@ export class RepairBookingDetailsComponent implements OnInit {
     this.addingNewRepair = true;
   }
 
-  isRepairEdit(id: number) {
+  isRepairEdit(id: number) : boolean {
     return id == this.repairEditId;
   }
 
-  deleteRepair(id: number) {
-    this.api.delete('/api/repair/'+ id).subscribe(
+  deleteRepair() {
+    this.modalService.dismissAll();
+    this.api.delete('/api/repair/'+ this.repairDeleteId).subscribe(
       ()=> {
+        this.alertService.warn("Repair with id " + this.repairDeleteId +" was deleted!", { autoClose: true });
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         this.ngOnInit();
       }
     )
   }
 
   cancel() {
-    this.repairEditId = -1;
-    this.isEdit = false;
     this.ngOnInit();
+  }
+
+  confirmDeleteRepair(id: number) {
+    this.repairDeleteId = id;
+  }
+
+  cancelDeleteRepair() {
+    this.modalService.dismissAll();
+    this.repairDeleteId = -1;
   }
 }
