@@ -4,7 +4,7 @@ import {UserSession} from "../../../core/models/user.model";
 import {Observable} from "rxjs";
 import {AlertService} from "../../../core/services/alert.service";
 import {Router} from "@angular/router";
-import {NgxSpinner, NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-header',
