@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {UserService} from "../../../core/services/user-service";
 import {UserSession} from "../../../core/models/user.model";
 import {Observable} from "rxjs";
-import {AlertService} from "../../../core/services/alert.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 
@@ -18,7 +17,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private alertService: AlertService,
     private router: Router,
     private spinner: NgxSpinnerService
     ) {
@@ -33,12 +31,7 @@ export class HeaderComponent implements OnInit {
     setTimeout(()=> {
         this.userService.logoutUser();
         this.spinner.hide();
-        this.router.navigate(['']).then(
-          () => {
-            this.alertService.success("Logged out successfully", { autoClose: true, keepAfterRouteChange: true });
-          })
-    }
-    ,2000);
+    },2000);
 
   }
 }

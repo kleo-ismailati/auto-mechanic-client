@@ -3,7 +3,9 @@ import {Client} from "../../../core/models/client.model";
 import {ApiService} from "../../../core/services/api.service";
 import {HelperService} from "../../../core/services/helper.service";
 import {ActivatedRoute} from "@angular/router";
-import {Car} from "../../../core/models/car.model";
+import {AlertService} from "../../../core/services/alert.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-client',
@@ -28,7 +30,6 @@ export class ClientComponent implements OnInit {
     phoneNumber: ""
   };
   isEdit: boolean = false;
-  addingNewCar: boolean = false;
   newCar = {
     carType: "",
     carDescription: "",
@@ -36,15 +37,43 @@ export class ClientComponent implements OnInit {
     color: "",
     year: ""
   }
-  private carEditId = -1;
+  newCarForm: FormGroup;
 
   constructor(
     private api: ApiService,
     private helperService: HelperService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private alertService: AlertService,
+    public modalService: NgbModal,
+    private formBuilder: FormBuilder
+  ) {
+    this.newCarForm = this.formBuilder.group({
+      carModel: new FormControl("", [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]),
+      carType: new FormControl("", [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]),
+      color: new FormControl("", [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]),
+      year: new FormControl("", [
+        Validators.required,
+        Validators.pattern("^(19|20)\\d{2}$")
+      ]),
+      carDescription: new FormControl("")
+    })
+  }
 
   ngOnInit(): void {
+    this.newCar = {carType: "", carDescription: "", carModel: "", color: "", year: ""}
+    this.newCarForm.reset();
     let id = this.route.snapshot.paramMap.get('id');
     this.api.get('/api/client/' + id).subscribe(
       (data:Client) => {
@@ -53,11 +82,15 @@ export class ClientComponent implements OnInit {
     );
   }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.newCarForm.controls;
+  }
+
   enableEdit() {
     this.isEdit = true;
   }
 
-  submit() {
+  editClient() {
     let data : Client = {
       id: this.data.id,
       address: this.data.address,
@@ -70,44 +103,36 @@ export class ClientComponent implements OnInit {
     this.api.put('/api/client/' + id, data).subscribe(
       () => {
         this.isEdit = false;
+        this.alertService.success("Client was updated successfully!", { autoClose: true});
         this.ngOnInit();
       }
     );
   }
 
-  enableCarEdit(id: number) {
-    if(this.carEditId == -1){
-      this.carEditId = id;
-    }
-  }
-
-  submitCar(car: Car) {
-    let carPayload: Car = {
-      color: car.color,
-      year: car.year,
-      id: car.id,
-      carType: car.carType,
-      carModel: car.carModel,
-      carDescription: car.carDescription
-    }
-    this.api.put('/api/car/'+ car.id, carPayload).subscribe(
-      ()=> {
-        this.carEditId = -1;
-        this.ngOnInit();
-      }
-    )
-  }
   submitNewCar(){
+    this.newCar = {
+      carModel: this.newCarForm.value['carModel'],
+      carType: this.newCarForm.value['carType'],
+      color: this.newCarForm.value['color'],
+      carDescription: this.newCarForm.value['carDescription'],
+      year: this.newCarForm.value['year']
+    }
     let id = this.route.snapshot.paramMap.get('id');
     this.api.post(`/api/client/${id}/addCar`, this.newCar).subscribe(
       () => {
-        this.addingNewCar = false;
+        this.modalService.dismissAll();
+        this.alertService.success("New car was added successfully!", { autoClose: true});
+        this.ngOnInit();
+      }, () => {
+        this.modalService.dismissAll();
+        this.alertService.error("An error has occurred", { autoClose: true});
         this.ngOnInit();
       }
     )
   }
 
   cancelNewCar() {
+    this.modalService.dismissAll();
     this.newCar = {
       carType: "",
       carDescription: "",
@@ -115,15 +140,7 @@ export class ClientComponent implements OnInit {
       color: "",
       year: ""
     }
-    this.addingNewCar = false;
-  }
-
-  addCar(){
-    this.addingNewCar = true;
-  }
-
-  isCarEdit(id: number) {
-    return id == this.carEditId;
+    this.newCarForm.reset();
   }
 
   deleteCar(id: number) {

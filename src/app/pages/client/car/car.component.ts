@@ -3,6 +3,7 @@ import {ApiService} from "../../../core/services/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Car} from "../../../core/models/car.model";
 import {NewRepairBooking} from "../../../core/models/repair-booking.model";
+import {AlertService} from "../../../core/services/alert.service";
 
 @Component({
   selector: 'app-car',
@@ -48,7 +49,8 @@ export class CarComponent implements OnInit {
   constructor(
     private api: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -79,6 +81,7 @@ export class CarComponent implements OnInit {
     this.api.put('/api/car/' + carId, data).subscribe(
       () => {
         this.isEdit = false;
+        this.alertService.success("Car was updated successfully!", { autoClose: true});
         this.ngOnInit();
       }
     );
@@ -139,8 +142,17 @@ export class CarComponent implements OnInit {
       this.api.post('/api/repair_booking', this.newRb).subscribe(
         ()=>{
           this.isAddRb = false;
+          this.alertService.success("Booking was added successfully! Redirecting to Bookings...",
+            { autoClose: true, keepAfterRouteChange: true });
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
           this.resetRb();
-          this.router.navigate(['repair-booking']);
+          setTimeout( () => {
+            this.router.navigate(['repair-booking']);
+          },3000 )
         }
       )
     }

@@ -6,6 +6,7 @@ import {ClientRoutingModule} from "./client-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import { ClientListComponent } from './client-list/client-list.component';
 import {PaginatorModule} from "primeng/paginator";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -19,7 +20,8 @@ import {PaginatorModule} from "primeng/paginator";
         CommonModule,
         ClientRoutingModule,
         PaginatorModule,
-        SharedModule
+        SharedModule,
+        ReactiveFormsModule
     ]
 })
 export class ClientModule { }

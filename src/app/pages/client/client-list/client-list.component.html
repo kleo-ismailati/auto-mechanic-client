@@ -5,6 +5,7 @@
 <div class="bg-light border-5 border-top border-dark">
   <app-breadcrumb [currentPage]="'Clients'">
   </app-breadcrumb>
+  <alert></alert>
   <div class="container crumb-container">
     <div class="container-fluid p-4 card">
       <div class="row my-2">
@@ -46,40 +47,106 @@
   </div>
 
   <!-- Modal -->
-  <ng-template #content let-modal>
+  <ng-template #content>
     <div class="modal-header">
       <h5 class="modal-title">Add Client</h5>
       <button type="button" (click)="cancelAddNewClient()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body modal-can-scroll">
-      <label class="form-label">First Name</label>
-      <div class="input-group mb-3">
-        <input [(ngModel)]="newClient.firstName" placeholder="First Name"
-               type="text" class="form-control" aria-label="First Name">
-      </div>
-      <label class="form-label">Last Name</label>
-      <div class="input-group mb-3">
-        <input [(ngModel)]="newClient.lastName" placeholder="Last Name"
-               type="text" class="form-control" aria-label="Last Name">
-      </div>
-      <label class="form-label">Phone Number</label>
-      <div class="input-group mb-3">
-        <input [(ngModel)]="newClient.phoneNumber" placeholder="Phone Number"
-               type="tel" class="form-control" aria-label="Phone Number">
-      </div>
-      <label class="form-label">Email</label>
-      <div class="input-group mb-3">
-        <input [(ngModel)]="newClient.email" placeholder="Email"
-               type="email" class="form-control" aria-label="Email">
-      </div>
-      <label class="form-label">Address</label>
-      <div class="input-group mb-3">
-        <input [(ngModel)]="newClient.address" placeholder="Address"
-               type="text" class="form-control" aria-label="Address">
-      </div>
+      <form [formGroup]="newClientForm">
+        <div class="form-group mb-3">
+          <label class="form-label">First Name</label>
+          <div class="input-group">
+            <input formControlName="firstName" placeholder="First Name" type="text" class="form-control"
+                   [ngClass]="{'is-invalid': f.firstName.errors && f.firstName.touched}"  aria-label="First Name">
+          </div>
+          <div *ngIf="f.firstName.invalid && (f.firstName.dirty || f.firstName.touched)"
+               class="text-danger small">
+            <div *ngIf="f.firstName.errors?.['required']">
+              First name is required.
+            </div>
+            <div *ngIf="f.firstName.errors?.['minlength']">
+              First name must be at least 3 characters long.
+            </div>
+            <div *ngIf="f.firstName.errors?.['maxlength']">
+              First name must be at most 15 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">Last Name</label>
+          <div class="input-group">
+            <input formControlName="lastName" placeholder="Last Name" type="text" class="form-control"
+                   [ngClass]="{'is-invalid': f.lastName.errors && f.lastName.touched}" aria-label="Last Name">
+          </div>
+          <div *ngIf="f.lastName.invalid && (f.lastName.dirty || f.lastName.touched)"
+               class="text-danger small">
+            <div *ngIf="f.lastName.errors?.['required']">
+              Last name is required.
+            </div>
+            <div *ngIf="f.lastName.errors?.['minlength']">
+              Last name must be at least 3 characters long.
+            </div>
+            <div *ngIf="f.lastName.errors?.['maxlength']">
+              Last name must be at most 15 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">Phone Number</label>
+          <div class="input-group">
+            <input formControlName="phoneNumber" placeholder="Phone Number" type="tel" class="form-control"
+                   [ngClass]="{'is-invalid': f.phoneNumber.errors && f.phoneNumber.touched}" aria-label="Phone Number">
+          </div>
+          <div *ngIf="f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)"
+               class="text-danger small">
+            <div *ngIf="f.phoneNumber.errors?.['required']">
+              Phone number is required.
+            </div>
+            <div *ngIf="f.phoneNumber.errors?.['pattern']">
+              Number must be 10 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">Email</label>
+          <div class="input-group">
+            <input formControlName="email" placeholder="Email" type="email" class="form-control"
+                   [ngClass]="{'is-invalid': f.email.errors && f.email.touched}" aria-label="Email">
+          </div>
+          <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)"
+               class="text-danger small">
+            <div *ngIf="f.email.errors?.['required']">
+              Email is required.
+            </div>
+            <div *ngIf="f.email.errors?.['email']">
+              Email must be a valid email address.
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">Address</label>
+          <div class="input-group">
+            <input formControlName="address" placeholder="Address" type="text" class="form-control"
+                   [ngClass]="{'is-invalid': f.address.errors && f.address.touched}" aria-label="Address">
+          </div>
+          <div *ngIf="f.address.invalid && (f.address.dirty || f.address.touched)"
+               class="text-danger small">
+            <div *ngIf="f.address.errors?.['required']">
+              Address is required.
+            </div>
+            <div *ngIf="f.address.errors?.['minlength']">
+              Address must be at least 3 characters long.
+            </div>
+            <div *ngIf="f.address.errors?.['maxlength']">
+              Address must be at most 100 characters long.
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
     <div class="modal-footer">
-      <button type="submit" (click)="addNewClient()" class="btn btn-sm btn-success">Add</button>
+      <button [disabled]="newClientForm.invalid" type="submit" (click)="addNewClient()" class="btn btn-sm btn-success">Add</button>
       <button type="button" (click)="cancelAddNewClient()" class="btn btn-sm btn-secondary">Cancel</button>
     </div>
   </ng-template>

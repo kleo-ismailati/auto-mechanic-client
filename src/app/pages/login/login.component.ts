@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {UserLogin, UserSession} from "../../core/models/user.model";
 import {ApiService} from "../../core/services/api.service";
 import {UserService} from "../../core/services/user-service";
-import {Router} from "@angular/router";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AlertService} from "../../core/services/alert.service";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -21,7 +20,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private api: ApiService,
     private userService: UserService,
-    private router: Router,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService
@@ -60,15 +58,10 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
         this.api.post('/auth/login', this.user).subscribe(
           (response: UserSession)=>{
-            this.userService.loginUser(response);
             if (this.rememberMe){
               this.userService.setRememberMe(this.user.username,  this.user.password);
             }
-            this.router.navigate(['dashboard']).then(
-              () => {
-                this.alertService.success("Logged in successfully!", { autoClose: true })
-              }
-            );
+            this.userService.loginUser(response);
           }, error => {
             if(error.status=="INTERNAL_SERVER_ERROR"){
               this.alertService.error("Bad credentials - could not login!", { autoClose: true })

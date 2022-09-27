@@ -63,13 +63,13 @@
             Edit User
           </button>
           <button *ngIf="isEdit" [disabled]="newUserForm.invalid"
-                  class="btn btn-sm btn-success me-2" (click)="modalService.open(confirm)">Save</button>
+                  class="btn btn-sm btn-success me-2" (click)="modalService.open(confirmModal)">Save</button>
           <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
         </div>
       </div>
     </div>
   </div>
-  <ng-template #confirm let-modal>
+  <ng-template #confirmModal>
     <div class="modal-header">
       <h5 class="modal-title">Confirm action</h5>
       <button type="button" (click)="cancel()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

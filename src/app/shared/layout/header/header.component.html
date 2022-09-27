@@ -55,10 +55,10 @@
         </div>
     </nav>
 </header>
-<div *ngIf="(loggedUser|async)?.token" class="my-0 bg-dark text-secondary text-end">
+<div *ngIf="(loggedUser|async)?.token" class="my-0 bg-success text-dark fw-bold text-end">
   <span class="small align-top">
     User :
-    <span class="text-success fst-italic">
+    <span class="text-white-50 fst-italic">
       {{(loggedUser|async)?.email}} - {{(loggedUser|async)?.username}}
       <i class="pi align-middle small pi-user mx-1"></i>
     </span>
