@@ -1,15 +1,28 @@
 # CarMechanicFrontend
 
-Angular 12 Frontend for Car-Mechanic
+Angular Frontend for Car-Mechanic API
 
-## Styling
+## Tools used
+* WebStorm
+* Postman
 
-Bootstrap 5.0
+## Technologies used
+* Angular 12
+* Bootstrap 5
+* PrimeNG
+* NgBootstrap
+* NgxSpinner
+* PrimeIcons
 
-## Dependencies
+## Authors and acknowledgment
+* Kleo Ismailati
+* Klajdi Hoxha
 
-PrimeNG, NgBootstrap, NgxSpinner, PrimeIcons
+## Project status
+In development
 
-## Development
+## Setup
+* Run npm install in terminal
+* Run npm run ng serve
+* If you have issue with OpenSSL run this in terminal: ```$env:NODE_OPTIONS = "--openssl-legacy-provider"```
 
-Kleo Ismailati, Klajdi Hoxha
