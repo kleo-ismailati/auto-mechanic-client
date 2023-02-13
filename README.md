@@ -1,6 +1,5 @@
-# CarMechanicFrontend
-
-Angular Frontend for Car-Mechanic API
+# Car Mechanic Frontend
+Angular Frontend for Car Mechanic API
 
 ## Tools used
 * WebStorm
@@ -18,11 +17,12 @@ Angular Frontend for Car-Mechanic API
 * Kleo Ismailati
 * Klajdi Hoxha
 
-## Project status
-In development
-
 ## Setup
-* Run npm install in terminal
-* Run npm run ng serve
+* Clone project into your machine
+* Run ```npm install``` in terminal (In your project folder)
+* Run ```npm run ng serve```
+* Open ```localhost:4200``` to access frontend while backend is up
 * If you have issue with OpenSSL run this in terminal: ```$env:NODE_OPTIONS = "--openssl-legacy-provider"```
 
+## Project status
+In development
