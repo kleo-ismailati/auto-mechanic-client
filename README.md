@@ -6,7 +6,7 @@ Angular Frontend for Car Mechanic API
 * Postman
 
 ## Technologies used
-* Angular 12
+* Angular 15
 * Bootstrap 5
 * PrimeNG
 * NgBootstrap

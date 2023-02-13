@@ -23,7 +23,7 @@
             <tbody>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Model</td>
-              <td *ngIf="!isEdit">{{this.data?.carModel}}</td>
+              <td *ngIf="!isEdit">{{this.data.carModel}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.carModel" type="text" name="editCarModel" required minlength="3" maxlength="15"
                        #editCarModel=ngModel [ngClass]="{'is-invalid' : editCarModel.invalid}" class="form-control form-control-sm bg-light">
@@ -31,7 +31,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Type</td>
-              <td *ngIf="!isEdit">{{this.data?.carType}}</td>
+              <td *ngIf="!isEdit">{{this.data.carType}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.carType" type="text" name="editCarType" required minlength="3" maxlength="15"
                        #editCarType=ngModel [ngClass]="{'is-invalid' : editCarType.invalid}" class="form-control form-control-sm bg-light">
@@ -39,7 +39,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Year</td>
-              <td *ngIf="!isEdit">{{this.data?.year}}</td>
+              <td *ngIf="!isEdit">{{this.data.year}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.year" #year=ngModel name="year" type="text" required pattern="^(19|20)\d{2}$"
                        [ngClass]="{'is-invalid' : year.invalid }" class="form-control form-control-sm bg-light">
@@ -47,7 +47,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Color</td>
-              <td *ngIf="!isEdit">{{this.data?.color}}</td>
+              <td *ngIf="!isEdit">{{this.data.color}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.color" name="color" type="text" required minlength="3" maxlength="15"
                        #color=ngModel [ngClass]="{'is-invalid' : color.invalid}" class="form-control form-control-sm bg-light">
@@ -55,7 +55,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Description</td>
-              <td *ngIf="!isEdit">{{this.data?.carDescription}}</td>
+              <td *ngIf="!isEdit">{{this.data.carDescription}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.carDescription" type="text" name="editCarDescription"
                        class="form-control form-control-sm bg-light">

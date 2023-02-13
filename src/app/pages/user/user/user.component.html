@@ -23,7 +23,7 @@
             <tbody>
             <tr>
               <td class="fw-bold col-sm-2 text-end w-25">Username</td>
-              <td *ngIf="!isEdit">{{this.data?.username}}</td>
+              <td *ngIf="!isEdit">{{this.data.username}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.username" name="username" #username=ngModel required minlength="3" maxlength="15"
                        [ngClass]="{ 'is-invalid': username.invalid}" (change)="this.data.username = this.data.username.trim()"
@@ -32,7 +32,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Email</td>
-              <td *ngIf="!isEdit">{{this.data?.email}}</td>
+              <td *ngIf="!isEdit">{{this.data.email}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.email" name="email" required email #email=ngModel
                        [ngClass]="{ 'is-invalid': email.invalid}"

@@ -23,7 +23,7 @@
             <tbody>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Firstname</td>
-              <td *ngIf="!isEdit">{{this.data?.firstName}}</td>
+              <td *ngIf="!isEdit">{{this.data.firstName}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.firstName" name="firstName" type="text" required minlength="3" maxlength="15"
                        #firstName=ngModel [ngClass]="{'is-invalid': this.firstName.invalid}" class="form-control form-control-sm bg-light">
@@ -31,7 +31,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Lastname</td>
-              <td *ngIf="!isEdit">{{this.data?.lastName}}</td>
+              <td *ngIf="!isEdit">{{this.data.lastName}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.lastName" name="lastName" type="text" required minlength="3" maxlength="15"
                        #lastName=ngModel [ngClass]="{'is-invalid': this.lastName.invalid}" class="form-control form-control-sm bg-light">
@@ -39,7 +39,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Email</td>
-              <td *ngIf="!isEdit">{{this.data?.email}}</td>
+              <td *ngIf="!isEdit">{{this.data.email}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.email" name="email" type="email" required email
                        #email=ngModel [ngClass]="{'is-invalid': this.email.invalid}" class="form-control form-control-sm bg-light">
@@ -47,7 +47,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Phone</td>
-              <td *ngIf="!isEdit">{{this.data?.phoneNumber}}</td>
+              <td *ngIf="!isEdit">{{this.data.phoneNumber}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.phoneNumber" name="phoneNumber" type="tel" required pattern="^\d{10}$"
                        #phoneNumber=ngModel [ngClass]="{'is-invalid': this.phoneNumber.invalid}" class="form-control form-control-sm bg-light">
@@ -55,7 +55,7 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Address</td>
-              <td *ngIf="!isEdit">{{this.data?.address}}</td>
+              <td *ngIf="!isEdit">{{this.data.address}}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.address" name="address" type="text" required minlength="3" maxlength="100"
                        #address=ngModel [ngClass]="{'is-invalid': this.address.invalid}" class="form-control form-control-sm bg-light">
@@ -98,7 +98,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let car of this.data?.cars; let idx=index">
+          <tr *ngFor="let car of this.data.cars; let idx=index">
             <td>{{idx+1}}</td>
             <td>{{car?.carModel}} {{car?.carType}}</td>
             <td style="width:30%">{{car?.year}}</td>
