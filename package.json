@@ -1,5 +1,5 @@
 {
-  "name": "car-mechanic-frontend",
+  "name": "car-mechanic-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

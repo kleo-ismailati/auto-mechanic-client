@@ -1,4 +1,4 @@
-# Car Mechanic Frontend
+# Car Mechanic Client
 
 ## Description
 Angular Client for Car Mechanic API
@@ -26,9 +26,9 @@ Angular Client for Car Mechanic API
 
 ## Setup
 * Clone project into your machine from git
-* Run ```npm install``` in terminal (In your project folder)
-* Run ```npm run ng serve```
-* Open ```localhost:4200``` to access Client while API is up
+* Run ```npm install``` command in terminal (In your project folder)
+* Run ```npm run start``` command to start App locally
+* Open [```http://localhost:4200/```](http://localhost:4200/) to access Client while API is up
 
 ## Project status
 In development
