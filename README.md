@@ -1,5 +1,7 @@
 # Car Mechanic Frontend
-Angular Frontend for Car Mechanic API
+
+## Description
+Angular Client for Car Mechanic API
 
 ## Tools used
 * WebStorm
@@ -8,21 +10,25 @@ Angular Frontend for Car Mechanic API
 ## Technologies used
 * Angular 15
 * Bootstrap 5
+* Node 18.14
+* JQuery
+* RxJS
+
+## Plugins
 * PrimeNG
+* PrimeIcons
 * NgBootstrap
 * NgxSpinner
-* PrimeIcons
 
 ## Authors and acknowledgment
 * Kleo Ismailati
 * Klajdi Hoxha
 
 ## Setup
-* Clone project into your machine
+* Clone project into your machine from git
 * Run ```npm install``` in terminal (In your project folder)
 * Run ```npm run ng serve```
-* Open ```localhost:4200``` to access frontend while backend is up
-* If you have issue with OpenSSL run this in terminal: ```$env:NODE_OPTIONS = "--openssl-legacy-provider"```
+* Open ```localhost:4200``` to access Client while API is up
 
 ## Project status
 In development
