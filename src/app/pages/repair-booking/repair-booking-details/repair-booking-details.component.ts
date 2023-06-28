@@ -28,7 +28,7 @@ export class RepairBookingDetailsComponent implements OnInit {
     repairCost: 0, repairDetails: "", repairType: ""
   }
   repairStatus = RepairStatus;
-  repairStatusKeys: number[] = this.helperService.getEnumKeysArray(this.repairStatus);
+  repairStatusKeys: number[] = [];
 
   isEdit: boolean = false;
   addingNewRepair: boolean = false;
@@ -68,6 +68,7 @@ export class RepairBookingDetailsComponent implements OnInit {
     this.addingNewRepair = false;
     this.repairEditId = -1;
     this.repairDeleteId = -1;
+    this.repairStatusKeys = this.helperService.getEnumKeysArray(this.repairStatus);
 
     this.newRepairForm.reset(
       {

@@ -12,12 +12,12 @@ import {ReactiveFormsModule} from "@angular/forms";
     RepairBookingListComponent,
     RepairBookingDetailsComponent
   ],
-    imports: [
-        CommonModule,
-        RepairBookingRoutingModule,
-        PaginatorModule,
-        SharedModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+      CommonModule,
+      RepairBookingRoutingModule,
+      PaginatorModule,
+      SharedModule,
+      ReactiveFormsModule
+  ]
 })
 export class RepairBookingModule { }
