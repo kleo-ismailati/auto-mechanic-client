@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {ClientComponent} from "./client/client.component";
 import {CarComponent} from "./car/car.component";
 import {ClientRoutingModule} from "./client-routing.module";
@@ -21,7 +21,8 @@ import {ReactiveFormsModule} from "@angular/forms";
         ClientRoutingModule,
         PaginatorModule,
         SharedModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgOptimizedImage
     ]
 })
 export class ClientModule { }

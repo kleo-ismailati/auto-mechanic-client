@@ -1,7 +1,6 @@
 import {RepairStatus} from "./repair-status-enum";
 
 export interface Repair {
-
   id: number;
   repairType: string;
   repairCost : number;

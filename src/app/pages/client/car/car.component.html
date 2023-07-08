@@ -61,6 +61,10 @@
                        class="form-control form-control-sm bg-light">
               </td>
             </tr>
+            <tr>
+              <td class="fw-bold col-sm-2 text-end">Image</td>
+              <td *ngIf="!isEdit" class="text-center"><img [src]="this.imageToShow" alt="carImage" class="w-50 img-thumbnail"></td>
+            </tr>
             </tbody>
           </table>
         </form>

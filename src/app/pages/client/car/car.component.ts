@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Car} from "../../../core/models/car.model";
 import {NewRepairBooking} from "../../../core/models/repair-booking.model";
 import {AlertService} from "../../../core/services/alert.service";
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-car',
@@ -29,8 +30,11 @@ export class CarComponent implements OnInit {
     carType: "",
     color: "",
     id: 0,
-    year: ""
+    year: "",
+    imageId: "",
   }
+  headers: HttpHeaders = new HttpHeaders().set('Accept','image/*');
+  imageToShow: any;
 
   isEdit: boolean = false;
   isAddRb = false;
@@ -59,8 +63,14 @@ export class CarComponent implements OnInit {
     this.api.get('/api/car/' + carId).subscribe(
       (data:Car) => {
         this.data = data;
+        this.api.getBlob('/image/' + this.data.imageId,undefined,this.headers).subscribe(
+          (image) => {
+            this.createImageFromBlob(image);
+          }
+        );
       }
     );
+
     this.breadcrumbParentsList[1] =
       {
         link: `/client/${id}`,
@@ -157,5 +167,16 @@ export class CarComponent implements OnInit {
       )
     }
     this.isAddRb = false;
+  }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
   }
 }

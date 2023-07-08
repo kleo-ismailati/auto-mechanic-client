@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/core/services/api.service';
-import { RepairBooking } from 'src/app/core/models/repair-booking.model';
 import {RepairStatus} from "../../core/models/repair-status-enum";
 import {AlertService} from "../../core/services/alert.service";
+import {RepairBookingGuestView} from "../../core/models/repair-booking-guest-view.model";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import {AlertService} from "../../core/services/alert.service";
 })
 export class HomeComponent implements OnInit {
 
-  data: RepairBooking | undefined;
+  data: RepairBookingGuestView | undefined;
   refID: String = '';
   repairStatus = RepairStatus;
   refIDWarning: boolean = false;
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     if (this.refID && this.refID.length >= 30){
       this.refIDWarning = false;
       this.api.get('/api/repair_booking/view/' + this.refID).subscribe(
-        (data:RepairBooking) => {
+        (data:RepairBookingGuestView) => {
           this.data = data;
           this.alertService.success("Repair Booking found", { autoClose: true });
         }, (error) => {

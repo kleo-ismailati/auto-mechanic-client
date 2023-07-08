@@ -9,4 +9,5 @@ export interface Car {
     color: string;
     carDescription: string;
     repairs?: Repair[];
+    imageId?: string;
 }

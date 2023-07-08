@@ -25,11 +25,11 @@
           <tr *ngFor="let repairBooking of this.data?.result; let idx = index">
             <td>{{idx+1}}</td>
             <td>
-              <span *ngIf="repairBooking.client as client">
-                {{client.firstName}} {{repairBooking.client.lastName}}
+              <span>
+                {{repairBooking.firstName}} {{repairBooking.lastName}}
               </span>
             </td>
-            <td>{{repairBooking.car?.carModel}} {{repairBooking.car?.carType}}</td>
+            <td>{{repairBooking.carModel}} {{repairBooking.carType}}</td>
             <td>{{repairBooking.totalPrice | currency:'USD'}}</td>
             <td>{{repairBooking.date | date}}</td>
             <td>{{repairStatus[repairBooking.status]}}</td>

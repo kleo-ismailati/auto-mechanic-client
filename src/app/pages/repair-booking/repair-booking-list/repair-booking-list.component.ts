@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {PagedResponse} from "../../../core/models/paged.response.model";
-import {RepairBooking} from "../../../core/models/repair-booking.model";
 import {ApiService} from "../../../core/services/api.service";
 import {RepairStatus} from "../../../core/models/repair-status-enum";
 import {AlertService} from "../../../core/services/alert.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {RepairBookingView} from "../../../core/models/repair-booking-view.model";
 
 @Component({
   selector: 'app-repair-booking-list',
@@ -13,7 +13,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class RepairBookingListComponent implements OnInit {
 
-  data : PagedResponse<RepairBooking> = {
+  data : PagedResponse<RepairBookingView> = {
     page: 0,
     size: 0,
     total: 0,
@@ -33,7 +33,7 @@ export class RepairBookingListComponent implements OnInit {
     this.deleteId = -1;
 
     this.api.get('/api/repair_booking').subscribe(
-      (data: PagedResponse<RepairBooking>) => {
+      (data: PagedResponse<RepairBookingView>) => {
         this.data = data;
       }
     );
@@ -51,7 +51,7 @@ export class RepairBookingListComponent implements OnInit {
 
   paginate(event: any) {
     this.api.get(`/api/repair_booking?page=${event.page}`).subscribe(
-      (data: PagedResponse<RepairBooking>) => {
+      (data: PagedResponse<RepairBookingView>) => {
         this.data = data;
       }
     );
