@@ -63,7 +63,18 @@
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Image</td>
-              <td *ngIf="!isEdit" class="text-center"><img [src]="this.imageToShow" alt="carImage" class="w-50 img-thumbnail"></td>
+              <td *ngIf="!isEdit && (this.data.imageId!=null)" class="text-center"><img [src]="this.imageToShow" alt="carImage" class="w-50 img-thumbnail"></td>
+              <td *ngIf="!isEdit && (this.data.imageId==null)" class="text-center">No image</td>
+              <td *ngIf="isEdit" class="text-center">
+              <form (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="row needs-validation" novalidate>
+                  <div class="mb-3">
+                    <label for="image" class="form-label">Choose an image:</label>
+                    <input type="file" name="image" id="image" (change)="onFileSelected($event)" class="form-control" required>
+                    <div class="invalid-feedback">Please choose an image.</div>
+                    <button type="submit" class="btn btn-primary my-2">Upload</button>
+                  </div>
+                </form>
+              </td>
             </tr>
             </tbody>
           </table>

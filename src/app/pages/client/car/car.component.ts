@@ -35,6 +35,7 @@ export class CarComponent implements OnInit {
   }
   headers: HttpHeaders = new HttpHeaders().set('Accept','image/*');
   imageToShow: any;
+  selectedFile: File | null = null;
 
   isEdit: boolean = false;
   isAddRb = false;
@@ -63,11 +64,13 @@ export class CarComponent implements OnInit {
     this.api.get('/api/car/' + carId).subscribe(
       (data:Car) => {
         this.data = data;
-        this.api.getBlob('/image/' + this.data.imageId,undefined,this.headers).subscribe(
-          (image) => {
-            this.createImageFromBlob(image);
-          }
-        );
+        if(this.data.imageId != null){
+          this.api.getBlob('/image/' + this.data.imageId,undefined,this.headers).subscribe(
+            (image) => {
+              this.createImageFromBlob(image);
+            }
+          );
+        }
       }
     );
 
@@ -177,6 +180,35 @@ export class CarComponent implements OnInit {
 
     if (image) {
       reader.readAsDataURL(image);
+    }
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0] as File;
+  }
+
+  onSubmit() {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('image', this.selectedFile);
+      let carId = this.route.snapshot.paramMap.get('carId');
+      this.api.post('/image/setCarImg/'+ carId, formData).subscribe(
+        {
+          next: () => {
+            this.isEdit = false;
+            this.alertService.success("Image was changed successfully!",
+              { autoClose: true, keepAfterRouteChange: false });
+            this.ngOnInit();
+          },
+          error: err => {
+            this.isEdit = false;
+            this.alertService.error("Image could not be changed!",
+              { autoClose: true, keepAfterRouteChange: false });
+            console.log(err);
+            this.ngOnInit();
+          }
+        }
+      );
     }
   }
 }
