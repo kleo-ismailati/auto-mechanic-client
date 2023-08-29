@@ -6,7 +6,7 @@ export interface Repair {
   repairCost : number;
   repairDetails : string;
   repairStatus: RepairStatus;
-  carId?: string;
+  autoId?: string;
 }
 export interface NewRepair {
   repairType: string;

@@ -5,15 +5,15 @@ export interface RepairBooking {
   id?: number;
   firstName?: string;
   lastName?: string;
-  carModel?: string;
-  carType?: string;
+  autoModel?: string;
+  autoType?: string;
   date?: Date;
   totalPrice?: string;
   status: RepairStatus;
   repairs?: Repair[];
 }
 export interface NewRepairBooking {
-  carId: number;
+  autoId: number;
   clientId: number;
   repairs: NewRepair[];
 }

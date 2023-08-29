@@ -12,7 +12,7 @@ import {Stats} from "../../core/models/stats.model";
 export class DashboardComponent implements OnInit {
 
   data : Stats = {
-    totalCars: 0,
+    totalAutos: 0,
     totalIncome: 0,
     totalClients: 0,
     totalRepairBookingsActive: 0,

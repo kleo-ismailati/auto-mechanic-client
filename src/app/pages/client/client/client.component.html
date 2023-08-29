@@ -77,12 +77,12 @@
     </div>
     <div class="container-fluid p-4 card">
       <div class="row">
-        <h1 class="lead fw-bold text-center">Cars Owned By Client</h1>
+        <h1 class="lead fw-bold text-center">Autos Owned By Client</h1>
       </div>
       <div class="row my-2">
         <div class="d-flex justify-content-end">
-          <button *ngIf="(!isEdit)" class="btn btn-sm btn-success me-2" (click)="modalService.open(newCarModal)">
-            Add Car
+          <button *ngIf="(!isEdit)" class="btn btn-sm btn-success me-2" (click)="modalService.open(newAutoModal)">
+            Add Auto
           </button>
         </div>
       </div>
@@ -91,20 +91,20 @@
           <thead class="table-secondary">
           <tr>
             <th></th>
-            <th>Car</th>
+            <th>Auto</th>
             <th>Year</th>
             <th>Color</th>
             <th>Actions</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let car of this.data.cars; let idx=index">
+          <tr *ngFor="let auto of this.data.autos; let idx=index">
             <td>{{idx+1}}</td>
-            <td>{{car?.carModel}} {{car?.carType}}</td>
-            <td style="width:30%">{{car?.year}}</td>
-            <td style="width:30%">{{car?.color}}</td>
+            <td>{{auto?.autoModel}} {{auto?.autoType}}</td>
+            <td style="width:30%">{{auto?.year}}</td>
+            <td style="width:30%">{{auto?.color}}</td>
             <td style="width:10%">
-              <a routerLink="./cars/{{car.id}}">
+              <a routerLink="./autos/{{auto.id}}">
                 <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
               </a>
             </td>
@@ -116,48 +116,48 @@
   </div>
 
   <!-- Modal -->
-  <ng-template #newCarModal>
+  <ng-template #newAutoModal>
     <div class="modal-header">
-      <h5 class="modal-title">Add Car</h5>
-      <button type="button" (click)="cancelNewCar()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <h5 class="modal-title">Add Auto</h5>
+      <button type="button" (click)="cancelNewAuto()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body modal-can-scroll">
-      <form [formGroup]="newCarForm">
+      <form [formGroup]="newAutoForm">
         <div class="form-group mb-3">
-          <label class="form-label">Car model</label>
+          <label class="form-label">Auto model</label>
           <div class="input-group">
-            <input formControlName="carModel" placeholder="Car model" type="text" class="form-control"
-                   [ngClass]="{'is-invalid': f.carModel.errors && f.carModel.touched}"  aria-label="Car model">
+            <input formControlName="autoModel" placeholder="Auto model" type="text" class="form-control"
+                   [ngClass]="{'is-invalid': f.autoModel.errors && f.autoModel.touched}"  aria-label="Auto model">
           </div>
-          <div *ngIf="f.carModel.invalid && (f.carModel.dirty || f.carModel.touched)"
+          <div *ngIf="f.autoModel.invalid && (f.autoModel.dirty || f.autoModel.touched)"
                class="text-danger small">
-            <div *ngIf="f.carModel.errors?.['required']">
-              Car model is required.
+            <div *ngIf="f.autoModel.errors?.['required']">
+              Auto model is required.
             </div>
-            <div *ngIf="f.carModel.errors?.['minlength']">
-              Car model must be at least 3 characters long.
+            <div *ngIf="f.autoModel.errors?.['minlength']">
+              Auto model must be at least 3 characters long.
             </div>
-            <div *ngIf="f.carModel.errors?.['maxlength']">
-              Car model must be at most 15 characters long.
+            <div *ngIf="f.autoModel.errors?.['maxlength']">
+              Auto model must be at most 15 characters long.
             </div>
           </div>
         </div>
         <div class="form-group mb-3">
-          <label class="form-label">Car type</label>
+          <label class="form-label">Auto type</label>
           <div class="input-group">
-            <input formControlName="carType" placeholder="Car type" type="text" class="form-control"
-                   [ngClass]="{'is-invalid': f.carType.errors && f.carType.touched}" aria-label="Car type">
+            <input formControlName="autoType" placeholder="Auto type" type="text" class="form-control"
+                   [ngClass]="{'is-invalid': f.autoType.errors && f.autoType.touched}" aria-label="Auto type">
           </div>
-          <div *ngIf="f.carType.invalid && (f.carType.dirty || f.carType.touched)"
+          <div *ngIf="f.autoType.invalid && (f.autoType.dirty || f.autoType.touched)"
                class="text-danger small">
-            <div *ngIf="f.carType.errors?.['required']">
-              Car type is required.
+            <div *ngIf="f.autoType.errors?.['required']">
+              Auto type is required.
             </div>
-            <div *ngIf="f.carType.errors?.['minlength']">
-              Car type must be at least 3 characters long.
+            <div *ngIf="f.autoType.errors?.['minlength']">
+              Auto type must be at least 3 characters long.
             </div>
-            <div *ngIf="f.carType.errors?.['maxlength']">
-              Car type must be at most 15 characters long.
+            <div *ngIf="f.autoType.errors?.['maxlength']">
+              Auto type must be at most 15 characters long.
             </div>
           </div>
         </div>
@@ -186,27 +186,27 @@
           <div *ngIf="f.color.invalid && (f.color.dirty || f.color.touched)"
                class="text-danger small">
             <div *ngIf="f.color.errors?.['required']">
-              Car color is required.
+              Auto color is required.
             </div>
             <div *ngIf="f.color.errors?.['minlength']">
-              Car color must be at least 3 characters long.
+              Auto color must be at least 3 characters long.
             </div>
             <div *ngIf="f.color.errors?.['maxlength']">
-              Car color must be at most 15 characters long.
+              Auto color must be at most 15 characters long.
             </div>
           </div>
         </div>
         <div class="form-group mb-3">
-          <label class="form-label">Car description</label>
+          <label class="form-label">Auto description</label>
           <div class="input-group">
-            <input formControlName="carDescription" placeholder="Car description" type="text" class="form-control" aria-label="Car description">
+            <input formControlName="autoDescription" placeholder="Auto description" type="text" class="form-control" aria-label="Auto description">
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button [disabled]="newCarForm.invalid" type="submit" (click)="submitNewCar()" class="btn btn-sm btn-success">Add</button>
-      <button type="button" (click)="cancelNewCar()" class="btn btn-sm btn-secondary">Cancel</button>
+      <button [disabled]="newAutoForm.invalid" type="submit" (click)="submitNewAuto()" class="btn btn-sm btn-success">Add</button>
+      <button type="button" (click)="cancelNewAuto()" class="btn btn-sm btn-secondary">Cancel</button>
     </div>
   </ng-template>
 </div>

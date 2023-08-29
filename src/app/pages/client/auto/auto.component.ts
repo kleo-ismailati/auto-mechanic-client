@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../../core/services/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Car} from "../../../core/models/car.model";
+import {Auto} from "../../../core/models/auto.model";
 import {NewRepairBooking} from "../../../core/models/repair-booking.model";
 import {AlertService} from "../../../core/services/alert.service";
 import {HttpHeaders} from "@angular/common/http";
 
 @Component({
-  selector: 'app-car',
-  templateUrl: './car.component.html',
-  styleUrls: ['./car.component.css']
+  selector: 'app-auto',
+  templateUrl: './auto.component.html',
+  styleUrls: ['./auto.component.css']
 })
-export class CarComponent implements OnInit {
+export class AutoComponent implements OnInit {
 
   breadcrumbParentsList = [
     {
@@ -24,10 +24,10 @@ export class CarComponent implements OnInit {
     }
   ];
 
-  data: Car = {
-    carDescription: "",
-    carModel: "",
-    carType: "",
+  data: Auto = {
+    autoDescription: "",
+    autoModel: "",
+    autoType: "",
     color: "",
     id: 0,
     year: "",
@@ -40,7 +40,7 @@ export class CarComponent implements OnInit {
   isEdit: boolean = false;
   isAddRb = false;
   newRb: NewRepairBooking = {
-    carId: 0,
+    autoId: 0,
     clientId: 0,
     repairs: [
       {
@@ -60,9 +60,9 @@ export class CarComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
-    let carId = this.route.snapshot.paramMap.get('carId');
-    this.api.get('/api/car/' + carId).subscribe(
-      (data:Car) => {
+    let autoId = this.route.snapshot.paramMap.get('autoId');
+    this.api.get('/api/auto/' + autoId).subscribe(
+      (data:Auto) => {
         this.data = data;
         if(this.data.imageId != null){
           this.api.getBlob('/image/' + this.data.imageId,undefined,this.headers).subscribe(
@@ -82,19 +82,19 @@ export class CarComponent implements OnInit {
   }
 
   submit() {
-    let data : Car = {
+    let data : Auto = {
       id: this.data.id,
-      carType: this.data.carType,
-      carDescription: this.data.carDescription,
-      carModel: this.data.carModel,
+      autoType: this.data.autoType,
+      autoDescription: this.data.autoDescription,
+      autoModel: this.data.autoModel,
       year: this.data.year,
       color: this.data.color
     };
-    let carId = this.route.snapshot.paramMap.get('carId');
-    this.api.put('/api/car/' + carId, data).subscribe(
+    let autoId = this.route.snapshot.paramMap.get('autoId');
+    this.api.put('/api/auto/' + autoId, data).subscribe(
       () => {
         this.isEdit = false;
-        this.alertService.success("Car was updated successfully!", { autoClose: true});
+        this.alertService.success("Auto was updated successfully!", { autoClose: true});
         this.ngOnInit();
       }
     );
@@ -134,7 +134,7 @@ export class CarComponent implements OnInit {
 
   resetRb(){
     this.newRb = {
-      carId: 0,
+      autoId: 0,
       clientId: 0,
       repairs: [
         {
@@ -148,10 +148,10 @@ export class CarComponent implements OnInit {
 
   submitNewRB() {
     let id = this.route.snapshot.paramMap.get('id');
-    let carId = this.route.snapshot.paramMap.get('carId');
-    if(id != null && carId != null){
+    let autoId = this.route.snapshot.paramMap.get('autoId');
+    if(id != null && autoId != null){
       this.newRb.clientId = Number(id);
-      this.newRb.carId = Number(carId);
+      this.newRb.autoId = Number(autoId);
       this.api.post('/api/repair_booking', this.newRb).subscribe(
         ()=>{
           this.isAddRb = false;
@@ -191,8 +191,8 @@ export class CarComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('image', this.selectedFile);
-      let carId = this.route.snapshot.paramMap.get('carId');
-      this.api.post('/image/setCarImg/'+ carId, formData).subscribe(
+      let autoId = this.route.snapshot.paramMap.get('autoId');
+      this.api.post('/image/setAutoImg/'+ autoId, formData).subscribe(
         {
           next: () => {
             this.isEdit = false;

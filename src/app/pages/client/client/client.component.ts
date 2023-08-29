@@ -30,14 +30,14 @@ export class ClientComponent implements OnInit {
     phoneNumber: ""
   };
   isEdit: boolean = false;
-  newCar = {
-    carType: "",
-    carDescription: "",
-    carModel: "",
+  newAuto = {
+    autoType: "",
+    autoDescription: "",
+    autoModel: "",
     color: "",
     year: ""
   }
-  newCarForm: FormGroup;
+  newAutoForm: FormGroup;
 
   constructor(
     private api: ApiService,
@@ -47,13 +47,13 @@ export class ClientComponent implements OnInit {
     public modalService: NgbModal,
     private formBuilder: FormBuilder
   ) {
-    this.newCarForm = this.formBuilder.group({
-      carModel: new FormControl("", [
+    this.newAutoForm = this.formBuilder.group({
+      autoModel: new FormControl("", [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(15)
       ]),
-      carType: new FormControl("", [
+      autoType: new FormControl("", [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(15)
@@ -67,13 +67,13 @@ export class ClientComponent implements OnInit {
         Validators.required,
         Validators.pattern("^(19|20)\\d{2}$")
       ]),
-      carDescription: new FormControl("")
+      autoDescription: new FormControl("")
     })
   }
 
   ngOnInit(): void {
-    this.newCar = {carType: "", carDescription: "", carModel: "", color: "", year: ""}
-    this.newCarForm.reset();
+    this.newAuto = {autoType: "", autoDescription: "", autoModel: "", color: "", year: ""}
+    this.newAutoForm.reset();
     let id = this.route.snapshot.paramMap.get('id');
     this.api.get('/api/client/' + id).subscribe(
       (data:Client) => {
@@ -83,7 +83,7 @@ export class ClientComponent implements OnInit {
   }
 
   get f(): { [key: string]: AbstractControl } {
-    return this.newCarForm.controls;
+    return this.newAutoForm.controls;
   }
 
   enableEdit() {
@@ -109,19 +109,19 @@ export class ClientComponent implements OnInit {
     );
   }
 
-  submitNewCar(){
-    this.newCar = {
-      carModel: this.newCarForm.value['carModel'],
-      carType: this.newCarForm.value['carType'],
-      color: this.newCarForm.value['color'],
-      carDescription: this.newCarForm.value['carDescription'],
-      year: this.newCarForm.value['year']
+  submitNewAuto(){
+    this.newAuto = {
+      autoModel: this.newAutoForm.value['autoModel'],
+      autoType: this.newAutoForm.value['autoType'],
+      color: this.newAutoForm.value['color'],
+      autoDescription: this.newAutoForm.value['autoDescription'],
+      year: this.newAutoForm.value['year']
     }
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.post(`/api/client/${id}/addCar`, this.newCar).subscribe(
+    this.api.post(`/api/client/${id}/addAuto`, this.newAuto).subscribe(
       () => {
         this.modalService.dismissAll();
-        this.alertService.success("New car was added successfully!", { autoClose: true});
+        this.alertService.success("New auto was added successfully!", { autoClose: true});
         this.ngOnInit();
       }, () => {
         this.modalService.dismissAll();
@@ -131,20 +131,20 @@ export class ClientComponent implements OnInit {
     )
   }
 
-  cancelNewCar() {
+  cancelNewAuto() {
     this.modalService.dismissAll();
-    this.newCar = {
-      carType: "",
-      carDescription: "",
-      carModel: "",
+    this.newAuto = {
+      autoType: "",
+      autoDescription: "",
+      autoModel: "",
       color: "",
       year: ""
     }
-    this.newCarForm.reset();
+    this.newAutoForm.reset();
   }
 
-  deleteCar(id: number) {
-    this.api.delete('/api/car/'+ id).subscribe(
+  deleteAuto(id: number) {
+    this.api.delete('/api/auto/'+ id).subscribe(
       ()=> {
         this.ngOnInit();
       }

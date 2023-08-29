@@ -4,8 +4,8 @@ export interface RepairBookingView {
   id?: number;
   firstName?: string;
   lastName?: string;
-  carModel?: string;
-  carType?: string;
+  autoModel?: string;
+  autoType?: string;
   date?: Date;
   totalPrice?: string;
   status: RepairStatus;

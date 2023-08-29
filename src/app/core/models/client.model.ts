@@ -1,4 +1,4 @@
-import { Car } from "./car.model";
+import { Auto } from "./auto.model";
 
 export interface Client {
 
@@ -8,6 +8,6 @@ export interface Client {
 	email: string;
 	phoneNumber: string;
 	address: string;
-	cars?: Car[];
+	autos?: Auto[];
 
 }

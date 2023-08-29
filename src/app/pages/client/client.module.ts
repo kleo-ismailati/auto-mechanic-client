@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {ClientComponent} from "./client/client.component";
-import {CarComponent} from "./car/car.component";
+import {AutoComponent} from "./auto/auto.component";
 import {ClientRoutingModule} from "./client-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import { ClientListComponent } from './client-list/client-list.component';
@@ -13,7 +13,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 @NgModule({
   declarations: [
     ClientComponent,
-    CarComponent,
+    AutoComponent,
     ClientListComponent
   ],
     imports: [

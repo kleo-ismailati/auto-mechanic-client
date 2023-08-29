@@ -1,13 +1,13 @@
 import { Repair } from "./repair.model";
 
-export interface Car {
+export interface Auto {
 
     id: number;
-    carType: string;
-    carModel: string;
+    autoType: string;
+    autoModel: string;
     year: string;
     color: string;
-    carDescription: string;
+    autoDescription: string;
     repairs?: Repair[];
     imageId?: string;
 }

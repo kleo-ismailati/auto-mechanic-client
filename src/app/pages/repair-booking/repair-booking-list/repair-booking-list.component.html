@@ -1,6 +1,6 @@
 <div class="banner-bg py-2">
   <h1 class="display-5 text-center fw-bold text-white my-3">Our Repair Bookings</h1>
-  <h1 class="lead fw-bold text-white text-center">Car Mechanic Repair Booking Listed</h1>
+  <h1 class="lead fw-bold text-white text-center">Auto Mechanic Repair Booking Listed</h1>
 </div>
 <div class="bg-light border-5 border-top border-dark">
   <app-breadcrumb [currentPage]="'Bookings'">
@@ -14,7 +14,7 @@
           <tr>
             <th></th>
             <th>Name</th>
-            <th>Car</th>
+            <th>Auto</th>
             <th>Repair Cost</th>
             <th>Date added</th>
             <th>Repair Status</th>
@@ -29,7 +29,7 @@
                 {{repairBooking.firstName}} {{repairBooking.lastName}}
               </span>
             </td>
-            <td>{{repairBooking.carModel}} {{repairBooking.carType}}</td>
+            <td>{{repairBooking.autoModel}} {{repairBooking.autoType}}</td>
             <td>{{repairBooking.totalPrice | currency:'USD'}}</td>
             <td>{{repairBooking.date | date}}</td>
             <td>{{repairStatus[repairBooking.status]}}</td>

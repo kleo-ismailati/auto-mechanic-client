@@ -3,8 +3,8 @@ import {RepairStatus} from "./repair-status-enum";
 export interface RepairBookingGuestView {
   firstName?: string;
   lastName?: string;
-  carModel?: string;
-  carType?: string;
+  autoModel?: string;
+  autoType?: string;
   date?: Date;
   totalPrice?: string;
   status: RepairStatus;

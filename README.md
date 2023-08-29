@@ -1,7 +1,7 @@
-# Car Mechanic Client
+# Auto Mechanic Client
 
 ## Description
-Angular Client for Car Mechanic API
+Angular Client for Auto Mechanic API
 
 ## Tools used
 * WebStorm
@@ -20,9 +20,8 @@ Angular Client for Car Mechanic API
 * NgBootstrap
 * NgxSpinner
 
-## Authors and acknowledgment
+## Author
 * Kleo Ismailati
-* Klajdi Hoxha
 
 ## Setup
 * Clone project into your machine from git

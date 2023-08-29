@@ -1,5 +1,5 @@
 export interface Stats{
-  totalCars: number;
+  totalAutos: number;
   totalClients: number;
   totalIncome: number;
   totalRepairBookingsActive: number;
