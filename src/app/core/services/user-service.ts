@@ -96,15 +96,12 @@ export class UserService {
 
     if (expireDate && expireDate.getTime() > currentDate.getTime()) {
       timeMillis = expireDate.getTime() - currentDate.getTime();
-
-      console.log('set');
       this.tokenExpirationTimer = setTimeout(() => {this.logoutUserOnExpire()}, timeMillis);
     }
   }
 
   clearLogoutTimer() {
     if (this.tokenExpirationTimer) {
-      console.log('unset');
       clearTimeout(this.tokenExpirationTimer);
       this.tokenExpirationTimer = null;
     }
