@@ -49,8 +49,10 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.loggedUser.subscribe(
-      (next)=> {
-        this.loggedUser = next;
+      (user)=> {
+        if (user!=null) {
+          this.loggedUser = user;
+        }
       }
     )
 

@@ -57,14 +57,17 @@ export class LoginComponent implements OnInit {
       ()=>{
         this.spinner.hide();
         this.api.post('/auth/login', this.user).subscribe(
-          (response: UserSession)=>{
-            if (this.rememberMe){
-              this.userService.setRememberMe(this.user.username,  this.user.password);
-            }
-            this.userService.loginUser(response);
-          }, error => {
-            if(error.status=="INTERNAL_SERVER_ERROR"){
-              this.alertService.error("Bad credentials - could not login!", { autoClose: true })
+          {
+            next: (response: UserSession)=> {
+              if (this.rememberMe){
+                this.userService.setRememberMe(this.user.username,  this.user.password);
+              }
+              this.userService.loginUser(response);
+            },
+            error: error => {
+              if(error.status=="INTERNAL_SERVER_ERROR"){
+                this.alertService.error("Bad credentials - could not login!", { autoClose: true })
+              }
             }
           }
         )

@@ -110,5 +110,8 @@
       }
     }
   },
-  "defaultProject": "auto-mechanic-client"
+  "defaultProject": "auto-mechanic-client",
+  "cli": {
+    "analytics": false
+  }
 }
