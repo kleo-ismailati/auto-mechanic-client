@@ -8,6 +8,7 @@ export interface Auto {
     year: string;
     color: string;
     autoDescription: string;
+    thumbnail?: string | any;
     repairs?: Repair[];
     imageId?: string;
 }

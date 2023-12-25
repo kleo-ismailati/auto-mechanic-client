@@ -92,6 +92,7 @@
           <tr>
             <th></th>
             <th>Auto</th>
+            <th>Image</th>
             <th>Year</th>
             <th>Color</th>
             <th>Actions</th>
@@ -101,6 +102,7 @@
           <tr *ngFor="let auto of this.data.autos; let idx=index">
             <td>{{idx+1}}</td>
             <td>{{auto?.autoModel}} {{auto?.autoType}}</td>
+            <td><img [src]=auto?.thumbnail alt="{{auto.thumbnail ? auto.autoModel + '' + auto.autoType : 'No image'}}" class="w-50 img-thumbnail"></td>
             <td style="width:30%">{{auto?.year}}</td>
             <td style="width:30%">{{auto?.color}}</td>
             <td style="width:10%">

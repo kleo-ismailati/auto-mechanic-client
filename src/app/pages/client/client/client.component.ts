@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {AlertService} from "../../../core/services/alert.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-client',
@@ -38,6 +39,7 @@ export class ClientComponent implements OnInit {
     year: ""
   }
   newAutoForm: FormGroup;
+  imageToShow: any = [];
 
   constructor(
     private api: ApiService,
@@ -45,7 +47,8 @@ export class ClientComponent implements OnInit {
     private route: ActivatedRoute,
     private alertService: AlertService,
     public modalService: NgbModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sanitizer: DomSanitizer
   ) {
     this.newAutoForm = this.formBuilder.group({
       autoModel: new FormControl("", [
@@ -78,6 +81,11 @@ export class ClientComponent implements OnInit {
     this.api.get('/api/client/' + id).subscribe(
       (data:Client) => {
         this.data = data;
+        for(let auto of this.data.autos!){
+          if(auto.thumbnail){
+            auto.thumbnail = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ auto.thumbnail);
+          }
+        }
       }
     );
   }
