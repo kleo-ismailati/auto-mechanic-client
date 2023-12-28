@@ -83,7 +83,7 @@ export class ClientComponent implements OnInit {
         this.data = data;
         for(let auto of this.data.autos!){
           if(auto.thumbnail){
-            auto.thumbnail = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ auto.thumbnail);
+            auto.thumbnail.data = this.sanitizer.bypassSecurityTrustUrl(`data:${auto.thumbnail.type};base64,`+ auto.thumbnail.data);
           }
         }
       }

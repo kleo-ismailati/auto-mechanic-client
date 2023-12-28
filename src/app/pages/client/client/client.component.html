@@ -100,12 +100,12 @@
           </thead>
           <tbody>
           <tr *ngFor="let auto of this.data.autos; let idx=index">
-            <td>{{idx+1}}</td>
-            <td>{{auto?.autoModel}} {{auto?.autoType}}</td>
-            <td><img [src]=auto?.thumbnail alt="{{auto.thumbnail ? auto.autoModel + '' + auto.autoType : 'No image'}}" class="w-50 img-thumbnail"></td>
-            <td style="width:30%">{{auto?.year}}</td>
-            <td style="width:30%">{{auto?.color}}</td>
-            <td style="width:10%">
+            <td class="align-middle">{{idx+1}}</td>
+            <td class="align-middle">{{auto?.autoModel}} {{auto?.autoType}}</td>
+            <td><img [src]=auto.thumbnail?.data alt="{{auto.thumbnail ? auto.autoModel + '' + auto.autoType : 'No image'}}" class="w-50 img-thumbnail"></td>
+            <td style="width:30%" class="align-middle">{{auto?.year}}</td>
+            <td style="width:30%" class="align-middle">{{auto?.color}}</td>
+            <td style="width:10%" class="align-middle">
               <a routerLink="./autos/{{auto.id}}">
                 <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
               </a>

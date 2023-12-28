@@ -1,4 +1,5 @@
 import { Repair } from "./repair.model";
+import {SafeUrl} from "@angular/platform-browser";
 
 export interface Auto {
 
@@ -8,7 +9,11 @@ export interface Auto {
     year: string;
     color: string;
     autoDescription: string;
-    thumbnail?: string | any;
+    thumbnail?: {
+      name: string,
+      type: string,
+      data: string | SafeUrl
+    } | null;
     repairs?: Repair[];
     imageId?: string;
 }
