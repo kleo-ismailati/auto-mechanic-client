@@ -29,7 +29,8 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute,
     private alertService: AlertService,
     public modalService: NgbModal
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.isEdit = false;
@@ -37,7 +38,7 @@ export class UserComponent implements OnInit {
     this.addNewPassword = false;
     let id = this.route.snapshot.paramMap.get('id');
     this.api.get('/user/' + id).subscribe(
-      (data:User) => {
+      (data: User) => {
         this.data = data;
       }
     );
@@ -49,12 +50,12 @@ export class UserComponent implements OnInit {
 
   submit() {
     this.modalService.dismissAll();
-    let data : User = {
+    let data: User = {
       email: this.data.email,
       id: 0,
       username: this.data.username
     }
-    if(this.newPassword != ''){
+    if (this.newPassword != '') {
       data.password = this.newPassword;
     }
     let id = this.route.snapshot.paramMap.get('id');

@@ -1,15 +1,17 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./pages/login/login.component";
 import {AuthGuard} from "./core/guards/auth.guard";
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-  { path: 'dashboard',
+  {path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
+  {path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
+  {
+    path: 'dashboard',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
   {
     path: 'repair-booking',
     canActivate: [AuthGuard],
@@ -28,12 +30,13 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule)
   },
-  { path: 'login', component: LoginComponent},
-  { path: '**', redirectTo: '' }
+  {path: 'login', component: LoginComponent},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -23,42 +23,49 @@
             <tbody>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Firstname</td>
-              <td *ngIf="!isEdit">{{this.data.firstName}}</td>
+              <td *ngIf="!isEdit">{{ this.data.firstName }}</td>
               <td *ngIf="isEdit">
-                <input [(ngModel)]="this.data.firstName" name="firstName" type="text" required minlength="3" maxlength="15"
-                       #firstName=ngModel [ngClass]="{'is-invalid': this.firstName.invalid}" class="form-control form-control-sm bg-light">
+                <input [(ngModel)]="this.data.firstName" name="firstName" type="text" required minlength="3"
+                       maxlength="15"
+                       #firstName=ngModel [ngClass]="{'is-invalid': this.firstName.invalid}"
+                       class="form-control form-control-sm bg-light">
               </td>
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Lastname</td>
-              <td *ngIf="!isEdit">{{this.data.lastName}}</td>
+              <td *ngIf="!isEdit">{{ this.data.lastName }}</td>
               <td *ngIf="isEdit">
-                <input [(ngModel)]="this.data.lastName" name="lastName" type="text" required minlength="3" maxlength="15"
-                       #lastName=ngModel [ngClass]="{'is-invalid': this.lastName.invalid}" class="form-control form-control-sm bg-light">
+                <input [(ngModel)]="this.data.lastName" name="lastName" type="text" required minlength="3"
+                       maxlength="15"
+                       #lastName=ngModel [ngClass]="{'is-invalid': this.lastName.invalid}"
+                       class="form-control form-control-sm bg-light">
               </td>
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Email</td>
-              <td *ngIf="!isEdit">{{this.data.email}}</td>
+              <td *ngIf="!isEdit">{{ this.data.email }}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.email" name="email" type="email" required email
-                       #email=ngModel [ngClass]="{'is-invalid': this.email.invalid}" class="form-control form-control-sm bg-light">
+                       #email=ngModel [ngClass]="{'is-invalid': this.email.invalid}"
+                       class="form-control form-control-sm bg-light">
               </td>
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Phone</td>
-              <td *ngIf="!isEdit">{{this.data.phoneNumber}}</td>
+              <td *ngIf="!isEdit">{{ this.data.phoneNumber }}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.phoneNumber" name="phoneNumber" type="tel" required pattern="^\d{10}$"
-                       #phoneNumber=ngModel [ngClass]="{'is-invalid': this.phoneNumber.invalid}" class="form-control form-control-sm bg-light">
+                       #phoneNumber=ngModel [ngClass]="{'is-invalid': this.phoneNumber.invalid}"
+                       class="form-control form-control-sm bg-light">
               </td>
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Address</td>
-              <td *ngIf="!isEdit">{{this.data.address}}</td>
+              <td *ngIf="!isEdit">{{ this.data.address }}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.address" name="address" type="text" required minlength="3" maxlength="100"
-                       #address=ngModel [ngClass]="{'is-invalid': this.address.invalid}" class="form-control form-control-sm bg-light">
+                       #address=ngModel [ngClass]="{'is-invalid': this.address.invalid}"
+                       class="form-control form-control-sm bg-light">
               </td>
             </tr>
             </tbody>
@@ -70,7 +77,9 @@
           <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">
             Edit Client
           </button>
-          <button *ngIf="isEdit" [disabled]="clientForm.invalid" class="btn btn-sm btn-success me-2" (click)="editClient()">Save</button>
+          <button *ngIf="isEdit" [disabled]="clientForm.invalid" class="btn btn-sm btn-success me-2"
+                  (click)="editClient()">Save
+          </button>
           <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
         </div>
       </div>
@@ -100,11 +109,13 @@
           </thead>
           <tbody>
           <tr *ngFor="let auto of this.data.autos; let idx=index">
-            <td class="align-middle">{{idx+1}}</td>
-            <td class="align-middle">{{auto?.autoModel}} {{auto?.autoType}}</td>
-            <td><img [src]=auto.thumbnail?.data alt="{{auto.thumbnail ? auto.autoModel + '' + auto.autoType : 'No image'}}" class="w-50 img-thumbnail"></td>
-            <td style="width:30%" class="align-middle">{{auto?.year}}</td>
-            <td style="width:30%" class="align-middle">{{auto?.color}}</td>
+            <td class="align-middle">{{ idx + 1 }}</td>
+            <td class="align-middle">{{ auto?.autoModel }} {{ auto?.autoType }}</td>
+            <td><img [src]=auto.thumbnail?.data
+                     alt="{{auto.thumbnail ? auto.autoModel + '' + auto.autoType : 'No image'}}"
+                     class="w-50 img-thumbnail"></td>
+            <td style="width:30%" class="align-middle">{{ auto?.year }}</td>
+            <td style="width:30%" class="align-middle">{{ auto?.color }}</td>
             <td style="width:10%" class="align-middle">
               <a routerLink="./autos/{{auto.id}}">
                 <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
@@ -121,7 +132,8 @@
   <ng-template #newAutoModal>
     <div class="modal-header">
       <h5 class="modal-title">Add Auto</h5>
-      <button type="button" (click)="cancelNewAuto()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" (click)="cancelNewAuto()" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
     </div>
     <div class="modal-body modal-can-scroll">
       <form [formGroup]="newAutoForm">
@@ -129,7 +141,7 @@
           <label class="form-label">Auto model</label>
           <div class="input-group">
             <input formControlName="autoModel" placeholder="Auto model" type="text" class="form-control"
-                   [ngClass]="{'is-invalid': f.autoModel.errors && f.autoModel.touched}"  aria-label="Auto model">
+                   [ngClass]="{'is-invalid': f.autoModel.errors && f.autoModel.touched}" aria-label="Auto model">
           </div>
           <div *ngIf="f.autoModel.invalid && (f.autoModel.dirty || f.autoModel.touched)"
                class="text-danger small">
@@ -201,13 +213,16 @@
         <div class="form-group mb-3">
           <label class="form-label">Auto description</label>
           <div class="input-group">
-            <input formControlName="autoDescription" placeholder="Auto description" type="text" class="form-control" aria-label="Auto description">
+            <input formControlName="autoDescription" placeholder="Auto description" type="text" class="form-control"
+                   aria-label="Auto description">
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button [disabled]="newAutoForm.invalid" type="submit" (click)="submitNewAuto()" class="btn btn-sm btn-success">Add</button>
+      <button [disabled]="newAutoForm.invalid" type="submit" (click)="submitNewAuto()" class="btn btn-sm btn-success">
+        Add
+      </button>
       <button type="button" (click)="cancelNewAuto()" class="btn btn-sm btn-secondary">Cancel</button>
     </div>
   </ng-template>

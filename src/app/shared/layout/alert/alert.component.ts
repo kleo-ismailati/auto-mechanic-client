@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {NavigationStart, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 import {Alert, AlertType} from "../../../core/models/alert.model";
 import {AlertService} from "../../../core/services/alert.service";
 
-@Component({ selector: 'alert', templateUrl: 'alert.component.html' })
+@Component({selector: 'alert', templateUrl: 'alert.component.html'})
 export class AlertComponent implements OnInit, OnDestroy {
   @Input() id = 'default-alert';
   @Input() fade = true;
@@ -70,7 +70,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
   }
 
-  cssClass(alert: Alert) : string {
+  cssClass(alert: Alert): string {
     if (!alert) return '';
 
     const classes = [];

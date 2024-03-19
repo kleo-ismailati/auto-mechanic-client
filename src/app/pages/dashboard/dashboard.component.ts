@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { ApiService } from 'src/app/core/services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from 'src/app/core/services/api.service';
 import {Stats} from "../../core/models/stats.model";
 
 
@@ -11,14 +10,15 @@ import {Stats} from "../../core/models/stats.model";
 })
 export class DashboardComponent implements OnInit {
 
-  data : Stats = {
+  data: Stats = {
     totalAutos: 0,
     totalIncome: 0,
     totalClients: 0,
     totalRepairBookingsActive: 0,
   };
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {
+  }
 
   ngOnInit(): void {
 

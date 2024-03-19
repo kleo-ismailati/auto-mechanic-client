@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {PaginatorModule} from 'primeng/paginator';
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard.component';
+import {DashboardRoutingModule} from './dashboard-routing.module';
+import {DashboardComponent} from './dashboard.component';
 import {SharedModule} from "../../shared/shared.module";
 
 
@@ -10,11 +10,12 @@ import {SharedModule} from "../../shared/shared.module";
   declarations: [
     DashboardComponent
   ],
-    imports: [
-        CommonModule,
-        DashboardRoutingModule,
-        PaginatorModule,
-        SharedModule
-    ]
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    PaginatorModule,
+    SharedModule
+  ]
 })
-export class DashboardModule { }
+export class DashboardModule {
+}

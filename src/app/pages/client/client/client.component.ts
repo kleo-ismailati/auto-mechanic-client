@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Client} from "../../../core/models/client.model";
 import {ApiService} from "../../../core/services/api.service";
 import {HelperService} from "../../../core/services/helper.service";
@@ -79,11 +79,11 @@ export class ClientComponent implements OnInit {
     this.newAutoForm.reset();
     let id = this.route.snapshot.paramMap.get('id');
     this.api.get('/api/client/' + id).subscribe(
-      (data:Client) => {
+      (data: Client) => {
         this.data = data;
-        for(let auto of this.data.autos!){
-          if(auto.thumbnail){
-            auto.thumbnail.data = this.sanitizer.bypassSecurityTrustUrl(`data:${auto.thumbnail.type};base64,`+ auto.thumbnail.data);
+        for (let auto of this.data.autos!) {
+          if (auto.thumbnail) {
+            auto.thumbnail.data = this.sanitizer.bypassSecurityTrustUrl(`data:${auto.thumbnail.type};base64,` + auto.thumbnail.data);
           }
         }
       }
@@ -99,7 +99,7 @@ export class ClientComponent implements OnInit {
   }
 
   editClient() {
-    let data : Client = {
+    let data: Client = {
       id: this.data.id,
       address: this.data.address,
       email: this.data.email,
@@ -111,13 +111,13 @@ export class ClientComponent implements OnInit {
     this.api.put('/api/client/' + id, data).subscribe(
       () => {
         this.isEdit = false;
-        this.alertService.success("Client was updated successfully!", { autoClose: true});
+        this.alertService.success("Client was updated successfully!", {autoClose: true});
         this.ngOnInit();
       }
     );
   }
 
-  submitNewAuto(){
+  submitNewAuto() {
     this.newAuto = {
       autoModel: this.newAutoForm.value['autoModel'],
       autoType: this.newAutoForm.value['autoType'],
@@ -129,11 +129,11 @@ export class ClientComponent implements OnInit {
     this.api.post(`/api/client/${id}/addAuto`, this.newAuto).subscribe(
       () => {
         this.modalService.dismissAll();
-        this.alertService.success("New auto was added successfully!", { autoClose: true});
+        this.alertService.success("New auto was added successfully!", {autoClose: true});
         this.ngOnInit();
       }, () => {
         this.modalService.dismissAll();
-        this.alertService.error("An error has occurred", { autoClose: true});
+        this.alertService.error("An error has occurred", {autoClose: true});
         this.ngOnInit();
       }
     )
@@ -152,8 +152,8 @@ export class ClientComponent implements OnInit {
   }
 
   deleteAuto(id: number) {
-    this.api.delete('/api/auto/'+ id).subscribe(
-      ()=> {
+    this.api.delete('/api/auto/' + id).subscribe(
+      () => {
         this.ngOnInit();
       }
     )

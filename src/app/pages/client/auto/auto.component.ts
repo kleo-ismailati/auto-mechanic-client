@@ -33,7 +33,7 @@ export class AutoComponent implements OnInit {
     year: "",
     imageId: "",
   }
-  headers: HttpHeaders = new HttpHeaders().set('Accept','image/*');
+  headers: HttpHeaders = new HttpHeaders().set('Accept', 'image/*');
   imageToShow: any;
   selectedFile: File | null = null;
 
@@ -44,7 +44,7 @@ export class AutoComponent implements OnInit {
     clientId: 0,
     repairs: [
       {
-        repairCost : 0,
+        repairCost: 0,
         repairDetails: '',
         repairType: ''
       }
@@ -56,16 +56,17 @@ export class AutoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
     let autoId = this.route.snapshot.paramMap.get('autoId');
     this.api.get('/api/auto/' + autoId).subscribe(
-      (data:Auto) => {
+      (data: Auto) => {
         this.data = data;
-        if(this.data.imageId != null){
-          this.api.getBlob('/image/' + this.data.imageId,undefined,this.headers).subscribe(
+        if (this.data.imageId != null) {
+          this.api.getBlob('/image/' + this.data.imageId, undefined, this.headers).subscribe(
             (image) => {
               this.createImageFromBlob(image);
             }
@@ -82,7 +83,7 @@ export class AutoComponent implements OnInit {
   }
 
   submit() {
-    let data : Auto = {
+    let data: Auto = {
       id: this.data.id,
       autoType: this.data.autoType,
       autoDescription: this.data.autoDescription,
@@ -94,7 +95,7 @@ export class AutoComponent implements OnInit {
     this.api.put('/api/auto/' + autoId, data).subscribe(
       () => {
         this.isEdit = false;
-        this.alertService.success("Auto was updated successfully!", { autoClose: true});
+        this.alertService.success("Auto was updated successfully!", {autoClose: true});
         this.ngOnInit();
       }
     );
@@ -114,13 +115,13 @@ export class AutoComponent implements OnInit {
   }
 
   lastOfList(idx: number) {
-    return (this.newRb.repairs?.length == idx+1);
+    return (this.newRb.repairs?.length == idx + 1);
   }
 
   addOther() {
     this.newRb.repairs?.push(
       {
-        repairCost : 0,
+        repairCost: 0,
         repairDetails: '',
         repairType: ''
       }
@@ -132,13 +133,13 @@ export class AutoComponent implements OnInit {
     this.isAddRb = false;
   }
 
-  resetRb(){
+  resetRb() {
     this.newRb = {
       autoId: 0,
       clientId: 0,
       repairs: [
         {
-          repairCost : 0,
+          repairCost: 0,
           repairDetails: '',
           repairType: ''
         }
@@ -149,23 +150,23 @@ export class AutoComponent implements OnInit {
   submitNewRB() {
     let id = this.route.snapshot.paramMap.get('id');
     let autoId = this.route.snapshot.paramMap.get('autoId');
-    if(id != null && autoId != null){
+    if (id != null && autoId != null) {
       this.newRb.clientId = Number(id);
       this.newRb.autoId = Number(autoId);
       this.api.post('/api/repair_booking', this.newRb).subscribe(
-        ()=>{
+        () => {
           this.isAddRb = false;
           this.alertService.success("Booking was added successfully! Redirecting to Bookings...",
-            { autoClose: true, keepAfterRouteChange: true });
+            {autoClose: true, keepAfterRouteChange: true});
           window.scroll({
             top: 0,
             left: 0,
             behavior: 'smooth'
           });
           this.resetRb();
-          setTimeout( () => {
+          setTimeout(() => {
             this.router.navigate(['repair-booking']);
-          },3000 )
+          }, 3000)
         }
       )
     }
@@ -192,18 +193,18 @@ export class AutoComponent implements OnInit {
       const formData = new FormData();
       formData.append('image', this.selectedFile);
       let autoId = this.route.snapshot.paramMap.get('autoId');
-      this.api.post('/image/setAutoImg/'+ autoId, formData).subscribe(
+      this.api.post('/image/setAutoImg/' + autoId, formData).subscribe(
         {
           next: () => {
             this.isEdit = false;
             this.alertService.success("Image was changed successfully!",
-              { autoClose: true, keepAfterRouteChange: false });
+              {autoClose: true, keepAfterRouteChange: false});
             this.ngOnInit();
           },
           error: err => {
             this.isEdit = false;
             this.alertService.error("Image could not be changed!",
-              { autoClose: true, keepAfterRouteChange: false });
+              {autoClose: true, keepAfterRouteChange: false});
             console.log(err);
             this.ngOnInit();
           }

@@ -1,13 +1,13 @@
-import { Auto } from "./auto.model";
+import {Auto} from "./auto.model";
 
 export interface Client {
 
-	id: number;
+  id: number;
   firstName: string;
-	lastName: string;
-	email: string;
-	phoneNumber: string;
-	address: string;
-	autos?: Auto[];
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  autos?: Auto[];
 
 }

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import { Observable ,  throwError } from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 
-import { catchError } from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 
 
 @Injectable({providedIn: 'root'})
@@ -11,19 +11,20 @@ export class ApiService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   private formatErrors(error: any) {
-    return  throwError(error.error);
+    return throwError(error.error);
   }
 
   get(path: string, params: HttpParams = new HttpParams(), headers: HttpHeaders = new HttpHeaders()): Observable<any> {
-    return this.http.get(`${environment.api_url}${path}`, { params, headers})
+    return this.http.get(`${environment.api_url}${path}`, {params, headers})
       .pipe(catchError(this.formatErrors));
   }
 
   getBlob(path: string, params: HttpParams = new HttpParams(), headers: HttpHeaders = new HttpHeaders()): Observable<any> {
-    return this.http.get(`${environment.api_url}${path}`, { params, headers, responseType: 'blob'})
+    return this.http.get(`${environment.api_url}${path}`, {params, headers, responseType: 'blob'})
       .pipe(catchError(this.formatErrors));
   }
 

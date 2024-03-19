@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../../core/services/api.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {User, UserSession} from "../../../core/models/user.model";
@@ -13,7 +13,7 @@ import {AlertService} from "../../../core/services/alert.service";
 })
 export class UserListComponent implements OnInit {
 
-  data! : User[];
+  data!: User[];
 
   newUser = {
     email: "",
@@ -49,8 +49,8 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.loggedUser.subscribe(
-      (user)=> {
-        if (user!=null) {
+      (user) => {
+        if (user != null) {
           this.loggedUser = user;
         }
       }
@@ -74,14 +74,14 @@ export class UserListComponent implements OnInit {
 
   addNewUser() {
     this.newUser = {
-      username:this.newUserForm.value['username'],
-      email:this.newUserForm.value['email'],
-      password:this.newUserForm.value['password'],
+      username: this.newUserForm.value['username'],
+      email: this.newUserForm.value['email'],
+      password: this.newUserForm.value['password'],
     }
     this.api.post('/user', this.newUser).subscribe(
       () => {
         this.modalService.dismissAll();
-        this.alertService.success("User was added successfully", { autoClose: true })
+        this.alertService.success("User was added successfully", {autoClose: true})
         this.ngOnInit();
       }
     );

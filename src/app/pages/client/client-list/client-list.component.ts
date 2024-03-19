@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PagedResponse} from "../../../core/models/paged.response.model";
 import {ApiService} from "../../../core/services/api.service";
 import {Client} from "../../../core/models/client.model";
@@ -13,7 +13,7 @@ import {AlertService} from "../../../core/services/alert.service";
 })
 export class ClientListComponent implements OnInit {
 
-  data : PagedResponse<Client> = {
+  data: PagedResponse<Client> = {
     page: 0,
     size: 0,
     total: 0,
@@ -66,7 +66,7 @@ export class ClientListComponent implements OnInit {
   ngOnInit(): void {
 
     this.newClientForm.reset();
-    this.newClient = { address: "", email: "", firstName: "", lastName: "", phoneNumber: ""};
+    this.newClient = {address: "", email: "", firstName: "", lastName: "", phoneNumber: ""};
 
     this.api.get('/api/client').subscribe(
       (data: PagedResponse<Client>) => {
@@ -103,14 +103,13 @@ export class ClientListComponent implements OnInit {
     this.api.post('/api/client', this.newClient).subscribe(
       () => {
         this.modalService.dismissAll();
-        this.alertService.success("New client was added successfully!", { autoClose: true});
+        this.alertService.success("New client was added successfully!", {autoClose: true});
         this.ngOnInit();
-      },() => {
+      }, () => {
         this.modalService.dismissAll();
-        this.alertService.error("An error has occurred", { autoClose: true});
+        this.alertService.error("An error has occurred", {autoClose: true});
         this.ngOnInit();
       }
-
     );
 
   }

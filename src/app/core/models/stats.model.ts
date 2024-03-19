@@ -1,4 +1,4 @@
-export interface Stats{
+export interface Stats {
   totalAutos: number;
   totalClients: number;
   totalIncome: number;

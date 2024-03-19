@@ -8,7 +8,7 @@
       <!-- Username input -->
       <div class="form-outline mb-4">
         <label class="form-label" for="username">Username</label>
-        <input  formControlName="username" [ngClass]="{ 'is-invalid': f.username.errors && f.username.touched }"
+        <input formControlName="username" [ngClass]="{ 'is-invalid': f.username.errors && f.username.touched }"
                class="form-control" id="username" name="email" type="text"/>
         <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)"
              class="text-danger small">
@@ -43,14 +43,17 @@
         <div class="col d-flex justify-content-center">
           <!-- Checkbox -->
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" (change)="rememberMe=!rememberMe" id="rememberMe" [checked]="rememberMe" />
+            <input class="form-check-input" type="checkbox" (change)="rememberMe=!rememberMe" id="rememberMe"
+                   [checked]="rememberMe"/>
             <label class="form-check-label" for="rememberMe"> Remember me </label>
           </div>
         </div>
       </div>
 
       <!-- Submit button -->
-      <button type="button" class="btn btn-primary btn-block" [disabled]="loginForm.invalid" (click)="doLogin()">Sign in</button>
+      <button type="button" class="btn btn-primary btn-block" [disabled]="loginForm.invalid" (click)="doLogin()">Sign
+        in
+      </button>
     </form>
   </div>
 </div>

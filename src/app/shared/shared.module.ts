@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
 import {BreadcrumbComponent} from "./layout/breadcrumb/breadcrumb.component";
-import { AlertComponent } from './layout/alert/alert.component';
-
+import {AlertComponent} from './layout/alert/alert.component';
 
 
 @NgModule({
@@ -20,4 +19,5 @@ import { AlertComponent } from './layout/alert/alert.component';
     RouterModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

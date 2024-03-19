@@ -72,7 +72,7 @@ export class RepairBookingDetailsComponent implements OnInit {
 
     this.newRepairForm.reset(
       {
-        repairCost:0
+        repairCost: 0
       }
     );
 
@@ -84,7 +84,7 @@ export class RepairBookingDetailsComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
     this.api.get('/api/repair_booking/' + id).subscribe(
-      (data:RepairBooking) => {
+      (data: RepairBooking) => {
         this.data = data;
       }
     );
@@ -99,20 +99,20 @@ export class RepairBookingDetailsComponent implements OnInit {
   }
 
   submit() {
-    let data : RepairBooking = {
-      status : Number(this.data.status)
+    let data: RepairBooking = {
+      status: Number(this.data.status)
     };
     let id = this.route.snapshot.paramMap.get('id');
     this.api.put('/api/repair_booking/' + id, data).subscribe(
       () => {
-        this.alertService.success("Booking was updated successfully!", { autoClose: true });
+        this.alertService.success("Booking was updated successfully!", {autoClose: true});
         this.ngOnInit();
       }
     );
   }
 
   enableRepairEdit(repair: Repair) {
-    if(this.repairEditId == -1){
+    if (this.repairEditId == -1) {
       this.repairEditId = repair.id;
     }
   }
@@ -125,9 +125,9 @@ export class RepairBookingDetailsComponent implements OnInit {
       repairStatus: repair.repairStatus,
       repairType: repair.repairType
     }
-    this.api.put('/api/repair/'+ repair.id, repairPayload).subscribe(
-      ()=> {
-        this.alertService.success("Repair was updated successfully!", { autoClose: true });
+    this.api.put('/api/repair/' + repair.id, repairPayload).subscribe(
+      () => {
+        this.alertService.success("Repair was updated successfully!", {autoClose: true});
         window.scroll({
           top: 0,
           left: 0,
@@ -137,7 +137,8 @@ export class RepairBookingDetailsComponent implements OnInit {
       }
     )
   }
-  submitNewRepair(){
+
+  submitNewRepair() {
     this.newRepair = {
       repairType: this.newRepairForm.value['repairType'],
       repairDetails: this.newRepairForm.value['repairDetails'],
@@ -145,7 +146,7 @@ export class RepairBookingDetailsComponent implements OnInit {
     }
     this.api.post('/api/repair/add/' + this.data.id, this.newRepair).subscribe(
       () => {
-        this.alertService.success("New repair was added successfully!", { autoClose: true });
+        this.alertService.success("New repair was added successfully!", {autoClose: true});
         window.scroll({
           top: 0,
           left: 0,
@@ -165,19 +166,19 @@ export class RepairBookingDetailsComponent implements OnInit {
     this.addingNewRepair = false;
   }
 
-  addRepair(){
+  addRepair() {
     this.addingNewRepair = true;
   }
 
-  isRepairEdit(id: number) : boolean {
+  isRepairEdit(id: number): boolean {
     return id == this.repairEditId;
   }
 
   deleteRepair() {
     this.modalService.dismissAll();
-    this.api.delete('/api/repair/'+ this.repairDeleteId).subscribe(
-      ()=> {
-        this.alertService.warn("Repair with id " + this.repairDeleteId +" was deleted!", { autoClose: true });
+    this.api.delete('/api/repair/' + this.repairDeleteId).subscribe(
+      () => {
+        this.alertService.warn("Repair with id " + this.repairDeleteId + " was deleted!", {autoClose: true});
         window.scroll({
           top: 0,
           left: 0,

@@ -28,10 +28,10 @@
           </thead>
           <tbody>
           <tr *ngFor="let client of this.data?.result; let idx=index">
-            <td>{{idx+1}}</td>
-            <td>{{client?.firstName}} {{client?.lastName}}</td>
-            <td style="width:30%">{{client?.email}}</td>
-            <td style="width:30%">{{client?.phoneNumber}}</td>
+            <td>{{ idx + 1 }}</td>
+            <td>{{ client?.firstName }} {{ client?.lastName }}</td>
+            <td style="width:30%">{{ client?.email }}</td>
+            <td style="width:30%">{{ client?.phoneNumber }}</td>
             <td style="width:10%">
               <a routerLink="./{{client.id}}">
                 <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
@@ -50,7 +50,8 @@
   <ng-template #content>
     <div class="modal-header">
       <h5 class="modal-title">Add Client</h5>
-      <button type="button" (click)="cancelAddNewClient()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" (click)="cancelAddNewClient()" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
     </div>
     <div class="modal-body modal-can-scroll">
       <form [formGroup]="newClientForm">
@@ -58,7 +59,7 @@
           <label class="form-label">First Name</label>
           <div class="input-group">
             <input formControlName="firstName" placeholder="First Name" type="text" class="form-control"
-                   [ngClass]="{'is-invalid': f.firstName.errors && f.firstName.touched}"  aria-label="First Name">
+                   [ngClass]="{'is-invalid': f.firstName.errors && f.firstName.touched}" aria-label="First Name">
           </div>
           <div *ngIf="f.firstName.invalid && (f.firstName.dirty || f.firstName.touched)"
                class="text-danger small">
@@ -146,7 +147,9 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button [disabled]="newClientForm.invalid" type="submit" (click)="addNewClient()" class="btn btn-sm btn-success">Add</button>
+      <button [disabled]="newClientForm.invalid" type="submit" (click)="addNewClient()" class="btn btn-sm btn-success">
+        Add
+      </button>
       <button type="button" (click)="cancelAddNewClient()" class="btn btn-sm btn-secondary">Cancel</button>
     </div>
   </ng-template>

@@ -12,6 +12,7 @@ export interface RepairBooking {
   status: RepairStatus;
   repairs?: Repair[];
 }
+
 export interface NewRepairBooking {
   autoId: number;
   clientId: number;

@@ -23,16 +23,18 @@
             <tbody>
             <tr>
               <td class="fw-bold col-sm-2 text-end w-25">Username</td>
-              <td *ngIf="!isEdit">{{this.data.username}}</td>
+              <td *ngIf="!isEdit">{{ this.data.username }}</td>
               <td *ngIf="isEdit">
-                <input [(ngModel)]="this.data.username" name="username" #username=ngModel required minlength="3" maxlength="15"
-                       [ngClass]="{ 'is-invalid': username.invalid}" (change)="this.data.username = this.data.username.trim()"
+                <input [(ngModel)]="this.data.username" name="username" #username=ngModel required minlength="3"
+                       maxlength="15"
+                       [ngClass]="{ 'is-invalid': username.invalid}"
+                       (change)="this.data.username = this.data.username.trim()"
                        type="text" class="form-control form-control-sm bg-light">
               </td>
             </tr>
             <tr>
               <td class="fw-bold col-sm-2 text-end">Email</td>
-              <td *ngIf="!isEdit">{{this.data.email}}</td>
+              <td *ngIf="!isEdit">{{ this.data.email }}</td>
               <td *ngIf="isEdit">
                 <input [(ngModel)]="this.data.email" name="email" required email #email=ngModel
                        [ngClass]="{ 'is-invalid': email.invalid}"
@@ -44,7 +46,7 @@
                 <label class="form-check-label me-2">New Password</label>
                 <input class="form-check-input" type="checkbox"
                        (change)="addNewPassword=!addNewPassword" id="rememberMe"
-                       [checked]="addNewPassword" />
+                       [checked]="addNewPassword"/>
               </td>
               <td>
                 <input [disabled]="!addNewPassword" name="password" [(ngModel)]="this.newPassword" #password=ngModel
@@ -63,7 +65,8 @@
             Edit User
           </button>
           <button *ngIf="isEdit" [disabled]="newUserForm.invalid"
-                  class="btn btn-sm btn-success me-2" (click)="modalService.open(confirmModal)">Save</button>
+                  class="btn btn-sm btn-success me-2" (click)="modalService.open(confirmModal)">Save
+          </button>
           <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
         </div>
       </div>

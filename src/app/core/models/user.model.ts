@@ -1,15 +1,17 @@
-export interface User{
+export interface User {
   id: number;
   username: string;
   email: string;
   password?: string;
   roles?: string[];
 }
-export interface UserLogin{
+
+export interface UserLogin {
   username: string;
   password: string;
 }
-export interface UserSession{
+
+export interface UserSession {
   token: string,
   type: string,
   id: number,

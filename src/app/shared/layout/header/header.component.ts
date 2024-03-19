@@ -1,7 +1,7 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../../../core/services/user-service";
 import {UserSession} from "../../../core/models/user.model";
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 
@@ -11,7 +11,7 @@ import {NgxSpinnerService} from "ngx-spinner";
   styleUrls: ['./header.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit, OnDestroy{
+export class HeaderComponent implements OnInit, OnDestroy {
 
   loggedUser!: Observable<UserSession | null>;
   loggedUserSub: any;
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
     private userService: UserService,
     private router: Router,
     private spinner: NgxSpinnerService
-    ) {
+  ) {
 
     this.loggedUser = this.userService.loggedUser
   }
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
     this.userService.autoLogoutUser();
     this.loggedUserSub = this.loggedUser.subscribe(
       (user) => {
-        if (user!= null) {
+        if (user != null) {
           this.userService.clearLogoutTimer();
           this.userService.setLogoutTimer();
         } else this.userService.clearLogoutTimer();
@@ -39,10 +39,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   logout() {
     this.spinner.show();
-    setTimeout(()=> {
-        this.userService.logoutUser();
-        this.spinner.hide();
-    },2000);
+    setTimeout(() => {
+      this.userService.logoutUser();
+      this.spinner.hide();
+    }, 2000);
   }
 
   ngOnDestroy(): void {

@@ -16,11 +16,11 @@
           <tbody>
           <tr>
             <td>Username</td>
-            <td>{{this.loggedUser.username}}</td>
+            <td>{{ this.loggedUser.username }}</td>
           </tr>
           <tr>
             <td>Email</td>
-            <td>{{this.loggedUser.email}}</td>
+            <td>{{ this.loggedUser.email }}</td>
           </tr>
           </tbody>
         </table>
@@ -47,9 +47,9 @@
           </thead>
           <tbody>
           <tr *ngFor="let user of this.data; let idx=index">
-            <td>{{idx+1}}</td>
-            <td>{{user?.username}}</td>
-            <td style="width:50%">{{user?.email}}</td>
+            <td>{{ idx + 1 }}</td>
+            <td>{{ user?.username }}</td>
+            <td style="width:50%">{{ user?.email }}</td>
             <td style="width:10%">
               <a routerLink="./{{user.id}}" *ngIf="(this.loggedUser.username!=user.username)">
                 <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
@@ -66,14 +66,16 @@
   <ng-template #content let-modal>
     <div class="modal-header">
       <h5 class="modal-title">Add User</h5>
-      <button type="button" (click)="cancelAddNewUser()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" (click)="cancelAddNewUser()" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
     </div>
     <div class="modal-body">
       <form [formGroup]="newUserForm">
         <div class="form-group mb-3">
           <label class="form-label">Username</label>
           <div class="input-group">
-            <input formControlName="username" placeholder="Username" [ngClass]="{ 'is-invalid': f.username.errors && f.username.touched}"
+            <input formControlName="username" placeholder="Username"
+                   [ngClass]="{ 'is-invalid': f.username.errors && f.username.touched}"
                    type="text" class="form-control" aria-label="Username">
           </div>
           <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)"
@@ -92,7 +94,8 @@
         <div class="form-group mb-3">
           <label class="form-label">Email</label>
           <div class="input-group">
-            <input formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched}"
+            <input formControlName="email" placeholder="Email"
+                   [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched}"
                    type="email" class="form-control" aria-label="Email">
           </div>
           <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)"
@@ -109,7 +112,8 @@
           <label class="form-label">Password</label>
           <div class="input-group">
             <input formControlName="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=\S+$).{8,}$" placeholder="Password"
-                   [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched}" type="password" class="form-control" aria-label="Password">
+                   [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched}" type="password"
+                   class="form-control" aria-label="Password">
           </div>
           <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)"
                class="text-danger small">
@@ -124,7 +128,8 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="submit" [disabled]="newUserForm.invalid" (click)="addNewUser()" class="btn btn-sm btn-success">Add</button>
+      <button type="submit" [disabled]="newUserForm.invalid" (click)="addNewUser()" class="btn btn-sm btn-success">Add
+      </button>
       <button type="button" (click)="cancelAddNewUser()" class="btn btn-sm btn-secondary">Cancel</button>
     </div>
   </ng-template>

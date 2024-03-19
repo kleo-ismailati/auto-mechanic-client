@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/core/services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from 'src/app/core/services/api.service';
 import {RepairStatus} from "../../core/models/repair-status-enum";
 import {AlertService} from "../../core/services/alert.service";
 import {RepairBookingGuestView} from "../../core/models/repair-booking-guest-view.model";
@@ -26,20 +26,20 @@ export class HomeComponent implements OnInit {
     this.refIDWarning = false;
   }
 
-  viewBooking(){
-    if (this.refID && this.refID.length >= 30){
+  viewBooking() {
+    if (this.refID && this.refID.length >= 30) {
       this.refIDWarning = false;
       this.api.get('/api/repair_booking/view/' + this.refID).subscribe(
-        (data:RepairBookingGuestView) => {
+        (data: RepairBookingGuestView) => {
           this.data = data;
-          this.alertService.success("Repair Booking found", { autoClose: true });
+          this.alertService.success("Repair Booking found", {autoClose: true});
         }, (error) => {
-          if(error.status == "NOT_FOUND"){
-            this.alertService.error("Repair Booking not found", { autoClose: true });
+          if (error.status == "NOT_FOUND") {
+            this.alertService.error("Repair Booking not found", {autoClose: true});
           }
         }
       );
-    }else {
+    } else {
       this.refIDWarning = true;
     }
   }

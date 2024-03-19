@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PagedResponse} from "../../../core/models/paged.response.model";
 import {ApiService} from "../../../core/services/api.service";
 import {RepairStatus} from "../../../core/models/repair-status-enum";
@@ -13,7 +13,7 @@ import {RepairBookingView} from "../../../core/models/repair-booking-view.model"
 })
 export class RepairBookingListComponent implements OnInit {
 
-  data : PagedResponse<RepairBookingView> = {
+  data: PagedResponse<RepairBookingView> = {
     page: 0,
     size: 0,
     total: 0,
@@ -27,7 +27,8 @@ export class RepairBookingListComponent implements OnInit {
     private api: ApiService,
     private alertService: AlertService,
     public modalService: NgbModal
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.deleteId = -1;
@@ -39,11 +40,11 @@ export class RepairBookingListComponent implements OnInit {
     );
   }
 
-  delete(): void{
+  delete(): void {
     this.modalService.dismissAll();
     this.api.delete(`/api/repair_booking/${this.deleteId}`).subscribe(
       () => {
-        this.alertService.warn("Repair Booking with id " + this.deleteId + " deleted!", { autoClose: true })
+        this.alertService.warn("Repair Booking with id " + this.deleteId + " deleted!", {autoClose: true})
         this.ngOnInit();
       }
     )

@@ -7,7 +7,7 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from "@angular/router";
-import { Observable } from "rxjs";
+import {Observable} from "rxjs";
 import {UserService} from "../services/user-service";
 
 @Injectable({providedIn: 'root'})
@@ -18,16 +18,16 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean{
-    if(!this.userService.isLoggedIn()){
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean {
+    if (!this.userService.isLoggedIn()) {
       this.router.navigate(['']);
     }
     return this.userService.isLoggedIn();
   }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot,
-                   state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean{
-    if(!this.userService.isLoggedIn()){
+                   state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean {
+    if (!this.userService.isLoggedIn()) {
       this.router.navigate(['']);
     }
     return this.userService.isLoggedIn();

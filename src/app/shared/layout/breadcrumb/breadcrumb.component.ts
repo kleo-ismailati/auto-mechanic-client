@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  constructor(protected router : Router) {
+  constructor(protected router: Router) {
     this.firstLink = router.url;
   }
 
-  @Input() parentsList!: Array<{link: string, label: string}>;
+  @Input() parentsList!: Array<{ link: string, label: string }>;
   @Input() currentPage!: string;
   firstLink: string = '';
 

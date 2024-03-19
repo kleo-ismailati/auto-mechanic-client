@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 import {UserListComponent} from "./user-list/user-list.component";
 import {UserRoutingModule} from "./user-routing.module";
 import {SharedModule} from "../../shared/shared.module";
-import { UserComponent } from './user/user.component';
+import {UserComponent} from './user/user.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
@@ -11,12 +11,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     UserListComponent,
     UserComponent
   ],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        SharedModule,
-        FormsModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
-export class UserModule { }
+export class UserModule {
+}

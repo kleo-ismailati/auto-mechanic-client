@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserLogin, UserSession} from "../../core/models/user.model";
 import {ApiService} from "../../core/services/api.service";
 import {UserService} from "../../core/services/user-service";
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  doLogin(){
+  doLogin() {
     if (this.loginForm.invalid) {
       return;
     }
@@ -54,24 +54,24 @@ export class LoginComponent implements OnInit {
     this.user.password = this.loginForm.value["password"];
     this.spinner.show();
     setTimeout(
-      ()=>{
+      () => {
         this.spinner.hide();
         this.api.post('/auth/login', this.user).subscribe(
           {
-            next: (response: UserSession)=> {
-              if (this.rememberMe){
-                this.userService.setRememberMe(this.user.username,  this.user.password);
+            next: (response: UserSession) => {
+              if (this.rememberMe) {
+                this.userService.setRememberMe(this.user.username, this.user.password);
               }
               this.userService.loginUser(response);
             },
             error: error => {
-              if(error.status=="INTERNAL_SERVER_ERROR"){
-                this.alertService.error("Bad credentials - could not login!", { autoClose: true })
+              if (error.status == "INTERNAL_SERVER_ERROR") {
+                this.alertService.error("Bad credentials - could not login!", {autoClose: true})
               }
             }
           }
         )
-      },2000
+      }, 2000
     )
   }
 }

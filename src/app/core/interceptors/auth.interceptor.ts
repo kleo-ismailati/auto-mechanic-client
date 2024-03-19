@@ -14,11 +14,11 @@ export class AuthInterceptor implements HttpInterceptor {
     req = req.clone({
       setHeaders: {
         // 'Content-Type' : 'application/json; charset=utf-8',
-        'Accept'       : 'application/json',
+        'Accept': 'application/json',
       },
     });
     req = !this.userService.getToken() ? req : req.clone({
-      setHeaders: { Authorization: `Bearer ${this.userService.getToken()}` }
+      setHeaders: {Authorization: `Bearer ${this.userService.getToken()}`}
     });
     return next.handle(req).pipe(
       catchError(error => {
