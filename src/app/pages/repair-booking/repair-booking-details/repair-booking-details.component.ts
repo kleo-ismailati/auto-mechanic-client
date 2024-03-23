@@ -18,7 +18,7 @@ export class RepairBookingDetailsComponent implements OnInit {
 
   breadcrumbParentsList = [
     {
-      link: "/repair-booking-list",
+      link: "/repair-booking",
       label: "Bookings",
     }
   ];

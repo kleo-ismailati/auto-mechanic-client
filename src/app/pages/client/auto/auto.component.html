@@ -1,18 +1,8 @@
-<div class="bg-light">
+<app-background>
   <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
   </app-breadcrumb>
-  <alert></alert>
+  <app-back-button [relativeUrl]="'../../'"/>
   <div class="container crumb-container-no-banner">
-    <div class="d-flex justify-content-start">
-      <a class="justify-content-end" routerLink="../../">
-        <button class="btn btn-sm btn-outline-dark">
-          <span class="d-inline-flex align-items-center">
-            <i class="pi align-middle pi-arrow-circle-left me-1"></i>
-            Go back
-          </span>
-        </button>
-      </a>
-    </div>
     <div class="container card my-2 py-2" *ngIf="this.data">
       <div class="row">
         <h1 class="lead fw-bold text-center">Auto Details</h1>
@@ -143,4 +133,5 @@
       </form>
     </div>
   </div>
-</div>
+</app-background>
+<alert></alert>

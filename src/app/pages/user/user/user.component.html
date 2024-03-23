@@ -1,18 +1,8 @@
-<div class="bg-light">
+<app-background>
   <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
   </app-breadcrumb>
-  <alert></alert>
+  <app-back-button/>
   <div class="container crumb-container-no-banner">
-    <div class="d-flex justify-content-start">
-      <a class="justify-content-end" routerLink="../">
-        <button class="btn btn-sm btn-outline-dark">
-          <span class="d-inline-flex align-items-center">
-            <i class="pi align-middle pi-arrow-circle-left me-1"></i>
-            Go back
-          </span>
-        </button>
-      </a>
-    </div>
     <div class="container card my-2 py-2" *ngIf="this.data">
       <div class="row">
         <h1 class="lead fw-bold text-center">User Details</h1>
@@ -72,17 +62,18 @@
       </div>
     </div>
   </div>
-  <ng-template #confirmModal>
-    <div class="modal-header">
-      <h5 class="modal-title">Confirm action</h5>
-      <button type="button" (click)="cancel()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      <p>Are you sure you want to edit user?</p>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" (click)="submit()" class="btn btn-sm btn-success">Yes</button>
-      <button type="button" (click)="cancel()" class="btn btn-sm btn-secondary">No</button>
-    </div>
-  </ng-template>
-</div>
+</app-background>
+<ng-template #confirmModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Confirm action</h5>
+    <button type="button" (click)="cancel()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to edit user?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" (click)="submit()" class="btn btn-sm btn-success">Yes</button>
+    <button type="button" (click)="cancel()" class="btn btn-sm btn-secondary">No</button>
+  </div>
+</ng-template>
+<alert></alert>

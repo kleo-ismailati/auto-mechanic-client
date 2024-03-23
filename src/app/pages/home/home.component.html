@@ -1,11 +1,7 @@
-<div class="banner-bg py-2">
-  <h1 class="display-5 fw-bold text-center text-white my-3">Your Auto Mechanic</h1>
-  <h1 class="lead fw-bold text-white text-center">Repair status tracking for your auto</h1>
-</div>
-<div class="bg-light border-5 border-top border-dark">
-  <alert></alert>
-  <div class="container-fluid h-50 default-container vertical-center">
-    <div class="row col-sm-4 mx-auto active-dark">
+<app-banner [title]="'Your Auto Mechanic'" [subTitle]="'Repair status tracking for your auto'"></app-banner>
+<app-background [hasBanner]="true">
+  <div class="container default-container">
+    <div class="row col-sm-4 mx-auto pt-5">
       <h1 class="lead fw-bold text-center mt-2 pb-4">View booking status</h1>
       <div class="input-group mb-3">
         <input type="search" class="form-control bg-light rounded-3"
@@ -50,4 +46,5 @@
       </table>
     </div>
   </div>
-</div>
+</app-background>
+<alert></alert>
