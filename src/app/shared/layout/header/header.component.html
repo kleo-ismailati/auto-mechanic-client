@@ -1,63 +1,64 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/">
-        <img src="assets/repair.png" alt="" width="35" height="35">
-        Auto Mechanic
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
-        <ul class="nav navbar-nav ms-auto me-2">
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-               routerLink="/">
-              Home
-            </a>
-          </li>
-          <li *ngIf="(loggedUser|async)?.token" class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-               routerLink="/dashboard">
-              Dashboard
-            </a>
-          </li>
-          <li *ngIf="(loggedUser|async)?.token" class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-               routerLink="/repair-booking">
-              Bookings
-            </a>
-          </li>
-          <li *ngIf="(loggedUser|async)?.token" class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-               routerLink="/client">
-              Clients
-            </a>
-          </li>
-          <li *ngIf="(loggedUser|async)?.token" class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-               routerLink="/user">
-              Users
-            </a>
-          </li>
-        </ul>
-
-        <a *ngIf="!(loggedUser|async)?.token" routerLink="/login" data-bs-toggle="collapse"
-           data-bs-target="#navbarNavDropdown.show">
-          <button class="btn btn-sm btn-outline-success">Sign in</button>
+<div class="header-fixed">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">
+          <img src="assets/repair.png" alt="" width="35" height="35">
+          Auto Mechanic
         </a>
-        <a *ngIf="(loggedUser|async)?.token"
-           data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show" (click)="logout()">
-          <button class="btn btn-sm btn-outline-danger">Sign out</button>
-        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
+          <ul class="nav navbar-nav ms-auto me-2">
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
+                 routerLink="/">
+                Home
+              </a>
+            </li>
+            <li *ngIf="(loggedUser|async)?.token" class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
+                 routerLink="/dashboard">
+                Dashboard
+              </a>
+            </li>
+            <li *ngIf="(loggedUser|async)?.token" class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
+                 routerLink="/repair-booking">
+                Bookings
+              </a>
+            </li>
+            <li *ngIf="(loggedUser|async)?.token" class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
+                 routerLink="/client">
+                Clients
+              </a>
+            </li>
+            <li *ngIf="(loggedUser|async)?.token" class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
+                 routerLink="/user">
+                Users
+              </a>
+            </li>
+          </ul>
+
+          <a *ngIf="!(loggedUser|async)?.token" routerLink="/login" data-bs-toggle="collapse"
+             data-bs-target="#navbarNavDropdown.show">
+            <button class="btn btn-sm btn-outline-success">Sign in</button>
+          </a>
+          <a *ngIf="(loggedUser|async)?.token"
+             data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show" (click)="logout()">
+            <button class="btn btn-sm btn-outline-danger">Sign out</button>
+          </a>
+
+        </div>
       </div>
-    </div>
-  </nav>
-</header>
-<div *ngIf="(loggedUser|async)?.token" class="my-0 bg-success text-dark fw-bold text-end">
+    </nav>
+  </header>
+  <div *ngIf="(loggedUser|async)?.token" class="my-0 bg-success text-dark fw-bold text-end">
   <span class="small align-top">
     User :
     <span class="text-white-50 fst-italic">
@@ -65,4 +66,11 @@
       <i class="pi align-middle small pi-user mx-1"></i>
     </span>
   </span>
+  </div>
+  <div *ngIf="!(loggedUser|async)?.token" class="my-0 bg-warning text-dark fw-bold text-end">
+  <span class="small align-top">
+    Viewing as Guest
+    <i class="pi align-middle small pi-user mx-1"></i>
+  </span>
+  </div>
 </div>
