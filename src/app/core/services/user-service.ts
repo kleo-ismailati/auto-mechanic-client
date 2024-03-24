@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {UserLogin, UserSession} from "../models/user.model";
+import {UserLogin, UserSession} from "../../features/user-management/models/user.model";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";

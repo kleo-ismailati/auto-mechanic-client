@@ -1,0 +1,85 @@
+<div class="container default-container">
+  <div class="col-xs-12" style="height:50px;"></div>
+  <div class="row h-25">
+    <div class="col-sm my-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-10">
+              <h4>
+                Bookings Active:
+              </h4>
+            </div>
+            <div class="col">
+              <h4 class="text-primary rounded-2 border border-1 border-secondary p-2 text-center">
+                {{ data.totalRepairBookingsActive }}
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a class="text-success" routerLink="/repair-bookings">View Bookings</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm my-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-10">
+              <h4>
+                Total Clients:
+              </h4>
+            </div>
+            <div class="col">
+              <h4 class="text-primary rounded-2 border border-1 border-secondary p-2 text-center">
+                {{ data.totalClients }}
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a class="text-success" routerLink="/client">View Clients</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row h-25">
+    <div class="col-sm my-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-10">
+              <h4>
+                Total Autos:
+              </h4>
+            </div>
+            <div class="col">
+              <h4 class="text-primary rounded-2 border border-1 border-secondary p-2 text-center">
+                {{ data.totalAutos }}
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm my-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h4>
+                Total Earnings:
+              </h4>
+            </div>
+            <div class="col">
+              <h4 class="text-primary rounded-2 border border-1 border-secondary p-2 text-center">
+                {{ data.totalIncome | currency:'EUR' : 'symbol' : '1.0-0' }}
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

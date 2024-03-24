@@ -1,36 +1,35 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./pages/login/login.component";
 import {AuthGuard} from "./core/guards/auth.guard";
 
 const routes: Routes = [
-  {path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
-  {path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
+  {path: '', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
+  {path: 'home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./features/admin-dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-    path: 'repair-booking',
+    path: 'repair-bookings',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./pages/repair-booking/repair-booking.module').then(m => m.RepairBookingModule)
+    loadChildren: () => import('./features/repair-booking-management/repair-booking.module').then(m => m.RepairBookingModule)
   },
   {
-    path: 'user',
+    path: 'users',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./features/user-management/user.module').then(m => m.UserModule)
   },
   {
-    path: 'client',
+    path: 'clients',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule)
+    loadChildren: () => import('./features/client-management/client.module').then(m => m.ClientModule)
   },
-  {path: 'login', component: LoginComponent},
+  {path: 'login', loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule)},
   {path: '**', redirectTo: ''}
 ];
 

@@ -27,19 +27,19 @@
             </li>
             <li *ngIf="(loggedUser|async)?.token" class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/repair-booking">
+                 routerLink="/repair-bookings">
                 Bookings
               </a>
             </li>
             <li *ngIf="(loggedUser|async)?.token" class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/client">
+                 routerLink="/clients">
                 Clients
               </a>
             </li>
             <li *ngIf="(loggedUser|async)?.token" class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/user">
+                 routerLink="/users">
                 Users
               </a>
             </li>
@@ -58,7 +58,7 @@
       </div>
     </nav>
   </header>
-  <div *ngIf="(loggedUser|async)?.token" class="my-0 bg-success text-dark fw-bold text-end">
+  <div *ngIf="(loggedUser|async)?.token" class="my-0 bg-success bg-gradient text-dark fw-bold text-end border-2 border-top border-bottom border-black">
   <span class="small align-top">
     User :
     <span class="text-white-50 fst-italic">
@@ -67,10 +67,6 @@
     </span>
   </span>
   </div>
-  <div *ngIf="!(loggedUser|async)?.token" class="my-0 bg-warning text-dark fw-bold text-end">
-  <span class="small align-top">
-    Viewing as Guest
-    <i class="pi align-middle small pi-user mx-1"></i>
-  </span>
+  <div *ngIf="!(loggedUser|async)?.token" class="my-0 bg-dark bg-gradient text-dark fw-bold text-end border-2 border-top border-bottom border-black" style="min-height: 24px">
   </div>
 </div>

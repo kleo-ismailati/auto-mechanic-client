@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../../../core/services/user-service";
-import {UserSession} from "../../../core/models/user.model";
+import {UserSession} from "../../../features/user-management/models/user.model";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";

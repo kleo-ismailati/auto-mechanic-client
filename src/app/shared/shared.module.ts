@@ -2,30 +2,42 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {BreadcrumbComponent} from "./layout/breadcrumb/breadcrumb.component";
-import {AlertComponent} from './layout/alert/alert.component';
-import { BannerComponent } from './layout/banner/banner.component';
-import { BackButtonComponent } from './layout/back-button/back-button.component';
-import { BackgroundComponent } from './layout/background/background.component';
+import {BannerComponent} from './layout/banner/banner.component';
+import {BackButtonComponent} from './components/back-button/back-button.component';
+import {BackgroundComponent} from './layout/background/background.component';
+import {HeaderComponent} from "./layout/header/header.component";
+import {FooterComponent} from "./layout/footer/footer.component";
+import {AlertComponent} from "./components/alert/alert.component";
+import {SpinnerComponent} from './layout/spinner/spinner.component';
+import {NgxSpinnerModule} from "ngx-spinner";
 
 
 @NgModule({
   declarations: [
     BreadcrumbComponent,
-    AlertComponent,
     BannerComponent,
     BackButtonComponent,
-    BackgroundComponent
+    BackgroundComponent,
+    HeaderComponent,
+    FooterComponent,
+    AlertComponent,
+    SpinnerComponent
   ],
   exports: [
     BreadcrumbComponent,
-    AlertComponent,
     BannerComponent,
     BackButtonComponent,
-    BackgroundComponent
+    BackgroundComponent,
+    HeaderComponent,
+    FooterComponent,
+    AlertComponent,
+    SpinnerComponent,
+    CommonModule
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule {
