@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../../../core/services/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Auto} from "../../models/auto.model";
-import {NewRepairBooking} from "../../../repair-booking-management/models/repair-booking.model";
+import {BookingCreate} from "../../../booking-management/models/booking.model";
 import {AlertService} from "../../../../core/services/alert.service";
 import {HttpHeaders} from "@angular/common/http";
 
@@ -39,7 +39,7 @@ export class AutoComponent implements OnInit {
 
   isEdit: boolean = false;
   isAddRb = false;
-  newRb: NewRepairBooking = {
+  newRb: BookingCreate = {
     autoId: 0,
     clientId: 0,
     repairs: [
@@ -62,11 +62,11 @@ export class AutoComponent implements OnInit {
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
     let autoId = this.route.snapshot.paramMap.get('autoId');
-    this.api.get('/api/auto/' + autoId).subscribe(
+    this.api.get('/api/autos/' + autoId).subscribe(
       (data: Auto) => {
         this.data = data;
         if (this.data.imageId != null) {
-          this.api.getBlob('/image/' + this.data.imageId, undefined, this.headers).subscribe(
+          this.api.getBlob('/images/' + this.data.imageId, undefined, this.headers).subscribe(
             (image) => {
               this.createImageFromBlob(image);
             }
@@ -92,7 +92,7 @@ export class AutoComponent implements OnInit {
       color: this.data.color
     };
     let autoId = this.route.snapshot.paramMap.get('autoId');
-    this.api.put('/api/auto/' + autoId, data).subscribe(
+    this.api.put('/api/autos/' + autoId, data).subscribe(
       () => {
         this.isEdit = false;
         this.alertService.success("Auto was updated successfully!", {autoClose: true});
@@ -153,7 +153,7 @@ export class AutoComponent implements OnInit {
     if (id != null && autoId != null) {
       this.newRb.clientId = Number(id);
       this.newRb.autoId = Number(autoId);
-      this.api.post('/api/repair_booking', this.newRb).subscribe(
+      this.api.post('/api/bookings', this.newRb).subscribe(
         () => {
           this.isAddRb = false;
           this.alertService.success("Booking was added successfully! Redirecting to Bookings...",
@@ -165,7 +165,7 @@ export class AutoComponent implements OnInit {
           });
           this.resetRb();
           setTimeout(() => {
-            this.router.navigate(['repair-booking']);
+            this.router.navigate(['bookings']);
           }, 3000)
         }
       )
@@ -193,7 +193,7 @@ export class AutoComponent implements OnInit {
       const formData = new FormData();
       formData.append('image', this.selectedFile);
       let autoId = this.route.snapshot.paramMap.get('autoId');
-      this.api.post('/image/setAutoImg/' + autoId, formData).subscribe(
+      this.api.post('/images/setAutoImg/' + autoId, formData).subscribe(
         {
           next: () => {
             this.isEdit = false;

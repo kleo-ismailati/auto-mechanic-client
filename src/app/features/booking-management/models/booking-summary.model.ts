@@ -1,7 +1,6 @@
 import {RepairStatus} from "../../../shared/enums/repair-status-enum";
 
-export interface RepairBookingView {
-  id?: number;
+export interface BookingSummary {
   firstName?: string;
   lastName?: string;
   autoModel?: string;
@@ -9,9 +8,12 @@ export interface RepairBookingView {
   date?: Date;
   totalPrice?: string;
   status: RepairStatus;
-  repairs?: RepairView[];
+  repairs?: BookingSummaryRepair[];
 }
 
-export interface RepairView {
+export interface BookingSummaryRepair {
   repairCost: number;
+  repairType: string;
+  repairDetails: string;
+  repairStatus: RepairStatus;
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from 'src/app/core/services/api.service';
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {AlertService} from "../../../../core/services/alert.service";
-import {RepairBookingGuestView} from "../../../repair-booking-management/models/repair-booking-guest-view.model";
+import {BookingSummary} from "../../../booking-management/models/booking-summary.model";
 
 @Component({
   selector: 'app-tracker',
@@ -11,7 +11,7 @@ import {RepairBookingGuestView} from "../../../repair-booking-management/models/
 })
 export class TrackerComponent implements OnInit {
 
-  data: RepairBookingGuestView | undefined;
+  data: BookingSummary | undefined;
   refID: String = '';
   repairStatus = RepairStatus;
   refIDWarning: boolean = false;
@@ -29,14 +29,17 @@ export class TrackerComponent implements OnInit {
   viewBooking() {
     if (this.refID && this.refID.length >= 30) {
       this.refIDWarning = false;
-      this.api.get('/api/repair_booking/view/' + this.refID).subscribe(
-        (data: RepairBookingGuestView) => {
-          this.data = data;
-          this.alertService.success("Repair Booking found", {autoClose: true});
-        }, (error) => {
-          if (error.status == "NOT_FOUND") {
-            this.alertService.error("Repair Booking not found", {autoClose: true});
-          }
+      this.api.get('/api/bookings/view/' + this.refID).subscribe(
+        {
+          next: ((data: BookingSummary) => {
+            this.data = data;
+            this.alertService.success("Booking found", {autoClose: true});
+          }),
+          error: ((error) => {
+            if (error.status == "NOT_FOUND") {
+              this.alertService.error("Booking not found", {autoClose: true});
+            }
+          })
         }
       );
     } else {

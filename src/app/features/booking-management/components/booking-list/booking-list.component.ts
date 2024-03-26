@@ -4,16 +4,16 @@ import {ApiService} from "../../../../core/services/api.service";
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {AlertService} from "../../../../core/services/alert.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {RepairBookingView} from "../../models/repair-booking-view.model";
+import {BookingItem} from "../../models/booking-item.model";
 
 @Component({
-  selector: 'app-repair-booking-list',
-  templateUrl: './repair-booking-list.component.html',
-  styleUrls: ['./repair-booking-list.component.css']
+  selector: 'app-booking-list',
+  templateUrl: './booking-list.component.html',
+  styleUrls: ['./booking-list.component.css']
 })
-export class RepairBookingListComponent implements OnInit {
+export class BookingListComponent implements OnInit {
 
-  data: PagedResponse<RepairBookingView> = {
+  data: PagedResponse<BookingItem> = {
     page: 0,
     size: 0,
     total: 0,
@@ -33,8 +33,8 @@ export class RepairBookingListComponent implements OnInit {
   ngOnInit(): void {
     this.deleteId = -1;
 
-    this.api.get('/api/repair_booking').subscribe(
-      (data: PagedResponse<RepairBookingView>) => {
+    this.api.get('/api/bookings').subscribe(
+      (data: PagedResponse<BookingItem>) => {
         this.data = data;
       }
     );
@@ -42,7 +42,7 @@ export class RepairBookingListComponent implements OnInit {
 
   delete(): void {
     this.modalService.dismissAll();
-    this.api.delete(`/api/repair_booking/${this.deleteId}`).subscribe(
+    this.api.delete(`/api/bookings/${this.deleteId}`).subscribe(
       () => {
         this.alertService.warn("Repair Booking with id " + this.deleteId + " deleted!", {autoClose: true})
         this.ngOnInit();
@@ -51,8 +51,8 @@ export class RepairBookingListComponent implements OnInit {
   }
 
   paginate(event: any) {
-    this.api.get(`/api/repair_booking?page=${event.page}`).subscribe(
-      (data: PagedResponse<RepairBookingView>) => {
+    this.api.get(`/api/bookings?page=${event.page}`).subscribe(
+      (data: PagedResponse<BookingItem>) => {
         this.data = data;
       }
     );

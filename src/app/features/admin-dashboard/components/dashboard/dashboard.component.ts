@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
     totalAutos: 0,
     totalIncome: 0,
     totalClients: 0,
-    totalRepairBookingsActive: 0,
+    totalBookingsActive: 0,
   };
 
   constructor(private api: ApiService) {

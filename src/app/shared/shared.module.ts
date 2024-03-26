@@ -32,11 +32,12 @@ import {NgxSpinnerModule} from "ngx-spinner";
     FooterComponent,
     AlertComponent,
     SpinnerComponent,
-    CommonModule
+    CommonModule,
+    NgxSpinnerModule
   ],
   imports: [
-    CommonModule,
     RouterModule,
+    CommonModule,
     NgxSpinnerModule
   ]
 })

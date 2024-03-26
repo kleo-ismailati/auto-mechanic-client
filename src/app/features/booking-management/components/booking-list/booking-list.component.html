@@ -28,7 +28,7 @@
           <td>{{ repairBooking.date | date }}</td>
           <td>{{ repairStatus[repairBooking.status] }}</td>
           <td style="width:20%">
-            <a routerLink="./rb-details/{{repairBooking.id}}">
+            <a routerLink="./booking-details/{{repairBooking.id}}">
               <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
             </a>
             <button (click)="confirmDelete(repairBooking.id); modalService.open(confirmModal)" type="button"

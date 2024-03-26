@@ -12,10 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/admin-dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-    path: 'repair-bookings',
+    path: 'bookings',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./features/repair-booking-management/repair-booking.module').then(m => m.RepairBookingModule)
+    loadChildren: () => import('./features/booking-management/booking.module').then(m => m.BookingModule)
   },
   {
     path: 'users',

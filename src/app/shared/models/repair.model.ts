@@ -9,7 +9,7 @@ export interface Repair {
   autoId?: string;
 }
 
-export interface NewRepair {
+export interface RepairCreate {
   repairType: string;
   repairCost: number;
   repairDetails: string;

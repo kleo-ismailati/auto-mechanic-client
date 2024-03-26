@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BookingManagementComponent} from "./pages/booking-management/booking-management.component";
-import {BookingDetailsComponent} from "./pages/booking-details/booking-details.component";
+import {BookingInfoComponent} from "./pages/booking-info/booking-info.component";
 
 const routes: Routes = [
   {path: '', component: BookingManagementComponent},
-  {path: 'rb-details/:id', component: BookingDetailsComponent},
+  {path: 'booking-details/:id', component: BookingInfoComponent},
   {path: '**', redirectTo: ''}
 ];
 
@@ -13,5 +13,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RepairBookingRoutingModule {
+export class BookingRoutingModule {
 }

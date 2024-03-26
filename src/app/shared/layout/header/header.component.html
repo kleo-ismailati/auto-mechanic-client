@@ -16,30 +16,35 @@
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                  routerLink="/">
+                <i class="pi align-baseline small pi-home mx-1"></i>
                 Home
               </a>
             </li>
             <li *ngIf="(loggedUser|async)?.token" class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                  routerLink="/dashboard">
+                <i class="pi align-baseline small pi-chart-bar mx-1"></i>
                 Dashboard
               </a>
             </li>
             <li *ngIf="(loggedUser|async)?.token" class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/repair-bookings">
+                 routerLink="/bookings">
+                <i class="pi align-baseline small pi-book mx-1"></i>
                 Bookings
               </a>
             </li>
             <li *ngIf="(loggedUser|async)?.token" class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                  routerLink="/clients">
+                <i class="pi align-baseline small pi-users mx-1"></i>
                 Clients
               </a>
             </li>
             <li *ngIf="(loggedUser|async)?.token" class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                  routerLink="/users">
+                <i class="pi align-baseline small pi-user mx-1"></i>
                 Users
               </a>
             </li>
@@ -58,15 +63,18 @@
       </div>
     </nav>
   </header>
-  <div *ngIf="(loggedUser|async)?.token" class="my-0 bg-success bg-gradient text-dark fw-bold text-end border-2 border-top border-bottom border-black">
+  <div *ngIf="(loggedUser|async)?.token"
+       class="my-0 bg-success bg-gradient text-dark fw-bold text-end border-2 border-top border-bottom border-black">
   <span class="small align-top">
     User :
     <span class="text-white-50 fst-italic">
       {{ (loggedUser|async)?.email }} - {{ (loggedUser|async)?.username }}
-      <i class="pi align-middle small pi-user mx-1"></i>
+      <i class="pi align-baseline small pi-user mx-1"></i>
     </span>
   </span>
   </div>
-  <div *ngIf="!(loggedUser|async)?.token" class="my-0 bg-dark bg-gradient text-dark fw-bold text-end border-2 border-top border-bottom border-black" style="min-height: 24px">
+  <div *ngIf="!(loggedUser|async)?.token"
+       class="my-0 bg-dark bg-gradient text-dark fw-bold text-end border-2 border-top border-bottom border-black"
+       style="min-height: 24px">
   </div>
 </div>

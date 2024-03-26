@@ -1,0 +1,20 @@
+<div class="card h-100">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-10">
+        <h4>
+          <i *ngIf="statIconClass!=''" class="pi align-baseline small mx-1" [class]="statIconClass"></i>
+          {{ statTitle }}
+        </h4>
+      </div>
+      <div class="col">
+        <h4 class="text-primary rounded-2 border border-1 border-secondary p-2 text-center">
+          {{ statValue }}
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="routeUrl!=''" class="card-footer">
+    <a class="text-success" [routerLink]="routeUrl">{{ routeText }}</a>
+  </div>
+</div>

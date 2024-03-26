@@ -78,7 +78,7 @@ export class ClientComponent implements OnInit {
     this.newAuto = {autoType: "", autoDescription: "", autoModel: "", color: "", year: ""}
     this.newAutoForm.reset();
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.get('/api/client/' + id).subscribe(
+    this.api.get('/api/clients/' + id).subscribe(
       (data: Client) => {
         this.data = data;
         for (let auto of this.data.autos!) {
@@ -108,7 +108,7 @@ export class ClientComponent implements OnInit {
       phoneNumber: this.data.phoneNumber
     };
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.put('/api/client/' + id, data).subscribe(
+    this.api.put('/api/clients/' + id, data).subscribe(
       () => {
         this.isEdit = false;
         this.alertService.success("Client was updated successfully!", {autoClose: true});
@@ -126,15 +126,17 @@ export class ClientComponent implements OnInit {
       year: this.newAutoForm.value['year']
     }
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.post(`/api/client/${id}/addAuto`, this.newAuto).subscribe(
-      () => {
-        this.modalService.dismissAll();
-        this.alertService.success("New auto was added successfully!", {autoClose: true});
-        this.ngOnInit();
-      }, () => {
-        this.modalService.dismissAll();
-        this.alertService.error("An error has occurred", {autoClose: true});
-        this.ngOnInit();
+    this.api.post(`/api/clients/${id}/addAuto`, this.newAuto).subscribe({
+        next: (() => {
+          this.modalService.dismissAll();
+          this.alertService.success("New auto was added successfully!", {autoClose: true});
+          this.ngOnInit();
+        }),
+        error: (() => {
+          this.modalService.dismissAll();
+          this.alertService.error("An error has occurred", {autoClose: true});
+          this.ngOnInit();
+        })
       }
     )
   }
@@ -152,7 +154,7 @@ export class ClientComponent implements OnInit {
   }
 
   deleteAuto(id: number) {
-    this.api.delete('/api/auto/' + id).subscribe(
+    this.api.delete('/api/autos/' + id).subscribe(
       () => {
         this.ngOnInit();
       }

@@ -37,7 +37,7 @@ export class UserComponent implements OnInit {
     this.newPassword = '';
     this.addNewPassword = false;
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.get('/user/' + id).subscribe(
+    this.api.get('/users/' + id).subscribe(
       (data: User) => {
         this.data = data;
       }
@@ -59,7 +59,7 @@ export class UserComponent implements OnInit {
       data.password = this.newPassword;
     }
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.put('/user/' + id, data).subscribe(
+    this.api.put('/users/' + id, data).subscribe(
       () => {
         this.isEdit = false;
         this.alertService.success('User was updated successfully', {autoClose: true})

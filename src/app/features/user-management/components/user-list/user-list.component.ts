@@ -56,7 +56,7 @@ export class UserListComponent implements OnInit {
       }
     )
 
-    this.api.get('/user').subscribe(
+    this.api.get('/users').subscribe(
       (data: User[]) => {
         this.data = data;
       }
@@ -78,7 +78,7 @@ export class UserListComponent implements OnInit {
       email: this.newUserForm.value['email'],
       password: this.newUserForm.value['password'],
     }
-    this.api.post('/user', this.newUser).subscribe(
+    this.api.post('/users', this.newUser).subscribe(
       () => {
         this.modalService.dismissAll();
         this.alertService.success("User was added successfully", {autoClose: true})

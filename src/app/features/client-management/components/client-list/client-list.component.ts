@@ -68,7 +68,7 @@ export class ClientListComponent implements OnInit {
     this.newClientForm.reset();
     this.newClient = {address: "", email: "", firstName: "", lastName: "", phoneNumber: ""};
 
-    this.api.get('/api/client').subscribe(
+    this.api.get('/api/clients').subscribe(
       (data: PagedResponse<Client>) => {
         this.data = data;
       }
@@ -80,7 +80,7 @@ export class ClientListComponent implements OnInit {
   }
 
   paginate(event: any) {
-    this.api.get(`/api/repair_booking?page=${event.page}`).subscribe(
+    this.api.get(`/api/bookings?page=${event.page}`).subscribe(
       (data: PagedResponse<Client>) => {
         this.data = data;
       }
@@ -100,15 +100,18 @@ export class ClientListComponent implements OnInit {
       email: this.newClientForm.value['email'],
       address: this.newClientForm.value['address']
     }
-    this.api.post('/api/client', this.newClient).subscribe(
-      () => {
-        this.modalService.dismissAll();
-        this.alertService.success("New client was added successfully!", {autoClose: true});
-        this.ngOnInit();
-      }, () => {
-        this.modalService.dismissAll();
-        this.alertService.error("An error has occurred", {autoClose: true});
-        this.ngOnInit();
+    this.api.post('/api/clients', this.newClient).subscribe(
+      {
+        next: (() => {
+          this.modalService.dismissAll();
+          this.alertService.success("New client was added successfully!", {autoClose: true});
+          this.ngOnInit();
+        }),
+        error: (() => {
+          this.modalService.dismissAll();
+          this.alertService.error("An error has occurred", {autoClose: true});
+          this.ngOnInit();
+        })
       }
     );
 
