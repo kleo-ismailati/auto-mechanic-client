@@ -3,8 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "./core/guards/auth.guard";
 
 const routes: Routes = [
-  {path: '', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
-  {path: 'home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
+  {
+    path: '',
+    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
+  },
   {
     path: 'dashboard',
     canActivate: [AuthGuard],

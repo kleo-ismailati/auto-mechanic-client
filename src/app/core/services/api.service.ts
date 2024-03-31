@@ -6,7 +6,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class ApiService {
 
   constructor(
@@ -15,7 +15,7 @@ export class ApiService {
   }
 
   private formatErrors(error: any) {
-    return throwError(error.error);
+    return throwError(() => error.error);
   }
 
   get(path: string, params: HttpParams = new HttpParams(), headers: HttpHeaders = new HttpHeaders()): Observable<any> {

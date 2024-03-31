@@ -1,4 +1,5 @@
 import {RepairStatus} from "../../../shared/enums/repair-status-enum";
+import {BookingSummaryRepair} from "./booking-summary-repair.model";
 
 export interface BookingSummary {
   firstName?: string;
@@ -9,11 +10,4 @@ export interface BookingSummary {
   totalPrice?: string;
   status: RepairStatus;
   repairs?: BookingSummaryRepair[];
-}
-
-export interface BookingSummaryRepair {
-  repairCost: number;
-  repairType: string;
-  repairDetails: string;
-  repairStatus: RepairStatus;
 }

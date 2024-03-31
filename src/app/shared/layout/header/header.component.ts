@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../../../core/services/user-service";
-import {UserSession} from "../../../features/user-management/models/user.model";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
+import {UserSession} from "../../../features/user-management/models/user-session.model";
 
 @Component({
   selector: 'app-header',
@@ -38,10 +38,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.spinner.show();
+    this.spinner.show().then(r => r);
     setTimeout(() => {
       this.userService.logoutUser();
-      this.spinner.hide();
+      this.spinner.hide().then(r => r);
     }, 2000);
   }
 

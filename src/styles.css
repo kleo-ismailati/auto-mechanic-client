@@ -8,31 +8,25 @@ th {
 }
 
 .default-container {
-  min-height: calc(100vh - 258px)
+  min-height: 76vh;
+  z-index: -1;
 }
 
 .crumb-bar {
-  min-height: 8vh;
+  min-height: 4vh;
+  height: 4vh;
 }
 
 .crumb-container {
-  min-height: calc(92vh - 260px);
+  min-height: 72vh;
 }
 
 .crumb-container-no-banner {
-  min-height: calc(92vh - 158px);
+  min-height: 88vh;
 }
 
-.scrollable-container-medium {
-  overflow-y: scroll;
-  height: 40vh;
-  border: 2px solid gray;
-}
-
-.scrollable-container-small {
-  overflow-y: scroll;
-  height: 25vh;
-  border: 2px solid gray;
+.paginator-container {
+  padding: 0 10px 10px 10px;
 }
 
 .modal-can-scroll {
@@ -72,4 +66,8 @@ th {
   border-radius: 0;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color: #555;
+}
+
+.p-datatable-header, .p-datatable-footer, .p-datatable .p-datatable-thead > tr > th {
+  background-color: var(--bs-light) !important;
 }

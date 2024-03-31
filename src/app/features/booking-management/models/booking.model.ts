@@ -1,5 +1,5 @@
 import {RepairStatus} from "../../../shared/enums/repair-status-enum";
-import {Repair, RepairCreate} from "../../../shared/models/repair.model";
+import {Repair} from "../../../shared/models/repair.model";
 
 export interface Booking {
   id?: number;
@@ -11,10 +11,4 @@ export interface Booking {
   totalPrice?: string;
   status: RepairStatus;
   repairs?: Repair[];
-}
-
-export interface BookingCreate {
-  autoId: number;
-  clientId: number;
-  repairs: RepairCreate[];
 }

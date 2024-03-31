@@ -1,7 +1,7 @@
 <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
 </app-breadcrumb>
-<app-back-button [relativeUrl]="'../../'"/>
 <div class="container crumb-container-no-banner">
+  <app-back-button [relativeUrl]="'../../'"/>
   <div class="container card my-2 py-2" *ngIf="this.data">
     <div class="row">
       <h1 class="lead fw-bold text-center">Auto Details</h1>
@@ -80,7 +80,7 @@
     </div>
     <div class="row mx-auto my-2 w-75">
       <div class="d-flex justify-content-end">
-        <button *ngIf="!isEdit&&!isAddRb" class="btn btn-sm btn-primary me-2" (click)="addNewRb()">
+        <button *ngIf="!isEdit&&!isAddBooking" class="btn btn-sm btn-primary me-2" (click)="addNewBooking()">
           Add Booking
         </button>
         <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">
@@ -94,12 +94,12 @@
     </div>
   </div>
 
-  <div *ngIf="isAddRb" class="w-50 mx-auto">
+  <div *ngIf="isAddBooking" class="w-50 mx-auto">
     <div class="container card my-2 py-2">
       <div class="card-title"><h1 class="lead fw-bold text-center">New Repair Booking</h1></div>
     </div>
     <form #newRepairsForm=ngForm>
-      <div *ngFor="let repair of newRb.repairs; let idx=index" class="container card my-2 py-2">
+      <div *ngFor="let repair of newBooking.repairs; let idx=index" class="container card my-2 py-2">
         <div class="row">
           <div class="card-title"><h1 class="lead fw-bold text-center">Auto repair nr.{{ idx + 1 }}</h1></div>
           <div class="form-group col">
@@ -122,11 +122,11 @@
           </div>
         </div>
         <div *ngIf="lastOfList(idx)" class="d-flex justify-content-end mt-2">
-          <button [disabled]="newRepairsForm.invalid" class="btn btn-sm btn-success me-2" (click)="submitNewRB()">
+          <button [disabled]="newRepairsForm.invalid" class="btn btn-sm btn-success me-2" (click)="submitNewBooking()">
             Save
           </button>
-          <button class="btn btn-sm btn-primary me-2" (click)="addOther()">Add Repair</button>
-          <button class="btn btn-sm btn-secondary me-2" (click)="cancelNewRB()">Cancel</button>
+          <button class="btn btn-sm btn-primary me-2" (click)="addOtherRepair()">Add Repair</button>
+          <button class="btn btn-sm btn-secondary me-2" (click)="cancelNewBooking()">Cancel</button>
         </div>
       </div>
     </form>

@@ -10,6 +10,7 @@ import {FooterComponent} from "./layout/footer/footer.component";
 import {AlertComponent} from "./components/alert/alert.component";
 import {SpinnerComponent} from './layout/spinner/spinner.component';
 import {NgxSpinnerModule} from "ngx-spinner";
+import {TypedTemplateDirective} from "./directives/typed-template.directive";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {NgxSpinnerModule} from "ngx-spinner";
     HeaderComponent,
     FooterComponent,
     AlertComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    TypedTemplateDirective
   ],
   exports: [
     BreadcrumbComponent,
@@ -32,6 +34,7 @@ import {NgxSpinnerModule} from "ngx-spinner";
     FooterComponent,
     AlertComponent,
     SpinnerComponent,
+    TypedTemplateDirective,
     CommonModule,
     NgxSpinnerModule
   ],

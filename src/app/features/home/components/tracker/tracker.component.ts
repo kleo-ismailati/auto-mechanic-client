@@ -3,6 +3,7 @@ import {ApiService} from 'src/app/core/services/api.service';
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {AlertService} from "../../../../core/services/alert.service";
 import {BookingSummary} from "../../../booking-management/models/booking-summary.model";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-tracker',
@@ -29,7 +30,7 @@ export class TrackerComponent implements OnInit {
   viewBooking() {
     if (this.refID && this.refID.length >= 30) {
       this.refIDWarning = false;
-      this.api.get('/api/bookings/view/' + this.refID).subscribe(
+      this.api.get(environment.booking_view_url + '/' + this.refID).subscribe(
         {
           next: ((data: BookingSummary) => {
             this.data = data;

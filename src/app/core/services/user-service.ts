@@ -1,11 +1,12 @@
 import {Injectable} from "@angular/core";
-import {UserLogin, UserSession} from "../../features/user-management/models/user.model";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
 import {jwtDecode} from "jwt-decode";
+import {UserLogin} from "../../features/user-management/models/user-login.model";
+import {UserSession} from "../../features/user-management/models/user-session.model";
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class UserService {
 
   private currentUserSubject: BehaviorSubject<UserSession | null>;

@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PagedResponse} from "../../../../core/models/paged.response.model";
 import {ApiService} from "../../../../core/services/api.service";
 import {Client} from "../../models/client.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AlertService} from "../../../../core/services/alert.service";
+import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
+import {Table} from "primeng/table";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-client-list',
@@ -12,6 +15,10 @@ import {AlertService} from "../../../../core/services/alert.service";
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
+
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+
+  protected readonly RepairStatus = RepairStatus;
 
   data: PagedResponse<Client> = {
     page: 0,
@@ -68,7 +75,7 @@ export class ClientListComponent implements OnInit {
     this.newClientForm.reset();
     this.newClient = {address: "", email: "", firstName: "", lastName: "", phoneNumber: ""};
 
-    this.api.get('/api/clients').subscribe(
+    this.api.get(environment.clients_url).subscribe(
       (data: PagedResponse<Client>) => {
         this.data = data;
       }
@@ -80,7 +87,7 @@ export class ClientListComponent implements OnInit {
   }
 
   paginate(event: any) {
-    this.api.get(`/api/bookings?page=${event.page}`).subscribe(
+    this.api.get(`${environment.clients_url}?page=${event.page}`).subscribe(
       (data: PagedResponse<Client>) => {
         this.data = data;
       }
@@ -100,7 +107,7 @@ export class ClientListComponent implements OnInit {
       email: this.newClientForm.value['email'],
       address: this.newClientForm.value['address']
     }
-    this.api.post('/api/clients', this.newClient).subscribe(
+    this.api.post(environment.clients_url, this.newClient).subscribe(
       {
         next: (() => {
           this.modalService.dismissAll();
@@ -114,6 +121,17 @@ export class ClientListComponent implements OnInit {
         })
       }
     );
+  }
 
+  filter(dataTable: Table, event: Event | null) {
+    if (event) {
+      const element: HTMLInputElement = event?.target as HTMLInputElement;
+      dataTable.filterGlobal(element.value, 'contains');
+    }
+  }
+
+  clear(table: Table) {
+    this.searchInput.nativeElement.value = '';
+    table.clear();
   }
 }

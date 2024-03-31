@@ -1,6 +1,3 @@
-import {Injectable} from "@angular/core";
-
-@Injectable({providedIn: 'root'})
 export class HelperService {
 
   getEnumKeyByEnumValue(myEnum: any, enumValue: any): string {

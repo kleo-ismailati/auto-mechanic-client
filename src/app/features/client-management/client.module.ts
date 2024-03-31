@@ -10,6 +10,10 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {ClientManagementComponent} from './pages/client-management/client-management.component';
 import {ClientDetailsComponent} from './pages/client-details/client-details.component';
 import {AutoDetailsComponent} from './pages/auto-details/auto-details.component';
+import {ButtonModule} from "primeng/button";
+import {InputTextModule} from "primeng/inputtext";
+import {TableModule} from "primeng/table";
+import {TagModule} from "primeng/tag";
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import {AutoDetailsComponent} from './pages/auto-details/auto-details.component'
     PaginatorModule,
     SharedModule,
     ReactiveFormsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    ButtonModule,
+    InputTextModule,
+    TableModule,
+    TagModule
   ]
 })
 export class ClientModule {

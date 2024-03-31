@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {User} from "../../models/user.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AlertService} from "../../../../core/services/alert.service";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-user',
@@ -37,7 +38,7 @@ export class UserComponent implements OnInit {
     this.newPassword = '';
     this.addNewPassword = false;
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.get('/users/' + id).subscribe(
+    this.api.get(environment.users_url + '/' + id).subscribe(
       (data: User) => {
         this.data = data;
       }
@@ -59,7 +60,7 @@ export class UserComponent implements OnInit {
       data.password = this.newPassword;
     }
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.put('/users/' + id, data).subscribe(
+    this.api.put(environment.users_url + '/' + id, data).subscribe(
       () => {
         this.isEdit = false;
         this.alertService.success('User was updated successfully', {autoClose: true})

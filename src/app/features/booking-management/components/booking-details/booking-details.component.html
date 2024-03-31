@@ -1,7 +1,7 @@
 <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
 </app-breadcrumb>
-<app-back-button [relativeUrl]="'../../'"/>
 <div class="container crumb-container-no-banner">
+  <app-back-button [relativeUrl]="'../../'"/>
   <div class="container card my-2 py-2" *ngIf="!this.data">
     <div class="row">
       <h1 class="lead text-center">Booking not found</h1>

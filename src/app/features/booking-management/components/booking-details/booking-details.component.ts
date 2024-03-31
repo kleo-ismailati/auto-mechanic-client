@@ -3,11 +3,12 @@ import {Booking} from "../../models/booking.model";
 import {ApiService} from "../../../../core/services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
-import {HelperService} from "../../../../core/services/helper.service";
+import {HelperService} from "../../../../core/utilities/helper.service";
 import {Repair} from "../../../../shared/models/repair.model";
 import {AlertService} from "../../../../core/services/alert.service";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-booking-details',
@@ -83,7 +84,7 @@ export class BookingDetailsComponent implements OnInit {
     }
 
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.get('/api/bookings/' + id).subscribe(
+    this.api.get(environment.bookings_url + '/' + id).subscribe(
       (data: Booking) => {
         this.data = data;
       }
@@ -103,7 +104,7 @@ export class BookingDetailsComponent implements OnInit {
       status: Number(this.data.status)
     };
     let id = this.route.snapshot.paramMap.get('id');
-    this.api.put('/api/bookings/' + id, data).subscribe(
+    this.api.put(environment.bookings_url + '/' + id, data).subscribe(
       () => {
         this.alertService.success("Booking was updated successfully!", {autoClose: true});
         this.ngOnInit();
@@ -125,7 +126,7 @@ export class BookingDetailsComponent implements OnInit {
       repairStatus: repair.repairStatus,
       repairType: repair.repairType
     }
-    this.api.put('/api/repairs/' + repair.id, repairPayload).subscribe(
+    this.api.put(environment.repairs_url + '/' + repair.id, repairPayload).subscribe(
       () => {
         this.alertService.success("Repair was updated successfully!", {autoClose: true});
         window.scroll({
@@ -144,7 +145,7 @@ export class BookingDetailsComponent implements OnInit {
       repairDetails: this.newRepairForm.value['repairDetails'],
       repairCost: this.newRepairForm.value['repairCost']
     }
-    this.api.post('/api/repairs/add/' + this.data.id, this.newRepair).subscribe(
+    this.api.post(environment.add_repair_url + '/' + this.data.id, this.newRepair).subscribe(
       () => {
         this.alertService.success("New repair was added successfully!", {autoClose: true});
         window.scroll({
@@ -176,7 +177,7 @@ export class BookingDetailsComponent implements OnInit {
 
   deleteRepair() {
     this.modalService.dismissAll();
-    this.api.delete('/api/repairs/' + this.repairDeleteId).subscribe(
+    this.api.delete(environment.repairs_url + '/' + this.repairDeleteId).subscribe(
       () => {
         this.alertService.warn("Repair with id " + this.repairDeleteId + " was deleted!", {autoClose: true});
         window.scroll({

@@ -1,43 +1,66 @@
 <app-breadcrumb [currentPage]="'Clients'">
 </app-breadcrumb>
 <div class="container crumb-container">
-  <div class="container-fluid p-4 card">
-    <div class="row my-2">
+  <div class="container-fluid card p-2">
+    <div class="m-2">
       <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-sm btn-success" (click)="modalService.open(content)">
           Add Client
         </button>
       </div>
     </div>
-    <div class="scrollable-container-medium">
-      <table class="table table-sm table-hover table-bordered">
-        <thead class="table-secondary">
-        <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let client of this.data?.result; let idx=index">
-          <td>{{ idx + 1 }}</td>
-          <td>{{ client?.firstName }} {{ client?.lastName }}</td>
-          <td style="width:30%">{{ client?.email }}</td>
-          <td style="width:30%">{{ client?.phoneNumber }}</td>
-          <td style="width:10%">
-            <a routerLink="./{{client.id}}">
-              <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
-            </a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="table-container-clients">
+      <p-table [value]="data.result" styleClass="p-datatable-gridlines" #dataTable
+               [globalFilterFields]="['firstName', 'lastName', 'email' ,'phoneNumber']"
+               [scrollable]="true" scrollHeight="44vh">
+        <ng-template pTemplate="caption">
+          <div class="d-flex justify-content-between">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                    (click)="clear(dataTable)"></button>
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input #searchInput pInputText type="text" (input)="filter(dataTable, $event)"
+                       placeholder="Search keyword"/>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width:10%">No.</th>
+            <th pSortableColumn="firstName" style="width:20%">Name
+              <p-sortIcon field="firstName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email" style="width:20%">Auto
+              <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th style="width:30%">Phone</th>
+            <th style="width:20%">Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-client let-index="rowIndex">
+          <tr>
+            <td>{{ index + 1 }}</td>
+            <td>
+              <span>
+                {{ client.firstName }} {{ client.lastName }}
+              </span>
+            </td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.phoneNumber }}</td>
+            <td style="width:20%" class="text-center">
+              <a routerLink="./{{client.id}}">
+                <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="paginator-container">
+      <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
+                   (onPageChange)="paginate($event)"></p-paginator>
     </div>
   </div>
-  <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
-               (onPageChange)="paginate($event)"></p-paginator>
 </div>
 <!-- Modal -->
 <ng-template #content>

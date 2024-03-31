@@ -12,8 +12,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-          <ul class="nav navbar-nav ms-auto me-2">
-            <li class="nav-item">
+          <ul class="navbar-nav ms-auto me-2">
+            <li *ngIf="!(loggedUser|async)?.token" class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
                  routerLink="/">
                 <i class="pi align-baseline small pi-home mx-1"></i>
@@ -48,33 +48,29 @@
                 Users
               </a>
             </li>
+            <li *ngIf="!(loggedUser|async)?.token" class="nav-item align-self-lg-center">
+              <a routerLink="/login" data-bs-toggle="collapse"
+                 data-bs-target="#navbarNavDropdown.show">
+                <button class="btn btn-sm btn-outline-success">Sign in</button>
+              </a>
+            </li>
+            <li class="nav-item dropdown" *ngIf="(loggedUser|async)?.token">
+              <button class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                {{ (loggedUser|async)?.username }}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item btn btn-outline-danger" data-bs-toggle="collapse"
+                     data-bs-target="#navbarNavDropdown.show" role="button" (click)="logout()">
+                    Sign out
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
-
-          <a *ngIf="!(loggedUser|async)?.token" routerLink="/login" data-bs-toggle="collapse"
-             data-bs-target="#navbarNavDropdown.show">
-            <button class="btn btn-sm btn-outline-success">Sign in</button>
-          </a>
-          <a *ngIf="(loggedUser|async)?.token"
-             data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show" (click)="logout()">
-            <button class="btn btn-sm btn-outline-danger">Sign out</button>
-          </a>
-
         </div>
       </div>
     </nav>
   </header>
-  <div *ngIf="(loggedUser|async)?.token"
-       class="my-0 bg-success bg-gradient text-dark fw-bold text-end border-2 border-top border-bottom border-black">
-  <span class="small align-top">
-    User :
-    <span class="text-white-50 fst-italic">
-      {{ (loggedUser|async)?.email }} - {{ (loggedUser|async)?.username }}
-      <i class="pi align-baseline small pi-user mx-1"></i>
-    </span>
-  </span>
-  </div>
-  <div *ngIf="!(loggedUser|async)?.token"
-       class="my-0 bg-dark bg-gradient text-dark fw-bold text-end border-2 border-top border-bottom border-black"
-       style="min-height: 24px">
-  </div>
 </div>
