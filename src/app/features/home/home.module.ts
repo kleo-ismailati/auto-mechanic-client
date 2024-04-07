@@ -4,18 +4,22 @@ import {HomeRoutingModule} from './home-routing.module';
 import {TrackerComponent} from './components/tracker/tracker.component';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from "../../shared/shared.module";
-import {BookingTrackerComponent} from './pages/booking-tracker/booking-tracker.component';
+import {BookingTrackerPageComponent} from './pages/booking-tracker-page/booking-tracker-page.component';
+import {HomeService} from "./home.service";
 
 
 @NgModule({
   declarations: [
     TrackerComponent,
-    BookingTrackerComponent
+    BookingTrackerPageComponent
   ],
   imports: [
     HomeRoutingModule,
     FormsModule,
     SharedModule,
+  ],
+  providers: [
+    HomeService
   ]
 })
 export class HomeModule {

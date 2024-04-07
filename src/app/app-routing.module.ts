@@ -15,25 +15,25 @@ const routes: Routes = [
     path: 'dashboard',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./features/admin-dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./features/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
   },
   {
     path: 'bookings',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./features/booking-management/booking.module').then(m => m.BookingModule)
+    loadChildren: () => import('./features/booking-management/booking-management.module').then(m => m.BookingManagementModule)
   },
   {
     path: 'users',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./features/user-management/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./features/user-management/user-management.module').then(m => m.UserManagementModule)
   },
   {
     path: 'clients',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: () => import('./features/client-management/client.module').then(m => m.ClientModule)
+    loadChildren: () => import('./features/client-management/client-management.module').then(m => m.ClientManagementModule)
   },
   {path: 'login', loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule)},
   {path: '**', redirectTo: ''}

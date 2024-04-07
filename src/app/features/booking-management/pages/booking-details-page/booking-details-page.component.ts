@@ -6,11 +6,11 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {environment} from "../../../../../environments/environment";
 
 @Component({
-  selector: 'app-booking-info',
-  templateUrl: './booking-info.component.html',
-  styleUrls: ['./booking-info.component.css']
+  selector: 'app-booking-details-page',
+  templateUrl: './booking-details-page.component.html',
+  styleUrls: ['./booking-details-page.component.css']
 })
-export class BookingInfoComponent implements OnInit {
+export class BookingDetailsPageComponent implements OnInit {
 
   @ViewChild('addRepairModal') addRepairModal!: TemplateRef<any>;
   @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;

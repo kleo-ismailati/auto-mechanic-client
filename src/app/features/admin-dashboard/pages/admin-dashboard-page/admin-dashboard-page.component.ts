@@ -4,11 +4,11 @@ import {ApiService} from "../../../../core/services/api.service";
 import {environment} from "../../../../../environments/environment";
 
 @Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  selector: 'app-admin-dashboard-page',
+  templateUrl: './admin-dashboard-page.component.html',
+  styleUrls: ['./admin-dashboard-page.component.css']
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardPageComponent implements OnInit {
 
   data: Stats = {
     totalAutos: 0,

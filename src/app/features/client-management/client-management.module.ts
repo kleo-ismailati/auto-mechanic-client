@@ -2,18 +2,19 @@ import {NgModule} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
 import {ClientComponent} from "./components/client/client.component";
 import {AutoComponent} from "./components/auto/auto.component";
-import {ClientRoutingModule} from "./client-routing.module";
+import {ClientManagementRoutingModule} from "./client-management-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {ClientListComponent} from './components/client-list/client-list.component';
 import {PaginatorModule} from "primeng/paginator";
 import {ReactiveFormsModule} from "@angular/forms";
-import {ClientManagementComponent} from './pages/client-management/client-management.component';
-import {ClientDetailsComponent} from './pages/client-details/client-details.component';
-import {AutoDetailsComponent} from './pages/auto-details/auto-details.component';
+import {ClientManagementPageComponent} from './pages/client-management-page/client-management-page.component';
+import {ClientDetailsPageComponent} from './pages/client-details-page/client-details-page.component';
+import {AutoDetailsPageComponent} from './pages/auto-details-page/auto-details-page.component';
 import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
 import {TableModule} from "primeng/table";
 import {TagModule} from "primeng/tag";
+import {ClientManagementService} from "./client-management.service";
 
 
 @NgModule({
@@ -21,12 +22,12 @@ import {TagModule} from "primeng/tag";
     ClientComponent,
     AutoComponent,
     ClientListComponent,
-    ClientManagementComponent,
-    ClientDetailsComponent,
-    AutoDetailsComponent
+    ClientManagementPageComponent,
+    ClientDetailsPageComponent,
+    AutoDetailsPageComponent
   ],
   imports: [
-    ClientRoutingModule,
+    ClientManagementRoutingModule,
     PaginatorModule,
     SharedModule,
     ReactiveFormsModule,
@@ -35,7 +36,10 @@ import {TagModule} from "primeng/tag";
     InputTextModule,
     TableModule,
     TagModule
+  ],
+  providers: [
+    ClientManagementService
   ]
 })
-export class ClientModule {
+export class ClientManagementModule {
 }
