@@ -3,6 +3,7 @@
 <div class="container crumb-container-no-banner">
   <app-back-button/>
   <div class="container card my-2 py-2" *ngIf="this.data">
+    <!--  Client section  -->
     <div class="row">
       <h1 class="lead fw-bold text-center">Client Details</h1>
     </div>
@@ -73,6 +74,7 @@
       </div>
     </div>
   </div>
+  <!--  Auto section  -->
   <div class="container-fluid card p-2">
     <div class="row">
       <div class="col-lg-4 offset-lg-4">
@@ -151,25 +153,6 @@
   <div class="modal-body modal-can-scroll">
     <form [formGroup]="newAutoForm">
       <div class="form-group mb-3">
-        <label class="form-label">Auto model</label>
-        <div class="input-group">
-          <input formControlName="autoModel" placeholder="Auto model" type="text" class="form-control"
-                 [ngClass]="{'is-invalid': f.autoModel.errors && f.autoModel.touched}" aria-label="Auto model">
-        </div>
-        <div *ngIf="f.autoModel.invalid && (f.autoModel.dirty || f.autoModel.touched)"
-             class="text-danger small">
-          <div *ngIf="f.autoModel.errors?.['required']">
-            Auto model is required.
-          </div>
-          <div *ngIf="f.autoModel.errors?.['minlength']">
-            Auto model must be at least 3 characters long.
-          </div>
-          <div *ngIf="f.autoModel.errors?.['maxlength']">
-            Auto model must be at most 15 characters long.
-          </div>
-        </div>
-      </div>
-      <div class="form-group mb-3">
         <label class="form-label">Auto type</label>
         <div class="input-group">
           <input formControlName="autoType" placeholder="Auto type" type="text" class="form-control"
@@ -185,6 +168,25 @@
           </div>
           <div *ngIf="f.autoType.errors?.['maxlength']">
             Auto type must be at most 15 characters long.
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label">Auto model</label>
+        <div class="input-group">
+          <input formControlName="autoModel" placeholder="Auto model" type="text" class="form-control"
+                 [ngClass]="{'is-invalid': f.autoModel.errors && f.autoModel.touched}" aria-label="Auto model">
+        </div>
+        <div *ngIf="f.autoModel.invalid && (f.autoModel.dirty || f.autoModel.touched)"
+             class="text-danger small">
+          <div *ngIf="f.autoModel.errors?.['required']">
+            Auto model is required.
+          </div>
+          <div *ngIf="f.autoModel.errors?.['minlength']">
+            Auto model must be at least 3 characters long.
+          </div>
+          <div *ngIf="f.autoModel.errors?.['maxlength']">
+            Auto model must be at most 15 characters long.
           </div>
         </div>
       </div>

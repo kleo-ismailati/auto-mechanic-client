@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add Repair</h5>
+  <button type="button" (click)="cancelNewRepair()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="newRepairForm">
+    <div class="row mx-auto">
+      <div class="card-title"><h1 class="lead fw-bold text-center">New Repair</h1></div>
+      <div class="form-group col">
+        <label for="repairType">Repair Type</label>
+        <input formControlName="repairType" [ngClass]="{ 'is-invalid': f.repairType.errors && f.repairType.touched}"
+               type="text" class="form-control" id="repairType" name="repairType">
+        <div *ngIf="f.repairType.invalid && (f.repairType.dirty || f.repairType.touched)"
+             class="text-danger small">
+          <div *ngIf="f.repairType.errors?.['required']">
+            Repair type is required.
+          </div>
+          <div *ngIf="f.repairType.errors?.['minlength']">
+            Repair type must be at least 3 characters long.
+          </div>
+          <div *ngIf="f.repairType.errors?.['maxlength']">
+            Repair type must be at most 30 characters long.
+          </div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>Repair Cost</label>
+        <input formControlName="repairCost" [ngClass]="{ 'is-invalid': f.repairCost.errors && f.repairCost.touched}"
+               type="number" class="form-control">
+        <div *ngIf="f.repairCost.invalid && (f.repairCost.dirty || f.repairCost.touched)"
+             class="text-danger small">
+          <div *ngIf="f.repairCost.errors?.['required']">
+            Repair cost is required.
+          </div>
+          <div *ngIf="f.repairCost.errors?.['min']">
+            Repair cost must be at least 0.
+          </div>
+          <div *ngIf="f.repairCost.errors?.['max']">
+            Repair type must be at most 99999.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Repair Details</label>
+        <textarea formControlName="repairDetails"
+                  [ngClass]="{ 'is-invalid': f.repairDetails.errors && f.repairDetails.touched}"
+                  type="text" rows="2" class="form-control"></textarea>
+        <div *ngIf="f.repairDetails.invalid && (f.repairDetails.dirty || f.repairDetails.touched)"
+             class="text-danger small">
+          <div *ngIf="f.repairDetails.errors?.['required']">
+            Repair details are required.
+          </div>
+          <div *ngIf="f.repairDetails.errors?.['minlength']">
+            Repair details are too short.
+          </div>
+          <div *ngIf="f.repairDetails.errors?.['maxlength']">
+            Repair details must be at most 200 characters long.
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button [disabled]="newRepairForm.invalid" type="submit" (click)="submitNewRepair()" class="btn btn-sm btn-success">
+    Add
+  </button>
+  <button type="button" (click)="cancelNewRepair()" class="btn btn-sm btn-secondary">Cancel</button>
+</div>

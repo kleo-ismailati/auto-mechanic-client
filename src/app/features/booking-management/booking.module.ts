@@ -12,13 +12,20 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {TagModule} from "primeng/tag";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
+import {AddRepairModalComponent} from './components/add-repair-modal/add-repair-modal.component';
+import {BookingManagementService} from "./booking-management.service";
+import {BookingRepairsComponent} from './components/booking-repairs/booking-repairs.component';
+import {DeleteRepairModalComponent} from './components/delete-repair-modal/delete-repair-modal.component';
 
 @NgModule({
   declarations: [
     BookingListComponent,
     BookingDetailsComponent,
     BookingInfoComponent,
-    BookingManagementComponent
+    BookingManagementComponent,
+    AddRepairModalComponent,
+    BookingRepairsComponent,
+    DeleteRepairModalComponent
   ],
   imports: [
     BookingRoutingModule,
@@ -30,6 +37,9 @@ import {ButtonModule} from "primeng/button";
     TagModule,
     InputTextModule,
     ButtonModule
+  ],
+  providers: [
+    BookingManagementService
   ]
 })
 export class BookingModule {

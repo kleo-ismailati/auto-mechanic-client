@@ -1,205 +1,49 @@
-<app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
-</app-breadcrumb>
-<div class="container crumb-container-no-banner">
-  <app-back-button [relativeUrl]="'../../'"/>
-  <div class="container card my-2 py-2" *ngIf="!this.data">
-    <div class="row">
-      <h1 class="lead text-center">Booking not found</h1>
-    </div>
+<div class="container card my-2 py-2">
+  <div class="row">
+    <h1 class="lead fw-bold text-center">Booking Details</h1>
   </div>
-  <div class="container card my-2 py-2" *ngIf="this.data">
-    <div class="row">
-      <h1 class="lead fw-bold text-center">Booking Details</h1>
-    </div>
-    <div class="row">
-      <table class="table table-bordered w-75 mx-auto">
-        <tbody>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Client</td>
-          <td>{{ this.data.firstName }} {{ this.data.lastName }}</td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Auto</td>
-          <td>{{ this.data.autoModel }} {{ this.data.autoType }}</td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Full repair cost</td>
-          <td>{{ this.data.totalPrice | currency:'USD' }}</td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Booking date</td>
-          <td>{{ this.data.date | date }}</td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Repair status</td>
-          <td *ngIf="!isEdit">{{ repairStatus[this.data.status] }}</td>
-          <select *ngIf="isEdit" [(ngModel)]="this.data.status" class="form-select bg-light" aria-label="Set status">
-            <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
-                    [selected]="this.data.status == symbol">
-              {{ repairStatus[symbol] }}
-            </option>
-          </select>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row mx-auto my-2 w-75">
-      <div class="d-flex justify-content-end">
-        <button *ngIf="(!isEdit&&!addingNewRepair)" class="btn btn-sm btn-primary me-2" (click)="addRepair()">Add
-          Repair
-        </button>
-        <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">Edit Booking</button>
-        <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="submit()">Save</button>
-        <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
-      </div>
-    </div>
+  <div class="row">
+    <table class="table table-bordered w-75 mx-auto">
+      <tbody>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Client</td>
+        <td>{{ bookingInfo.firstName }} {{ bookingInfo.lastName }}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Auto</td>
+        <td>{{ bookingInfo.autoModel }} {{ bookingInfo.autoType }}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Full repair cost</td>
+        <td>{{ bookingInfo.totalPrice | currency:'USD' }}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Booking date</td>
+        <td>{{ bookingInfo.date | date }}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-sm-2 text-end">Repair status</td>
+        <td *ngIf="!isEdit">{{ repairStatus[bookingInfo.status] }}</td>
+        <select *ngIf="isEdit" [(ngModel)]="updatedBookingInfo.status" class="form-select bg-light"
+                aria-label="Set status">
+          <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
+                  [selected]="bookingInfo.status == symbol">
+            {{ repairStatus[symbol] }}
+          </option>
+        </select>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <div *ngIf="addingNewRepair" class="container card my-2 py-2">
-    <form [formGroup]="newRepairForm">
-      <div class="row mx-auto">
-        <div class="card-title"><h1 class="lead fw-bold text-center">New Repair</h1></div>
-        <div class="form-group col">
-          <label for="repairType">Repair Type</label>
-          <input formControlName="repairType" [ngClass]="{ 'is-invalid': f.repairType.errors && f.repairType.touched}"
-                 type="text" class="form-control" id="repairType" name="repairType">
-          <div *ngIf="f.repairType.invalid && (f.repairType.dirty || f.repairType.touched)"
-               class="text-danger small">
-            <div *ngIf="f.repairType.errors?.['required']">
-              Repair type is required.
-            </div>
-            <div *ngIf="f.repairType.errors?.['minlength']">
-              Repair type must be at least 3 characters long.
-            </div>
-            <div *ngIf="f.repairType.errors?.['maxlength']">
-              Repair type must be at most 30 characters long.
-            </div>
-          </div>
-        </div>
-        <div class="form-group col">
-          <label>Repair Cost</label>
-          <input formControlName="repairCost" [ngClass]="{ 'is-invalid': f.repairCost.errors && f.repairCost.touched}"
-                 type="number" class="form-control">
-          <div *ngIf="f.repairCost.invalid && (f.repairCost.dirty || f.repairCost.touched)"
-               class="text-danger small">
-            <div *ngIf="f.repairCost.errors?.['required']">
-              Repair cost is required.
-            </div>
-            <div *ngIf="f.repairCost.errors?.['min']">
-              Repair cost must be at least 0.
-            </div>
-            <div *ngIf="f.repairCost.errors?.['max']">
-              Repair type must be at most 99999.
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Repair Details</label>
-          <textarea formControlName="repairDetails"
-                    [ngClass]="{ 'is-invalid': f.repairDetails.errors && f.repairDetails.touched}"
-                    type="text" rows="2" class="form-control"></textarea>
-          <div *ngIf="f.repairDetails.invalid && (f.repairDetails.dirty || f.repairDetails.touched)"
-               class="text-danger small">
-            <div *ngIf="f.repairDetails.errors?.['required']">
-              Repair details are required.
-            </div>
-            <div *ngIf="f.repairDetails.errors?.['minlength']">
-              Repair details are too short.
-            </div>
-            <div *ngIf="f.repairDetails.errors?.['maxlength']">
-              Repair details must be at most 200 characters long.
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-end mt-2">
-          <button [disabled]="newRepairForm.invalid" class="btn btn-sm btn-success me-2" (click)="submitNewRepair()">
-            Add
-          </button>
-          <button class="btn btn-sm btn-secondary me-2" (click)="cancelNewRepair()">Cancel</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <!--  Repairs list  -->
-  <div *ngIf="this.data?.repairs && this.data.repairs!.length" class="container card my-2 py-2">
-    <h1 class="lead fw-bold text-center py-2">List of repairs</h1>
-    <div class="row" *ngFor="let repair of this.data.repairs; let i = index">
-      <hr>
-      <table class="table table-bordered w-75 mx-auto">
-        <thead class="table-light">
-        <tr>
-          <th class="fw-bold col-sm-2 text-end">Repair #{{ i + 1 }}</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Repair type</td>
-          <td *ngIf="!isRepairEdit(repair.id)">{{ repair.repairType }}</td>
-          <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairType"
-                 [ngClass]="{ 'is-invalid': repair.repairType.length < 3 || repair.repairType.length > 30}"
-                 type="text" class="form-control bg-light" aria-label="Repair Type">
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Repair details</td>
-          <td *ngIf="!isRepairEdit(repair.id)">{{ repair.repairDetails }}</td>
-          <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairDetails"
-                 [ngClass]="{ 'is-invalid': repair.repairDetails.length < 3 || repair.repairDetails.length > 200}"
-                 type="text" class="form-control bg-light" aria-label="Repair Details">
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Repair cost</td>
-          <td *ngIf="!isRepairEdit(repair.id)">{{ repair.repairCost | currency:'USD' }}</td>
-          <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairCost"
-                 [ngClass]="{ 'is-invalid': repair.repairCost < 0 || repair.repairCost > 99999 || repair.repairCost == null}"
-                 type="number" class="form-control bg-light" aria-label="Repair Cost">
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Repair status</td>
-          <td *ngIf="!isRepairEdit(repair.id)">{{ repairStatus[repair.repairStatus] }}</td>
-          <select *ngIf="isRepairEdit(repair.id)" [(ngModel)]="repair.repairStatus" class="form-select bg-light"
-                  aria-label="Set status">
-            <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
-                    [selected]="repair.repairStatus == symbol">
-              {{ repairStatus[symbol] }}
-            </option>
-          </select>
-        </tr>
-        </tbody>
-      </table>
-
-      <div class="mx-auto my-2 w-75">
-        <div class="d-flex justify-content-end">
-          <button *ngIf="!isRepairEdit(repair.id) && this.repairEditId == -1" class="btn btn-sm btn-success me-2"
-                  (click)="enableRepairEdit(repair)">Edit Repair
-          </button>
-          <button *ngIf="!isRepairEdit(repair.id) && this.repairEditId == -1" class="btn btn-sm btn-danger me-2"
-                  (click)="confirmDeleteRepair(repair.id); modalService.open(confirmModal)">Delete Repair
-          </button>
-          <button [disabled]="(repair.repairType.length < 3) || (repair.repairType.length > 30) ||
-                                (repair.repairDetails.length < 3) || (repair.repairDetails.length > 200) ||
-                                (repair.repairCost < 0) || (repair.repairCost == null) || (repair.repairCost > 99999)"
-                  *ngIf="isRepairEdit(repair.id)" class="btn btn-sm btn-success me-2"
-                  (click)="submitRepair(repair)">Save
-          </button>
-          <button *ngIf="isRepairEdit(repair.id)" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel
-          </button>
-        </div>
-      </div>
+  <div class="row mx-auto my-2 w-75">
+    <div class="d-flex justify-content-end">
+      <button *ngIf="(!isEdit&&!addingNewRepair)" class="btn btn-sm btn-primary me-2" (click)="addRepair()">Add
+        Repair
+      </button>
+      <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">Edit Booking</button>
+      <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="submit()">Save</button>
+      <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
     </div>
   </div>
 </div>
-<ng-template #confirmModal>
-  <div class="modal-header">
-    <h5 class="modal-title">Confirm action</h5>
-    <button type="button" (click)="cancelDeleteRepair()" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure you want to delete this repair?</p>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" (click)="deleteRepair()" class="btn btn-sm btn-success">Yes</button>
-    <button type="button" (click)="cancelDeleteRepair()" class="btn btn-sm btn-secondary">No</button>
-  </div>
-</ng-template>
 
