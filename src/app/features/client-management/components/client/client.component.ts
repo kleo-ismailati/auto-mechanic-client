@@ -1,13 +1,14 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Client} from "../../models/client.model";
-import {ApiService} from "../../../../core/services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {AlertService} from "../../../../core/services/alert.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Table} from "primeng/table";
-import {environment} from "../../../../../environments/environment";
+import {AutoCreate} from "../../models/auto-create.model";
+import {ClientManagementService} from "../../client-management.service";
+import {Breadcrumb} from "../../../../shared/models/breadcrumb.model";
 
 @Component({
   selector: 'app-client',
@@ -18,7 +19,7 @@ export class ClientComponent implements OnInit {
 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-  breadcrumbParentsList = [
+  breadcrumbParentsList: Breadcrumb[] = [
     {
       link: "/clients",
       label: "Clients",
@@ -36,7 +37,7 @@ export class ClientComponent implements OnInit {
 
   isEdit: boolean = false;
 
-  newAuto = {
+  newAuto: AutoCreate = {
     autoType: "",
     autoDescription: "",
     autoModel: "",
@@ -47,7 +48,7 @@ export class ClientComponent implements OnInit {
   newAutoForm: FormGroup;
 
   constructor(
-    private api: ApiService,
+    private clientManagementService: ClientManagementService,
     private route: ActivatedRoute,
     private alertService: AlertService,
     public modalService: NgbModal,
@@ -81,8 +82,8 @@ export class ClientComponent implements OnInit {
   ngOnInit(): void {
     this.newAuto = {autoType: "", autoDescription: "", autoModel: "", color: "", year: ""}
     this.newAutoForm.reset();
-    let id = this.route.snapshot.paramMap.get('id');
-    this.api.get(environment.clients_url + '/' + id).subscribe(
+    let id: string = this.route.snapshot.paramMap.get('id')!;
+    this.clientManagementService.getClient(+id).subscribe(
       (data: Client) => {
         this.data = data;
         for (let auto of this.data.autos!) {
@@ -103,7 +104,7 @@ export class ClientComponent implements OnInit {
   }
 
   editClient() {
-    let data: Client = {
+    let updatedClient: Client = {
       id: this.data.id,
       address: this.data.address,
       email: this.data.email,
@@ -111,8 +112,8 @@ export class ClientComponent implements OnInit {
       lastName: this.data.lastName,
       phoneNumber: this.data.phoneNumber
     };
-    let id = this.route.snapshot.paramMap.get('id');
-    this.api.put(environment.clients_url + '/' + id, data).subscribe(
+    let id: string = this.route.snapshot.paramMap.get('id')!;
+    this.clientManagementService.editClient(+id, updatedClient).subscribe(
       () => {
         this.isEdit = false;
         this.alertService.success("Client was updated successfully!", {autoClose: true});
@@ -129,8 +130,8 @@ export class ClientComponent implements OnInit {
       autoDescription: this.newAutoForm.value['autoDescription'],
       year: this.newAutoForm.value['year']
     }
-    let id = this.route.snapshot.paramMap.get('id');
-    this.api.post(`${environment.clients_url}/${id}${environment.add_auto_url}`, this.newAuto).subscribe({
+    let id: string = this.route.snapshot.paramMap.get('id')!;
+    this.clientManagementService.addAuto(+id, this.newAuto).subscribe({
         next: (() => {
           this.modalService.dismissAll();
           this.alertService.success("New auto was added successfully!", {autoClose: true});
@@ -155,14 +156,6 @@ export class ClientComponent implements OnInit {
       year: ""
     }
     this.newAutoForm.reset();
-  }
-
-  deleteAuto(id: number) {
-    this.api.delete(environment.autos_url + '/' + id).subscribe(
-      () => {
-        this.ngOnInit();
-      }
-    )
   }
 
   cancel() {

@@ -1,9 +1,9 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Booking} from "../../models/booking.model";
-import {ApiService} from "../../../../core/services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {environment} from "../../../../../environments/environment";
+import {BookingManagementService} from "../../booking-management.service";
+import {Breadcrumb} from "../../../../shared/models/breadcrumb.model";
 
 @Component({
   selector: 'app-booking-details-page',
@@ -15,7 +15,7 @@ export class BookingDetailsPageComponent implements OnInit {
   @ViewChild('addRepairModal') addRepairModal!: TemplateRef<any>;
   @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;
 
-  breadcrumbParentsList = [
+  breadcrumbParentsList: Breadcrumb[] = [
     {
       link: "/bookings",
       label: "Bookings",
@@ -25,11 +25,11 @@ export class BookingDetailsPageComponent implements OnInit {
   data!: Booking;
 
   isAddingNewRepair: boolean = false;
-  idOfRepairToDelete = -1;
+  idOfRepairToDelete: number = -1;
 
   constructor(
-    private api: ApiService,
     private route: ActivatedRoute,
+    private bookingManagementService: BookingManagementService,
     public modalService: NgbModal
   ) {
   }
@@ -38,9 +38,9 @@ export class BookingDetailsPageComponent implements OnInit {
     this.isAddingNewRepair = false;
     this.idOfRepairToDelete = -1;
 
-    let id = this.route.snapshot.paramMap.get('id');
+    let id: string = this.route.snapshot.paramMap.get('id')!;
 
-    this.api.get(environment.bookings_url + '/' + id).subscribe(
+    this.bookingManagementService.getBooking(+id).subscribe(
       (data: Booking) => {
         this.data = data;
       }

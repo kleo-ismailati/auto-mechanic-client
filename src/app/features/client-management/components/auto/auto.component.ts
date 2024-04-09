@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from "../../../../core/services/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Auto} from "../../models/auto.model";
 import {BookingCreate} from "../../../booking-management/models/booking-create.model";
 import {AlertService} from "../../../../core/services/alert.service";
 import {HttpHeaders} from "@angular/common/http";
-import {environment} from "../../../../../environments/environment";
+import {ClientManagementService} from "../../client-management.service";
+import {Breadcrumb} from "../../../../shared/models/breadcrumb.model";
 
 @Component({
   selector: 'app-auto',
@@ -14,7 +14,7 @@ import {environment} from "../../../../../environments/environment";
 })
 export class AutoComponent implements OnInit {
 
-  breadcrumbParentsList = [
+  breadcrumbParentsList: Breadcrumb[] = [
     {
       link: "/clients",
       label: "Clients",
@@ -39,7 +39,7 @@ export class AutoComponent implements OnInit {
   selectedFile: File | null = null;
 
   isEdit: boolean = false;
-  isAddBooking = false;
+  isAddBooking: boolean = false;
   newBooking: BookingCreate = {
     autoId: 0,
     clientId: 0,
@@ -53,7 +53,7 @@ export class AutoComponent implements OnInit {
   };
 
   constructor(
-    private api: ApiService,
+    private clientManagementService: ClientManagementService,
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService
@@ -61,13 +61,13 @@ export class AutoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id');
-    let autoId = this.route.snapshot.paramMap.get('autoId');
-    this.api.get(environment.autos_url + '/' + autoId).subscribe(
+    let id: string = this.route.snapshot.paramMap.get('id')!;
+    let autoId: string = this.route.snapshot.paramMap.get('autoId')!;
+    this.clientManagementService.getAuto(+autoId).subscribe(
       (data: Auto) => {
         this.data = data;
         if (this.data.imageId != null) {
-          this.api.getBlob(environment.images_url + '/' + this.data.imageId, undefined, this.headers).subscribe(
+          this.clientManagementService.getImage(+this.data.imageId, this.headers).subscribe(
             (image) => {
               this.createImageFromBlob(image);
             }
@@ -92,8 +92,8 @@ export class AutoComponent implements OnInit {
       year: this.data.year,
       color: this.data.color
     };
-    let autoId = this.route.snapshot.paramMap.get('autoId');
-    this.api.put(environment.autos_url + '/' + autoId, data).subscribe(
+    let autoId: string = this.route.snapshot.paramMap.get('autoId')!;
+    this.clientManagementService.updateAuto(+autoId, data).subscribe(
       () => {
         this.isEdit = false;
         this.alertService.success("Auto was updated successfully!", {autoClose: true});
@@ -149,12 +149,12 @@ export class AutoComponent implements OnInit {
   }
 
   submitNewBooking() {
-    let id = this.route.snapshot.paramMap.get('id');
-    let autoId = this.route.snapshot.paramMap.get('autoId');
+    let id: string = this.route.snapshot.paramMap.get('id')!;
+    let autoId: string = this.route.snapshot.paramMap.get('autoId')!;
     if (id != null && autoId != null) {
       this.newBooking.clientId = Number(id);
       this.newBooking.autoId = Number(autoId);
-      this.api.post(environment.bookings_url, this.newBooking).subscribe(
+      this.clientManagementService.createBooking(this.newBooking).subscribe(
         () => {
           this.isAddBooking = false;
           this.alertService.success("Booking was added successfully! Redirecting to Bookings...",
@@ -193,8 +193,8 @@ export class AutoComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('image', this.selectedFile);
-      let autoId = this.route.snapshot.paramMap.get('autoId');
-      this.api.post(environment.auto_images_url + '/' + autoId, formData).subscribe(
+      let autoId: string = this.route.snapshot.paramMap.get('autoId')!;
+      this.clientManagementService.setImageForAuto(+autoId, formData).subscribe(
         {
           next: () => {
             this.isEdit = false;
@@ -202,11 +202,10 @@ export class AutoComponent implements OnInit {
               {autoClose: true, keepAfterRouteChange: false});
             this.ngOnInit();
           },
-          error: err => {
+          error: () => {
             this.isEdit = false;
             this.alertService.error("Image could not be changed!",
               {autoClose: true, keepAfterRouteChange: false});
-            console.log(err);
             this.ngOnInit();
           }
         }

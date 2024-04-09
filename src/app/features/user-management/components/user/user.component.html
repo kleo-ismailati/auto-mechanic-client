@@ -2,30 +2,30 @@
 </app-breadcrumb>
 <div class="container crumb-container-no-banner">
   <app-back-button/>
-  <div class="container card my-2 py-2" *ngIf="this.data">
+  <div class="container card my-2 py-2" *ngIf="this.user">
     <div class="row">
       <h1 class="lead fw-bold text-center">User Details</h1>
     </div>
     <div class="row">
-      <form #newUserForm=ngForm>
+      <form #editUserForm=ngForm>
         <table class="table table-bordered w-75 mx-auto">
           <tbody>
           <tr>
             <td class="fw-bold col-sm-2 text-end w-25">Username</td>
-            <td *ngIf="!isEdit">{{ this.data.username }}</td>
+            <td *ngIf="!isEdit">{{ this.user.username }}</td>
             <td *ngIf="isEdit">
-              <input [(ngModel)]="this.data.username" name="username" #username=ngModel required minlength="3"
+              <input [(ngModel)]="this.user.username" name="username" #username=ngModel required minlength="3"
                      maxlength="15"
                      [ngClass]="{ 'is-invalid': username.invalid}"
-                     (change)="this.data.username = this.data.username.trim()"
+                     (change)="this.user.username = this.user.username.trim()"
                      type="text" class="form-control form-control-sm bg-light">
             </td>
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Email</td>
-            <td *ngIf="!isEdit">{{ this.data.email }}</td>
+            <td *ngIf="!isEdit">{{ this.user.email }}</td>
             <td *ngIf="isEdit">
-              <input [(ngModel)]="this.data.email" name="email" required email #email=ngModel
+              <input [(ngModel)]="this.user.email" name="email" required email #email=ngModel
                      [ngClass]="{ 'is-invalid': email.invalid}"
                      type="email" class="form-control form-control-sm bg-light">
             </td>
@@ -53,7 +53,7 @@
         <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">
           Edit User
         </button>
-        <button *ngIf="isEdit" [disabled]="newUserForm.invalid"
+        <button *ngIf="isEdit" [disabled]="editUserForm.invalid"
                 class="btn btn-sm btn-success me-2" (click)="modalService.open(confirmModal)">Save
         </button>
         <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>

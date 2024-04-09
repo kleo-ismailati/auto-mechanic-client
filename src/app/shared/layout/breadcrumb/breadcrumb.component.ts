@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {Breadcrumb} from "../../models/breadcrumb.model";
 
 @Component({
   selector: 'app-breadcrumb',
@@ -12,7 +13,7 @@ export class BreadcrumbComponent implements OnInit {
     this.firstLink = router.url;
   }
 
-  @Input() parentsList!: Array<{ link: string, label: string }>;
+  @Input() parentsList!: Breadcrumb[];
   @Input() currentPage!: string;
   firstLink: string = '';
 

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Stats} from "../../models/stats.model";
-import {ApiService} from "../../../../core/services/api.service";
-import {environment} from "../../../../../environments/environment";
+import {AdminDashboardService} from "../../admin-dashboard.service";
 
 @Component({
   selector: 'app-admin-dashboard-page',
@@ -17,14 +16,13 @@ export class AdminDashboardPageComponent implements OnInit {
     totalBookingsActive: 0,
   };
 
-  constructor(private api: ApiService) {
+  constructor(private adminDashboardService: AdminDashboardService) {
   }
 
   ngOnInit(): void {
-
-    this.api.get(environment.stats_url).subscribe(
-      (data: Stats) => {
-        this.data = data;
+    this.adminDashboardService.getStats().subscribe(
+      (stats: Stats) => {
+        this.data = stats;
       }
     );
   }

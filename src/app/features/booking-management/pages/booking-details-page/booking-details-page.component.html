@@ -19,7 +19,8 @@
   </div>
   <!--  Delete repair confirmation modal  -->
   <ng-template #confirmModal>
-    <app-delete-repair-modal [repairId]="this.idOfRepairToDelete" (isRepairDeletedEvent)="checkIfRepairWasDeleted($event)"/>
+    <app-delete-repair-modal [repairId]="this.idOfRepairToDelete"
+                             (isRepairDeletedEvent)="checkIfRepairWasDeleted($event)"/>
   </ng-template>
   <!--  Add repair to booking modal  -->
   <ng-template #addRepairModal>

@@ -2,10 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {Booking} from "../../models/booking.model";
 import {HelperService} from "../../../../core/utilities/helper.service";
-import {environment} from "../../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
-import {ApiService} from "../../../../core/services/api.service";
 import {AlertService} from "../../../../core/services/alert.service";
+import {BookingManagementService} from "../../booking-management.service";
 
 @Component({
   selector: 'app-booking-details',
@@ -27,7 +26,7 @@ export class BookingDetailsComponent implements OnInit {
   updatedBookingInfo: Booking;
 
   constructor(
-    private api: ApiService,
+    private bookingManagementService: BookingManagementService,
     private helperService: HelperService,
     private route: ActivatedRoute,
     private alertService: AlertService
@@ -46,8 +45,8 @@ export class BookingDetailsComponent implements OnInit {
   }
 
   submit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.api.put(environment.bookings_url + '/' + id, this.updatedBookingInfo).subscribe(
+    let id: string = this.route.snapshot.paramMap.get('id')!;
+    this.bookingManagementService.postUpdatedBooking(+id, this.updatedBookingInfo).subscribe(
       () => {
         this.alertService.success("Booking was updated successfully!", {autoClose: true});
         this.isEdit = false;

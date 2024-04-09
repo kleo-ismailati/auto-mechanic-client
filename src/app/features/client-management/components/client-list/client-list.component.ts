@@ -1,13 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PagedResponse} from "../../../../core/models/paged.response.model";
-import {ApiService} from "../../../../core/services/api.service";
 import {Client} from "../../models/client.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AlertService} from "../../../../core/services/alert.service";
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {Table} from "primeng/table";
-import {environment} from "../../../../../environments/environment";
+import {ClientManagementService} from "../../client-management.service";
+import {ClientCreate} from "../../models/client-create.model";
 
 @Component({
   selector: 'app-client-list',
@@ -27,7 +27,7 @@ export class ClientListComponent implements OnInit {
     result: []
   };
 
-  newClient = {
+  newClient: ClientCreate = {
     address: "",
     email: "",
     firstName: "",
@@ -38,7 +38,7 @@ export class ClientListComponent implements OnInit {
   newClientForm: FormGroup;
 
   constructor(
-    private api: ApiService,
+    private clientManagementService: ClientManagementService,
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private alertService: AlertService
@@ -75,7 +75,7 @@ export class ClientListComponent implements OnInit {
     this.newClientForm.reset();
     this.newClient = {address: "", email: "", firstName: "", lastName: "", phoneNumber: ""};
 
-    this.api.get(environment.clients_url).subscribe(
+    this.clientManagementService.getClientList().subscribe(
       (data: PagedResponse<Client>) => {
         this.data = data;
       }
@@ -87,7 +87,7 @@ export class ClientListComponent implements OnInit {
   }
 
   paginate(event: any) {
-    this.api.get(`${environment.clients_url}?page=${event.page}`).subscribe(
+    this.clientManagementService.getClientPage(+event.page).subscribe(
       (data: PagedResponse<Client>) => {
         this.data = data;
       }
@@ -107,7 +107,7 @@ export class ClientListComponent implements OnInit {
       email: this.newClientForm.value['email'],
       address: this.newClientForm.value['address']
     }
-    this.api.post(environment.clients_url, this.newClient).subscribe(
+    this.clientManagementService.addClient(this.newClient).subscribe(
       {
         next: (() => {
           this.modalService.dismissAll();

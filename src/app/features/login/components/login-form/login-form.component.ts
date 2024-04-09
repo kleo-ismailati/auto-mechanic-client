@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from "../../../../core/services/api.service";
 import {UserService} from "../../../../core/services/user-service";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AlertService} from "../../../../core/services/alert.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {UserLogin} from "../../../user-management/models/user-login.model";
 import {UserSession} from "../../../user-management/models/user-session.model";
-import {environment} from "../../../../../environments/environment";
+import {LoginService} from "../../login.service";
 
 @Component({
   selector: 'app-login-form',
@@ -20,7 +19,7 @@ export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
-    private api: ApiService,
+    private loginService: LoginService,
     private userService: UserService,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
@@ -58,7 +57,7 @@ export class LoginFormComponent implements OnInit {
     setTimeout(
       () => {
         this.spinner.hide().then(r => r);
-        this.api.post(environment.auth_url, this.user).subscribe(
+        this.loginService.login(this.user).subscribe(
           {
             next: (response: UserSession) => {
               if (this.rememberMe) {

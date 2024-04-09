@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from "../../../../core/services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../../models/user.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AlertService} from "../../../../core/services/alert.service";
-import {environment} from "../../../../../environments/environment";
+import {UserManagementService} from "../../user-management.service";
+import {UserUpdate} from "../../models/user-update.model";
+import {Breadcrumb} from "../../../../shared/models/breadcrumb.model";
 
 @Component({
   selector: 'app-user',
@@ -13,20 +14,20 @@ import {environment} from "../../../../../environments/environment";
 })
 export class UserComponent implements OnInit {
 
-  breadcrumbParentsList = [
+  breadcrumbParentsList: Breadcrumb[] = [
     {
       link: "/users",
       label: "Users",
     }
   ];
 
-  data!: User;
+  user!: User;
   isEdit: boolean = false;
   newPassword: string = '';
   addNewPassword: boolean = false;
 
   constructor(
-    private api: ApiService,
+    private userManagementService: UserManagementService,
     private route: ActivatedRoute,
     private alertService: AlertService,
     public modalService: NgbModal
@@ -37,10 +38,10 @@ export class UserComponent implements OnInit {
     this.isEdit = false;
     this.newPassword = '';
     this.addNewPassword = false;
-    let id = this.route.snapshot.paramMap.get('id');
-    this.api.get(environment.users_url + '/' + id).subscribe(
-      (data: User) => {
-        this.data = data;
+    let id: string = this.route.snapshot.paramMap.get('id')!;
+    this.userManagementService.getCurrentUser(+id).subscribe(
+      (user: User) => {
+        this.user = user;
       }
     );
   }
@@ -51,16 +52,15 @@ export class UserComponent implements OnInit {
 
   submit() {
     this.modalService.dismissAll();
-    let data: User = {
-      email: this.data.email,
-      id: 0,
-      username: this.data.username
+    let updatedUser: UserUpdate = {
+      email: this.user.email,
+      username: this.user.username
     }
     if (this.newPassword != '') {
-      data.password = this.newPassword;
+      updatedUser.password = this.newPassword;
     }
-    let id = this.route.snapshot.paramMap.get('id');
-    this.api.put(environment.users_url + '/' + id, data).subscribe(
+    let id: string = this.route.snapshot.paramMap.get('id')!;
+    this.userManagementService.updateUser(+id, updatedUser).subscribe(
       () => {
         this.isEdit = false;
         this.alertService.success('User was updated successfully', {autoClose: true})

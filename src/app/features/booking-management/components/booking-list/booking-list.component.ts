@@ -1,12 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PagedResponse} from "../../../../core/models/paged.response.model";
-import {ApiService} from "../../../../core/services/api.service";
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {AlertService} from "../../../../core/services/alert.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BookingItem} from "../../models/booking-item.model";
 import {Table} from "primeng/table";
-import {environment} from "../../../../../environments/environment";
+import {BookingManagementService} from "../../booking-management.service";
 
 @Component({
   selector: 'app-booking-list',
@@ -26,10 +25,10 @@ export class BookingListComponent implements OnInit {
     result: []
   };
 
-  deleteId = -1;
+  deleteId: number = -1;
 
   constructor(
-    private api: ApiService,
+    private bookingManagementService: BookingManagementService,
     private alertService: AlertService,
     public modalService: NgbModal
   ) {
@@ -38,7 +37,7 @@ export class BookingListComponent implements OnInit {
   ngOnInit(): void {
     this.deleteId = -1;
 
-    this.api.get(environment.bookings_url).subscribe(
+    this.bookingManagementService.getBookingList().subscribe(
       (data: PagedResponse<BookingItem>) => {
         this.data = data;
       }
@@ -47,7 +46,7 @@ export class BookingListComponent implements OnInit {
 
   delete(): void {
     this.modalService.dismissAll();
-    this.api.delete(`${environment.bookings_url}/${this.deleteId}`).subscribe(
+    this.bookingManagementService.deleteBooking(this.deleteId).subscribe(
       () => {
         this.alertService.warn("Booking with id " + this.deleteId + " deleted!", {autoClose: true})
         this.ngOnInit();
@@ -56,7 +55,7 @@ export class BookingListComponent implements OnInit {
   }
 
   paginate(event: any) {
-    this.api.get(`${environment.bookings_url}?page=${event.page}`).subscribe(
+    this.bookingManagementService.getBookingPage(+event.page).subscribe(
       (data: PagedResponse<BookingItem>) => {
         this.data = data;
       }

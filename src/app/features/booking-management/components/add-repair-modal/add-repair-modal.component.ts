@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {environment} from "../../../../../environments/environment";
-import {ApiService} from "../../../../core/services/api.service";
 import {AlertService} from "../../../../core/services/alert.service";
+import {BookingManagementService} from "../../booking-management.service";
+import {RepairCreate} from "../../../../shared/models/repair.model";
 
 @Component({
   selector: 'app-add-repair-modal',
@@ -17,12 +17,12 @@ export class AddRepairModalComponent {
   @Output() isRepairAddedEvent = new EventEmitter<boolean>();
 
   newRepairForm: FormGroup;
-  newRepair = {
+  newRepair: RepairCreate = {
     repairCost: 0, repairDetails: "", repairType: ""
   }
 
   constructor(
-    private api: ApiService,
+    private bookingManagementService: BookingManagementService,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     public modalService: NgbModal
@@ -56,7 +56,7 @@ export class AddRepairModalComponent {
       repairDetails: this.newRepairForm.value['repairDetails'],
       repairCost: this.newRepairForm.value['repairCost']
     }
-    this.api.post(environment.add_repair_url + '/' + this.bookingId, this.newRepair).subscribe(
+    this.bookingManagementService.postNewRepair(this.bookingId, this.newRepair).subscribe(
       () => {
         this.alertService.success("New repair was added successfully!", {autoClose: true});
 

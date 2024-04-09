@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {Repair} from "../../../../shared/models/repair.model";
-import {environment} from "../../../../../environments/environment";
-import {ApiService} from "../../../../core/services/api.service";
 import {HelperService} from "../../../../core/utilities/helper.service";
 import {AlertService} from "../../../../core/services/alert.service";
+import {BookingManagementService} from "../../booking-management.service";
 
 @Component({
   selector: 'app-booking-repairs',
@@ -20,13 +19,13 @@ export class BookingRepairsComponent implements OnInit {
   protected readonly repairStatus = RepairStatus;
   repairStatusKeys: number[] = [];
 
-  repairEditId = -1;
-  repairDeleteId = -1;
+  repairEditId: number = -1;
+  repairDeleteId: number = -1;
 
   updatedRepair!: Repair;
 
   constructor(
-    private api: ApiService,
+    private bookingManagementService: BookingManagementService,
     private helperService: HelperService,
     private alertService: AlertService
   ) {
@@ -58,7 +57,7 @@ export class BookingRepairsComponent implements OnInit {
   }
 
   submitRepair(updatedRepair: Repair) {
-    this.api.put(environment.repairs_url + '/' + updatedRepair.id, updatedRepair).subscribe(
+    this.bookingManagementService.postUpdatedRepair(updatedRepair.id, updatedRepair).subscribe(
       () => {
         this.alertService.success("Repair was updated successfully!", {autoClose: true});
         window.scroll({
@@ -71,6 +70,5 @@ export class BookingRepairsComponent implements OnInit {
       }
     )
   }
-
 
 }

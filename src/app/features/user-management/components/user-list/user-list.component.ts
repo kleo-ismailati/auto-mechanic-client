@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ApiService} from "../../../../core/services/api.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {User} from "../../models/user.model";
 import {UserService} from "../../../../core/services/user-service";
@@ -7,7 +6,8 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import {AlertService} from "../../../../core/services/alert.service";
 import {UserSession} from "../../models/user-session.model";
 import {Table} from "primeng/table";
-import {environment} from "../../../../../environments/environment";
+import {UserManagementService} from "../../user-management.service";
+import {UserCreate} from "../../models/user-create.model";
 
 @Component({
   selector: 'app-user-list',
@@ -18,16 +18,16 @@ export class UserListComponent implements OnInit {
 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-  data!: User[];
+  users!: User[];
 
-  newUser = {email: '', username: '', password: ''};
+  newUser: UserCreate = {email: '', username: '', password: ''};
 
   loggedUser!: UserSession;
 
   newUserForm: FormGroup;
 
   constructor(
-    private api: ApiService,
+    private userManagementService: UserManagementService,
     private userService: UserService,
     public modalService: NgbModal,
     private alertService: AlertService,
@@ -60,9 +60,9 @@ export class UserListComponent implements OnInit {
       }
     )
 
-    this.api.get(environment.users_url).subscribe(
+    this.userManagementService.getUserList().subscribe(
       (data: User[]) => {
-        this.data = data;
+        this.users = data;
       }
     );
   }
@@ -82,7 +82,7 @@ export class UserListComponent implements OnInit {
       email: this.newUserForm.value['email'],
       password: this.newUserForm.value['password'],
     }
-    this.api.post(environment.users_url, this.newUser).subscribe(
+    this.userManagementService.addUser(this.newUser).subscribe(
       () => {
         this.modalService.dismissAll();
         this.alertService.success("User was added successfully", {autoClose: true})

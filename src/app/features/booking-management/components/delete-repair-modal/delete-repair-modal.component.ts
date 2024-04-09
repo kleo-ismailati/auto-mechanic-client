@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {environment} from "../../../../../environments/environment";
 import {AlertService} from "../../../../core/services/alert.service";
-import {ApiService} from "../../../../core/services/api.service";
+import {BookingManagementService} from "../../booking-management.service";
 
 @Component({
   selector: 'app-delete-repair-modal',
@@ -14,13 +13,13 @@ export class DeleteRepairModalComponent {
   @Output() isRepairDeletedEvent = new EventEmitter<boolean>();
 
   constructor(
-    private api: ApiService,
+    private bookingManagementService: BookingManagementService,
     private alertService: AlertService,
   ) {
   }
 
   deleteRepair() {
-    this.api.delete(environment.repairs_url + '/' + this.repairId).subscribe(
+    this.bookingManagementService.deleteRepair(this.repairId).subscribe(
       () => {
         this.alertService.warn("Repair with id " + this.repairId + " was deleted!", {autoClose: true});
         window.scroll({
