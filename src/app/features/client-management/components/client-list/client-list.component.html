@@ -58,7 +58,7 @@
     </div>
     <div class="paginator-container">
       <p-paginator [rows]="data.size" [totalRecords]="(data.size * data.total)"
-                   (onPageChange)="paginate($event)"></p-paginator>
+                   (onPageChange)="changePage($event)"></p-paginator>
     </div>
   </div>
 </div>

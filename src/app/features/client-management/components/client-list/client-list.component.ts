@@ -21,7 +21,7 @@ export class ClientListComponent implements OnInit {
   protected readonly RepairStatus = RepairStatus;
 
   data: PagedResponse<Client> = {
-    page: 0,
+    pageNo: 0,
     size: 0,
     total: 0,
     result: []
@@ -86,7 +86,7 @@ export class ClientListComponent implements OnInit {
     return this.newClientForm.controls;
   }
 
-  paginate(event: any) {
+  changePage(event: any) {
     this.clientManagementService.getClientPage(+event.page).subscribe(
       (data: PagedResponse<Client>) => {
         this.data = data;

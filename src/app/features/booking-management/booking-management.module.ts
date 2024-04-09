@@ -16,6 +16,7 @@ import {AddRepairModalComponent} from './components/add-repair-modal/add-repair-
 import {BookingManagementService} from "./booking-management.service";
 import {BookingRepairsComponent} from './components/booking-repairs/booking-repairs.component';
 import {DeleteRepairModalComponent} from './components/delete-repair-modal/delete-repair-modal.component';
+import {DeleteBookingModalComponent} from './components/delete-booking-modal/delete-booking-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {DeleteRepairModalComponent} from './components/delete-repair-modal/delet
     BookingManagementPageComponent,
     AddRepairModalComponent,
     BookingRepairsComponent,
-    DeleteRepairModalComponent
+    DeleteRepairModalComponent,
+    DeleteBookingModalComponent
   ],
   imports: [
     BookingManagementRoutingModule,

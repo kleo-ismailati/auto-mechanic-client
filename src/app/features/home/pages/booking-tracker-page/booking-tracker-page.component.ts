@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {BookingSummary} from "../../../booking-management/models/booking-summary.model";
 
 @Component({
   selector: 'app-booking-tracker-page',
@@ -7,4 +8,9 @@ import {Component} from '@angular/core';
 })
 export class BookingTrackerPageComponent {
 
+  bookingSummary: BookingSummary | undefined;
+
+  setBooking(summary: BookingSummary) {
+    this.bookingSummary = summary;
+  }
 }

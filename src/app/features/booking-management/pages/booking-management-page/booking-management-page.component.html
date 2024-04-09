@@ -1,5 +1,20 @@
 <app-banner [title]="'Our Repair Bookings'" [subTitle]="'Auto Mechanic Repair Booking Listed'"></app-banner>
 <app-background [hasBanner]="true">
-  <app-booking-list></app-booking-list>
+  <app-breadcrumb [currentPage]="'Bookings'">
+  </app-breadcrumb>
+  <div class="container crumb-container">
+    <div class="container card my-2 py-2" *ngIf="!this.bookings">
+      <div class="row">
+        <h1 class="lead text-center">Bookings not found</h1>
+      </div>
+    </div>
+    <!--  Booking list  -->
+    <app-booking-list *ngIf="this.bookings" (deleteBookingConfirmationEvent)="deleteBooking($event)"
+                      [bookings]="this.bookings"/>
+  </div>
+  <ng-template #confirmModal>
+    <!--  Delete booking confirmation modal -->
+    <app-delete-booking-modal (isBookingDeletedEvent)="checkIfBookingDeleted($event)" [deleteId]="this.deleteId"/>
+  </ng-template>
 </app-background>
 <alert></alert>

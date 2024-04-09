@@ -6,6 +6,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {UserLogin} from "../../../user-management/models/user-login.model";
 import {UserSession} from "../../../user-management/models/user-session.model";
 import {LoginService} from "../../login.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login-form',
@@ -65,8 +66,8 @@ export class LoginFormComponent implements OnInit {
               }
               this.userService.loginUser(response);
             },
-            error: error => {
-              if (error.status == "INTERNAL_SERVER_ERROR") {
+            error: (error: HttpErrorResponse) => {
+              if (error.status == 500) {
                 this.alertService.error("Bad credentials - could not login!", {autoClose: true})
               }
             }

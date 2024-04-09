@@ -1,5 +1,8 @@
 <app-banner [title]="'Your Auto Mechanic'" [subTitle]="'Repair status tracking for your auto'"></app-banner>
 <app-background [hasBanner]="true">
-  <app-tracker></app-tracker>
+  <div class="container default-container">
+    <app-search-reference (getBookingSummaryEvent)="setBooking($event)"/>
+    <app-booking-summary *ngIf="this.bookingSummary" [bookingSummary]="bookingSummary!"/>
+  </div>
 </app-background>
 <alert></alert>
