@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
-import {AutoComponent} from "./components/auto/auto.component";
 import {ClientManagementRoutingModule} from "./client-management-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {ClientListComponent} from './components/client-list/client-list.component';
@@ -18,11 +17,12 @@ import {AddClientModalComponent} from './components/add-client-modal/add-client-
 import {ClientDetailsComponent} from './components/client-details/client-details.component';
 import {AutoListComponent} from './components/auto-list/auto-list.component';
 import {AddAutoModalComponent} from './components/add-auto-modal/add-auto-modal.component';
+import {AutoDetailsComponent} from './components/auto-details/auto-details.component';
+import {AddBookingModalComponent} from './components/add-booking-modal/add-booking-modal.component';
 
 
 @NgModule({
   declarations: [
-    AutoComponent,
     ClientListComponent,
     ClientManagementPageComponent,
     ClientDetailsPageComponent,
@@ -30,7 +30,9 @@ import {AddAutoModalComponent} from './components/add-auto-modal/add-auto-modal.
     AddClientModalComponent,
     ClientDetailsComponent,
     AutoListComponent,
-    AddAutoModalComponent
+    AddAutoModalComponent,
+    AutoDetailsComponent,
+    AddBookingModalComponent
   ],
   imports: [
     ClientManagementRoutingModule,
