@@ -67,7 +67,7 @@ export class AutoComponent implements OnInit {
       (data: Auto) => {
         this.data = data;
         if (this.data.imageId != null) {
-          this.clientManagementService.getImage(+this.data.imageId, this.headers).subscribe(
+          this.clientManagementService.getImage(this.data.imageId, this.headers).subscribe(
             (image) => {
               this.createImageFromBlob(image);
             }

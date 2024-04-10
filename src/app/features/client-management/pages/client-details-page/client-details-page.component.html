@@ -1,4 +1,16 @@
 <app-background>
-  <app-client></app-client>
+  <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
+  </app-breadcrumb>
+  <div class="container crumb-container-no-banner">
+    <app-back-button/>
+    <!--  Client details table -->
+    <app-client-details *ngIf="this.client" [clientInfo]="this.client" (updateClient)="onUpdateClient($event)"/>
+    <!--  Auto list table  -->
+    <app-auto-list (addingAuto)="onAddingAuto($event)" *ngIf="this.client.autos" [autos]="this.client.autos"/>
+  </div>
 </app-background>
 <alert></alert>
+<!-- Add new auto modal -->
+<ng-template #addAutoModal>
+  <app-add-auto-modal (addAuto)="onAddAuto($event)"/>
+</ng-template>

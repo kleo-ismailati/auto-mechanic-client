@@ -1,5 +1,14 @@
 <app-banner [title]="'Our Clients'" [subTitle]="'Auto Mechanic Clients Listed'"></app-banner>
 <app-background [hasBanner]="true">
-  <app-client-list></app-client-list>
+  <app-breadcrumb [currentPage]="'Clients'">
+  </app-breadcrumb>
+  <div class="container crumb-container">
+    <app-client-list [clients]="this.clients" (switchToPage)="onSwitchToPage($event)"
+                     (addingClient)="onAddingClient($event)"/>
+  </div>
 </app-background>
 <alert></alert>
+<!-- Add client modal -->
+<ng-template #addClientModal>
+  <app-add-client-modal (addClient)="onAddClient($event)"/>
+</ng-template>

@@ -52,7 +52,7 @@ export class ClientManagementService {
     return this.api.post(environment.bookings_url, booking);
   }
 
-  getImage(imageId: number, headers: HttpHeaders): Observable<Blob> {
+  getImage(imageId: string, headers: HttpHeaders): Observable<Blob> {
     return this.api.getBlob(environment.images_url + '/' + imageId, undefined, headers);
   }
 

@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
-import {ClientComponent} from "./components/client/client.component";
 import {AutoComponent} from "./components/auto/auto.component";
 import {ClientManagementRoutingModule} from "./client-management-routing.module";
 import {SharedModule} from "../../shared/shared.module";
@@ -15,16 +14,23 @@ import {InputTextModule} from "primeng/inputtext";
 import {TableModule} from "primeng/table";
 import {TagModule} from "primeng/tag";
 import {ClientManagementService} from "./client-management.service";
+import {AddClientModalComponent} from './components/add-client-modal/add-client-modal.component';
+import {ClientDetailsComponent} from './components/client-details/client-details.component';
+import {AutoListComponent} from './components/auto-list/auto-list.component';
+import {AddAutoModalComponent} from './components/add-auto-modal/add-auto-modal.component';
 
 
 @NgModule({
   declarations: [
-    ClientComponent,
     AutoComponent,
     ClientListComponent,
     ClientManagementPageComponent,
     ClientDetailsPageComponent,
-    AutoDetailsPageComponent
+    AutoDetailsPageComponent,
+    AddClientModalComponent,
+    ClientDetailsComponent,
+    AutoListComponent,
+    AddAutoModalComponent
   ],
   imports: [
     ClientManagementRoutingModule,

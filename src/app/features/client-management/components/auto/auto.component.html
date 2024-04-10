@@ -58,10 +58,10 @@
           </tr>
           <tr>
             <td class="fw-bold col-sm-2 text-end">Image</td>
-            <td *ngIf="!isEdit && (this.data.imageId!=null)" class="text-center"><img [src]="this.imageToShow"
-                                                                                      alt="autoImage"
-                                                                                      class="w-50 img-thumbnail"></td>
-            <td *ngIf="!isEdit && (this.data.imageId==null)" class="text-center">No image</td>
+            <td *ngIf="!isEdit && (this.data.imageId!=null)" class="text-start">
+              <img [src]="this.imageToShow" width="200" height="200" alt="autoImage" class="img-thumbnail">
+            </td>
+            <td *ngIf="!isEdit && (this.data.imageId==null)" class="fw-lighter fst-italic">No image set</td>
             <td *ngIf="isEdit" class="text-center">
               <form (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="row needs-validation" novalidate>
                 <div class="mb-3">

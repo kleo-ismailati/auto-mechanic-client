@@ -1,0 +1,68 @@
+<div class="container-fluid card p-2">
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4">
+      <h1 class="lead fw-bold text-center">Autos Owned By Client</h1>
+    </div>
+    <div class="col-lg-4 d-flex justify-content-lg-end justify-content-center">
+      <button class="btn btn-sm btn-success me-2" (click)="addAuto()">
+        Add Auto
+      </button>
+    </div>
+  </div>
+  <div class="table-container-autos">
+    <p-table [value]="autos" styleClass="p-datatable-gridlines" #dataTable
+             [globalFilterFields]="['autoModel', 'autoType', 'year' ,'color']"
+             [scrollable]="true" scrollHeight="30vh">
+      <ng-template pTemplate="caption">
+        <div class="d-flex justify-content-between">
+          <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                  (click)="clear(dataTable)"></button>
+          <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input #searchInput pInputText type="text" (input)="filter(dataTable, $event)"
+                       placeholder="Search keyword"/>
+            </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:10%">No.</th>
+          <th pSortableColumn="autoModel" style="width:20%">Auto
+            <p-sortIcon field="autoModel"></p-sortIcon>
+          </th>
+          <th style="width:30%">Image</th>
+          <th pSortableColumn="year" style="width:10%">Year
+            <p-sortIcon field="year"></p-sortIcon>
+          </th>
+          <th pSortableColumn="color" style="width:10%">Color
+            <p-sortIcon field="color"></p-sortIcon>
+          </th>
+          <th style="width:20%">Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-auto let-index="rowIndex">
+        <tr>
+          <td>{{ index + 1 }}</td>
+          <td>
+              <span>
+                {{ auto.autoModel }} {{ auto.autoType }}
+              </span>
+          </td>
+          <td>
+            <img *ngIf="auto.thumbnail" [src]=auto.thumbnail.data width="100" height="100"
+                 alt="{{auto.thumbnail ? auto.autoModel + '' + auto.autoType : 'No image'}}"
+                 class="img-thumbnail">
+            <span *ngIf="!auto.thumbnail">No Image</span>
+          </td>
+          <td>{{ auto.year }}</td>
+          <td>{{ auto.color }}</td>
+          <td style="width:20%" class="text-center">
+            <a routerLink="./autos/{{auto.id}}">
+              <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
