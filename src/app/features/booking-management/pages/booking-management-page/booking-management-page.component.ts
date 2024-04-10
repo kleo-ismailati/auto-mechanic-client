@@ -3,6 +3,7 @@ import {PagedResponse} from "../../../../core/models/paged.response.model";
 import {BookingItem} from "../../models/booking-item.model";
 import {BookingManagementService} from "../../booking-management.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AlertService} from "../../../../core/services/alert.service";
 
 @Component({
   selector: 'app-booking-management-page',
@@ -24,6 +25,7 @@ export class BookingManagementPageComponent {
 
   constructor(
     private bookingManagementService: BookingManagementService,
+    private alertService: AlertService,
     public modalService: NgbModal
   ) {
   }
@@ -36,14 +38,31 @@ export class BookingManagementPageComponent {
     );
   }
 
-  deleteBooking(bookingId: number) {
+  onDeleteBooking(bookingId: number) {
     this.deleteId = bookingId;
     this.modalService.open(this.confirmModal);
   }
 
-  checkIfBookingDeleted(isBookingDeleted: boolean) {
-    if (isBookingDeleted) {
-      this.ngOnInit();
+  onDeleteBookingConfirmed(isConfirmed: boolean) {
+    this.modalService.dismissAll();
+    if (isConfirmed) {
+      this.bookingManagementService.deleteBooking(this.deleteId).subscribe(
+        () => {
+          this.alertService.warn("Booking with id " + this.deleteId + " deleted!", {autoClose: true});
+          this.deleteId = -1;
+          this.ngOnInit();
+        }
+      )
+    } else {
+      this.deleteId = -1;
     }
+  }
+
+  onSwitchToPage(pageNo: number) {
+    this.bookingManagementService.getBookingPage(pageNo).subscribe(
+      (data: PagedResponse<BookingItem>) => {
+        this.bookings = data;
+      }
+    );
   }
 }

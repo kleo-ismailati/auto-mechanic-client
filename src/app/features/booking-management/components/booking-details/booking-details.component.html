@@ -37,12 +37,12 @@
   </div>
   <div class="row mx-auto my-2 w-75">
     <div class="d-flex justify-content-end">
-      <button *ngIf="(!isEdit&&!addingNewRepair)" class="btn btn-sm btn-primary me-2" (click)="addRepair()">Add
+      <button *ngIf="(!isEdit)" class="btn btn-sm btn-primary me-2" (click)="addRepair()">Add
         Repair
       </button>
       <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">Edit Booking</button>
-      <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="submit()">Save</button>
-      <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
+      <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="bookingUpdate()">Save</button>
+      <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancelUpdate()">Cancel</button>
     </div>
   </div>
 </div>

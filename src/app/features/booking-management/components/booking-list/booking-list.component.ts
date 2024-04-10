@@ -1,41 +1,26 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {PagedResponse} from "../../../../core/models/paged.response.model";
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BookingItem} from "../../models/booking-item.model";
 import {Table} from "primeng/table";
-import {BookingManagementService} from "../../booking-management.service";
 
 @Component({
   selector: 'app-booking-list',
   templateUrl: './booking-list.component.html',
   styleUrls: ['./booking-list.component.css']
 })
-export class BookingListComponent implements OnInit {
+export class BookingListComponent {
 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-  @Output() deleteBookingConfirmationEvent = new EventEmitter<number>();
-
+  @Output() deleteBooking = new EventEmitter<number>();
+  @Output() switchToPage = new EventEmitter<number>();
   @Input() bookings!: PagedResponse<BookingItem>;
 
   protected readonly RepairStatus = RepairStatus;
 
-  constructor(
-    private bookingManagementService: BookingManagementService,
-    public modalService: NgbModal
-  ) {
-  }
-
-  ngOnInit(): void {
-  }
-
   changePage(event: any) {
-    this.bookingManagementService.getBookingPage(+event.page).subscribe(
-      (data: PagedResponse<BookingItem>) => {
-        this.bookings = data;
-      }
-    );
+    this.switchToPage.emit(+event.page);
   }
 
   getSeverity(repairStatus: string) {
@@ -64,6 +49,6 @@ export class BookingListComponent implements OnInit {
   }
 
   confirmDelete(id: number) {
-    this.deleteBookingConfirmationEvent.emit(id);
+    this.deleteBooking.emit(id);
   }
 }

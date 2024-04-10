@@ -1,148 +1,52 @@
-<app-breadcrumb [currentPage]="'Users'">
-</app-breadcrumb>
-<div class="container crumb-container">
-  <div class="container card mb-2 py-2" *ngIf="this.loggedUser">
-    <div class="row">
-      <h1 class="lead fw-bold text-center">Current User</h1>
-    </div>
-    <div class="row">
-      <table class="table table-bordered w-50 mx-auto">
-        <tbody>
-        <tr>
-          <td>Username</td>
-          <td>{{ this.loggedUser.username }}</td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td>{{ this.loggedUser.email }}</td>
-        </tr>
-        </tbody>
-      </table>
+<div class="container-fluid card p-2">
+  <div class="m-2">
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-sm btn-success" (click)="showAddUserModal()">
+        Add User
+      </button>
     </div>
   </div>
-
-  <div class="container-fluid card p-2">
-    <div class="m-2">
-      <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-sm btn-success" (click)="modalService.open(content)">
-          Add User
-        </button>
-      </div>
-    </div>
-    <div class="table-container-users">
-      <p-table [value]="users!" styleClass="p-datatable-gridlines" #dataTable
-               [globalFilterFields]="['username', 'email']"
-               [scrollable]="true" scrollHeight="33vh">
-        <ng-template pTemplate="caption">
-          <div class="d-flex justify-content-between">
-            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                    (click)="clear(dataTable)"></button>
-            <span class="p-input-icon-left ml-auto">
+  <div class="table-container-users">
+    <p-table [value]="users!" styleClass="p-datatable-gridlines" #dataTable
+             [globalFilterFields]="['username', 'email']"
+             [scrollable]="true" scrollHeight="33vh">
+      <ng-template pTemplate="caption">
+        <div class="d-flex justify-content-between">
+          <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                  (click)="clear(dataTable)"></button>
+          <span class="p-input-icon-left ml-auto">
                 <i class="pi pi-search"></i>
                 <input #searchInput pInputText type="text" (input)="filter(dataTable, $event)"
                        placeholder="Search keyword"/>
             </span>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-          <tr>
-            <th style="width:10%">No.</th>
-            <th pSortableColumn="username" style="width:20%">Username
-              <p-sortIcon field="username"></p-sortIcon>
-            </th>
-            <th pSortableColumn="email" style="width:50%">Email
-              <p-sortIcon field="email"></p-sortIcon>
-            </th>
-            <th style="width:20%">Actions</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-data let-index="rowIndex">
-          <tr>
-            <td>{{ index + 1 }}</td>
-            <td>
-              {{ data.username }}
-            </td>
-            <td>{{ data.email }}</td>
-            <td style="width:20%" class="text-center">
-              <a routerLink="./{{data.id}}" *ngIf="(this.loggedUser.username!=data.username)">
-                <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
-              </a>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:10%">No.</th>
+          <th pSortableColumn="username" style="width:20%">Username
+            <p-sortIcon field="username"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email" style="width:50%">Email
+            <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th style="width:20%">Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data let-index="rowIndex">
+        <tr>
+          <td>{{ index + 1 }}</td>
+          <td>
+            {{ data.username }}
+          </td>
+          <td>{{ data.email }}</td>
+          <td style="width:20%" class="text-center">
+            <a routerLink="./{{data.id}}" *ngIf="(this.loggedUser.username!=data.username)">
+              <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </div>
-
-<!-- Modal -->
-<ng-template #content>
-  <div class="modal-header">
-    <h5 class="modal-title">Add User</h5>
-    <button type="button" (click)="cancelAddNewUser()" class="btn-close" data-bs-dismiss="modal"
-            aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="newUserForm">
-      <div class="form-group mb-3">
-        <label class="form-label">Username</label>
-        <div class="input-group">
-          <input formControlName="username" placeholder="Username"
-                 [ngClass]="{ 'is-invalid': f.username.errors && f.username.touched}"
-                 type="text" class="form-control" aria-label="Username">
-        </div>
-        <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)"
-             class="text-danger small">
-          <div *ngIf="f.username.errors?.['required']">
-            Username is required.
-          </div>
-          <div *ngIf="f.username.errors?.['minlength']">
-            Username must be at least 3 characters long.
-          </div>
-          <div *ngIf="f.username.errors?.['maxlength']">
-            Username must be at most 15 characters long.
-          </div>
-        </div>
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label">Email</label>
-        <div class="input-group">
-          <input formControlName="email" placeholder="Email"
-                 [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched}"
-                 type="email" class="form-control" aria-label="Email">
-        </div>
-        <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)"
-             class="text-danger small">
-          <div *ngIf="f.email.errors?.['required']">
-            Email is required.
-          </div>
-          <div *ngIf="f.email.errors?.['email']">
-            Email must be a valid email address.
-          </div>
-        </div>
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label">Password</label>
-        <div class="input-group">
-          <input formControlName="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=\S+$).{8,}$" placeholder="Password"
-                 [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched}" type="password"
-                 class="form-control" aria-label="Password">
-        </div>
-        <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)"
-             class="text-danger small">
-          <div *ngIf="f.password.errors?.['required']">
-            Password is required.
-          </div>
-          <div *ngIf="f.password.errors?.['pattern']">
-            Password must be 8 characters long, with at least 1 lowercase character and no spaces
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" [disabled]="newUserForm.invalid" (click)="addNewUser()" class="btn btn-sm btn-success">Add
-    </button>
-    <button type="button" (click)="cancelAddNewUser()" class="btn btn-sm btn-secondary">Cancel</button>
-  </div>
-</ng-template>

@@ -9,12 +9,12 @@
       </div>
     </div>
     <!--  Booking list  -->
-    <app-booking-list *ngIf="this.bookings" (deleteBookingConfirmationEvent)="deleteBooking($event)"
-                      [bookings]="this.bookings"/>
+    <app-booking-list *ngIf="this.bookings" (deleteBooking)="onDeleteBooking($event)"
+                      (switchToPage)="onSwitchToPage($event)" [bookings]="this.bookings"/>
   </div>
   <ng-template #confirmModal>
     <!--  Delete booking confirmation modal -->
-    <app-delete-booking-modal (isBookingDeletedEvent)="checkIfBookingDeleted($event)" [deleteId]="this.deleteId"/>
+    <app-delete-booking-modal (deleteBookingConfirmed)="onDeleteBookingConfirmed($event)"/>
   </ng-template>
 </app-background>
 <alert></alert>

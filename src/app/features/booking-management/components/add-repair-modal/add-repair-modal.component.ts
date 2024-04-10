@@ -1,8 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AlertService} from "../../../../core/services/alert.service";
-import {BookingManagementService} from "../../booking-management.service";
 import {RepairCreate} from "../../../../shared/models/repair.model";
 
 @Component({
@@ -12,9 +10,7 @@ import {RepairCreate} from "../../../../shared/models/repair.model";
 })
 export class AddRepairModalComponent {
 
-  @Input() bookingId!: number;
-  @Output() isAddingRepairEvent = new EventEmitter<boolean>();
-  @Output() isRepairAddedEvent = new EventEmitter<boolean>();
+  @Output() addRepair = new EventEmitter<RepairCreate | null>();
 
   newRepairForm: FormGroup;
   newRepair: RepairCreate = {
@@ -22,8 +18,6 @@ export class AddRepairModalComponent {
   }
 
   constructor(
-    private bookingManagementService: BookingManagementService,
-    private alertService: AlertService,
     private formBuilder: FormBuilder,
     public modalService: NgbModal
   ) {
@@ -56,20 +50,12 @@ export class AddRepairModalComponent {
       repairDetails: this.newRepairForm.value['repairDetails'],
       repairCost: this.newRepairForm.value['repairCost']
     }
-    this.bookingManagementService.postNewRepair(this.bookingId, this.newRepair).subscribe(
-      () => {
-        this.alertService.success("New repair was added successfully!", {autoClose: true});
-
-        this.isRepairAddedEvent.emit(true);
-        this.isAddingRepairEvent.emit(false);
-        this.resetNewRepairForm();
-      }
-    )
+    this.addRepair.emit(this.newRepair);
   }
 
   cancelNewRepair() {
     this.resetNewRepairForm();
-    this.isAddingRepairEvent.emit(false);
+    this.addRepair.emit(null);
   }
 
   resetNewRepairForm() {

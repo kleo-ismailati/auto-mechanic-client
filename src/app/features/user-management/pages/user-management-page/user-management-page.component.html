@@ -1,5 +1,15 @@
 <app-banner [title]="'Our Users'" [subTitle]="'User Management'"></app-banner>
 <app-background [hasBanner]="true">
-  <app-user-list></app-user-list>
+  <app-breadcrumb [currentPage]="'Users'">
+  </app-breadcrumb>
+  <div class="container crumb-container">
+    <app-current-user *ngIf="this.loggedUser" [loggedUser]="this.loggedUser"/>
+
+    <app-user-list (showAddUser)="onShowAddUser($event)" [loggedUser]="this.loggedUser" [users]="this.users"/>
+  </div>
 </app-background>
 <alert></alert>
+<!-- Add user modal -->
+<ng-template #addUser>
+  <app-add-user-modal (addUser)="onAddUser($event)"/>
+</ng-template>

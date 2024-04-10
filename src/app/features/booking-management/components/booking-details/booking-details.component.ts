@@ -2,9 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {Booking} from "../../models/booking.model";
 import {HelperService} from "../../../../core/utilities/helper.service";
-import {ActivatedRoute} from "@angular/router";
-import {AlertService} from "../../../../core/services/alert.service";
-import {BookingManagementService} from "../../booking-management.service";
 
 @Component({
   selector: 'app-booking-details',
@@ -14,9 +11,8 @@ import {BookingManagementService} from "../../booking-management.service";
 export class BookingDetailsComponent implements OnInit {
 
   @Input() bookingInfo!: Booking;
-  @Input() addingNewRepair!: boolean;
-  @Output() hasSubmittedEvent = new EventEmitter<boolean>();
-  @Output() isAddingRepairEvent = new EventEmitter<boolean>();
+  @Output() updateBooking = new EventEmitter<Booking>();
+  @Output() addingRepair = new EventEmitter<boolean>();
 
   protected readonly repairStatus = RepairStatus;
   repairStatusKeys: number[] = [];
@@ -26,10 +22,7 @@ export class BookingDetailsComponent implements OnInit {
   updatedBookingInfo: Booking;
 
   constructor(
-    private bookingManagementService: BookingManagementService,
     private helperService: HelperService,
-    private route: ActivatedRoute,
-    private alertService: AlertService
   ) {
     this.updatedBookingInfo = {...this.bookingInfo};
     this.repairStatusKeys = this.helperService.getEnumKeysArray(this.repairStatus);
@@ -37,30 +30,24 @@ export class BookingDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isEdit = false;
-    this.updatedBookingInfo = {...this.bookingInfo};
   }
 
   enableEdit() {
     this.isEdit = true;
+    this.updatedBookingInfo = {...this.bookingInfo};
   }
 
-  submit() {
-    let id: string = this.route.snapshot.paramMap.get('id')!;
-    this.bookingManagementService.postUpdatedBooking(+id, this.updatedBookingInfo).subscribe(
-      () => {
-        this.alertService.success("Booking was updated successfully!", {autoClose: true});
-        this.isEdit = false;
-        this.hasSubmittedEvent.emit(true);
-      }
-    );
+  bookingUpdate() {
+    this.updateBooking.emit(this.updatedBookingInfo);
+    this.isEdit = false;
+    this.ngOnInit();
   }
 
   addRepair() {
-    this.addingNewRepair = true;
-    this.isAddingRepairEvent.emit(true);
+    this.addingRepair.emit(true);
   }
 
-  cancel() {
+  cancelUpdate() {
     this.ngOnInit();
   }
 }

@@ -3,29 +3,26 @@
   </app-breadcrumb>
   <div class="container crumb-container-no-banner">
     <app-back-button [relativeUrl]="'../../'"/>
-    <div class="container card my-2 py-2" *ngIf="!this.data">
+    <div class="container card my-2 py-2" *ngIf="!this.booking">
       <div class="row">
         <h1 class="lead text-center">Booking not found</h1>
       </div>
     </div>
     <!--  Booking information  -->
-    <app-booking-details [bookingInfo]="this.data" [addingNewRepair]="this.isAddingNewRepair" *ngIf="this.data"
-                         (hasSubmittedEvent)="checkIfBookingWasUpdated($event)"
-                         (isAddingRepairEvent)="checkIfAddingNewRepair($event)"/>
+    <app-booking-details [bookingInfo]="this.booking" *ngIf="this.booking" (updateBooking)="onUpdateBooking($event)"
+                         (addingRepair)="onAddingRepair($event)"/>
     <!--  Repairs list  -->
-    <app-booking-repairs *ngIf="this.data?.repairs && this.data.repairs!.length" [repairs]="this.data.repairs!"
-                         (repairToBeDeletedEvent)="showDeleteConfirmationModal($event)"
-                         (repairUpdatedEvent)="checkIfRepairWasUpdated($event)"/>
+    <app-booking-repairs *ngIf="this.booking?.repairs && this.booking.repairs!.length" [repairs]="this.booking.repairs!"
+                         (deleteRepairById)="onDeleteRepairById($event)"
+                         (updateRepair)="onUpdateRepair($event)"/>
   </div>
   <!--  Delete repair confirmation modal  -->
   <ng-template #confirmModal>
-    <app-delete-repair-modal [repairId]="this.idOfRepairToDelete"
-                             (isRepairDeletedEvent)="checkIfRepairWasDeleted($event)"/>
+    <app-delete-repair-modal (confirmRepairDelete)="onConfirmRepairDelete($event)"/>
   </ng-template>
   <!--  Add repair to booking modal  -->
   <ng-template #addRepairModal>
-    <app-add-repair-modal [bookingId]="this.data.id!" (isAddingRepairEvent)="checkIfAddingNewRepair($event)"
-                          (isRepairAddedEvent)="checkIfRepairWasAdded($event)"/>
+    <app-add-repair-modal (addRepair)="onAddRepair($event)"/>
   </ng-template>
 </app-background>
 <alert></alert>

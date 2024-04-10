@@ -2,8 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RepairStatus} from "../../../../shared/enums/repair-status-enum";
 import {Repair} from "../../../../shared/models/repair.model";
 import {HelperService} from "../../../../core/utilities/helper.service";
-import {AlertService} from "../../../../core/services/alert.service";
-import {BookingManagementService} from "../../booking-management.service";
 
 @Component({
   selector: 'app-booking-repairs',
@@ -13,8 +11,8 @@ import {BookingManagementService} from "../../booking-management.service";
 export class BookingRepairsComponent implements OnInit {
 
   @Input() repairs!: Repair[];
-  @Output() repairToBeDeletedEvent = new EventEmitter<number>();
-  @Output() repairUpdatedEvent = new EventEmitter<boolean>();
+  @Output() deleteRepairById = new EventEmitter<number>();
+  @Output() updateRepair = new EventEmitter<Repair>();
 
   protected readonly repairStatus = RepairStatus;
   repairStatusKeys: number[] = [];
@@ -25,9 +23,7 @@ export class BookingRepairsComponent implements OnInit {
   updatedRepair!: Repair;
 
   constructor(
-    private bookingManagementService: BookingManagementService,
     private helperService: HelperService,
-    private alertService: AlertService
   ) {
     this.repairStatusKeys = this.helperService.getEnumKeysArray(this.repairStatus);
   }
@@ -53,22 +49,12 @@ export class BookingRepairsComponent implements OnInit {
 
   confirmDeleteRepair(id: number) {
     this.repairDeleteId = id;
-    this.repairToBeDeletedEvent.emit(id);
+    this.deleteRepairById.emit(id);
   }
 
   submitRepair(updatedRepair: Repair) {
-    this.bookingManagementService.postUpdatedRepair(updatedRepair.id, updatedRepair).subscribe(
-      () => {
-        this.alertService.success("Repair was updated successfully!", {autoClose: true});
-        window.scroll({
-          top: 0,
-          left: 0,
-          behavior: 'smooth'
-        });
-        this.repairUpdatedEvent.emit(true);
-        this.ngOnInit();
-      }
-    )
+    this.updateRepair.emit(updatedRepair);
+    this.ngOnInit();
   }
 
 }
