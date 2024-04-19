@@ -1,76 +1,156 @@
 <div class="header-fixed">
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/">
-          <img src="assets/repair.png" alt="" width="35" height="35">
-          Auto Mechanic
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
-          <ul class="navbar-nav ms-auto me-2">
-            <li *ngIf="!(loggedUser|async)?.token" class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/">
-                <i class="pi align-baseline small pi-home mx-1"></i>
-                Home
-              </a>
-            </li>
-            <li *ngIf="(loggedUser|async)?.token" class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/dashboard">
-                <i class="pi align-baseline small pi-chart-bar mx-1"></i>
-                Dashboard
-              </a>
-            </li>
-            <li *ngIf="(loggedUser|async)?.token" class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/bookings">
-                <i class="pi align-baseline small pi-book mx-1"></i>
-                Bookings
-              </a>
-            </li>
-            <li *ngIf="(loggedUser|async)?.token" class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/clients">
-                <i class="pi align-baseline small pi-users mx-1"></i>
-                Clients
-              </a>
-            </li>
-            <li *ngIf="(loggedUser|async)?.token" class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown.show"
-                 routerLink="/users">
-                <i class="pi align-baseline small pi-user mx-1"></i>
-                Users
-              </a>
-            </li>
-            <li *ngIf="!(loggedUser|async)?.token" class="nav-item align-self-lg-center">
-              <a routerLink="/login" data-bs-toggle="collapse"
-                 data-bs-target="#navbarNavDropdown.show">
-                <button class="btn btn-sm btn-outline-success">Sign in</button>
-              </a>
-            </li>
-            <li class="nav-item dropdown" *ngIf="(loggedUser|async)?.token">
-              <button class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                {{ (loggedUser|async)?.username }}
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item btn btn-outline-danger" data-bs-toggle="collapse"
-                     data-bs-target="#navbarNavDropdown.show" role="button" (click)="logout()">
-                    Sign out
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" routerLink="/">
+                    <img
+                        src="assets/repair.png"
+                        alt=""
+                        width="35"
+                        height="35"
+                    />
+                    Auto Mechanic
+                </a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto me-2">
+                        <li
+                            *ngIf="!(loggedUser | async)?.token"
+                            class="nav-item"
+                        >
+                            <a
+                                class="nav-link"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown.show"
+                                routerLink="/"
+                            >
+                                <i
+                                    class="pi align-baseline small pi-home mx-1"
+                                ></i>
+                                Home
+                            </a>
+                        </li>
+                        <li
+                            *ngIf="(loggedUser | async)?.token"
+                            class="nav-item"
+                        >
+                            <a
+                                class="nav-link"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown.show"
+                                routerLink="/dashboard"
+                            >
+                                <i
+                                    class="pi align-baseline small pi-chart-bar mx-1"
+                                ></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li
+                            *ngIf="(loggedUser | async)?.token"
+                            class="nav-item"
+                        >
+                            <a
+                                class="nav-link"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown.show"
+                                routerLink="/bookings"
+                            >
+                                <i
+                                    class="pi align-baseline small pi-book mx-1"
+                                ></i>
+                                Bookings
+                            </a>
+                        </li>
+                        <li
+                            *ngIf="(loggedUser | async)?.token"
+                            class="nav-item"
+                        >
+                            <a
+                                class="nav-link"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown.show"
+                                routerLink="/clients"
+                            >
+                                <i
+                                    class="pi align-baseline small pi-users mx-1"
+                                ></i>
+                                Clients
+                            </a>
+                        </li>
+                        <li
+                            *ngIf="(loggedUser | async)?.token"
+                            class="nav-item"
+                        >
+                            <a
+                                class="nav-link"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown.show"
+                                routerLink="/users"
+                            >
+                                <i
+                                    class="pi align-baseline small pi-user mx-1"
+                                ></i>
+                                Users
+                            </a>
+                        </li>
+                        <li
+                            *ngIf="!(loggedUser | async)?.token"
+                            class="nav-item align-self-lg-center"
+                        >
+                            <a
+                                routerLink="/login"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown.show"
+                            >
+                                <button class="btn btn-sm btn-outline-success">
+                                    Sign in
+                                </button>
+                            </a>
+                        </li>
+                        <li
+                            class="nav-item dropdown"
+                            *ngIf="(loggedUser | async)?.token"
+                        >
+                            <button
+                                class="nav-link dropdown-toggle"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                {{ (loggedUser | async)?.username }}
+                            </button>
+                            <ul
+                                class="dropdown-menu dropdown-menu-end dropdown-menu-dark"
+                                aria-labelledby="navbarDropdown"
+                            >
+                                <li>
+                                    <a
+                                        class="dropdown-item btn btn-outline-danger"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#navbarNavDropdown.show"
+                                        role="button"
+                                        (click)="logout()"
+                                    >
+                                        Sign out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 </div>

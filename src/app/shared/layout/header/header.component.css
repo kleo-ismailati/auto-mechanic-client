@@ -1,9 +1,9 @@
 .header-fixed {
-  position: fixed;
-  max-height: 6vh;
-  height: 6vh;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
+    position: fixed;
+    max-height: 6vh;
+    height: 6vh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
 }

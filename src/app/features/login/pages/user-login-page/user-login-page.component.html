@@ -1,7 +1,11 @@
 <app-banner [title]="'Admin Login'"></app-banner>
 <app-background [hasBanner]="true">
-  <div class="container-fluid mt-5 w-50 default-container">
-    <app-login-form [user]="user" (userLoggingIn)="onUserLoggingIn($event)" (setRememberMe)="onSetRememberMe($event)"/>
-  </div>
+    <div class="container-fluid mt-5 w-50 default-container">
+        <app-login-form
+            [user]="user"
+            (userLoggingIn)="onUserLoggingIn($event)"
+            (setRememberMe)="onSetRememberMe($event)"
+        />
+    </div>
 </app-background>
 <alert></alert>

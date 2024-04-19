@@ -1,22 +1,20 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core'
 
 @Component({
-  selector: 'app-edit-user-modal',
-  templateUrl: './edit-user-modal.component.html',
-  styleUrls: ['./edit-user-modal.component.css']
+    selector: 'app-edit-user-modal',
+    templateUrl: './edit-user-modal.component.html',
+    styleUrls: ['./edit-user-modal.component.css'],
 })
 export class EditUserModalComponent {
+    @Output() updateConfirmed = new EventEmitter<boolean>()
 
-  @Output() updateConfirmed = new EventEmitter<boolean>();
+    constructor() {}
 
-  constructor() {
-  }
+    cancel() {
+        this.updateConfirmed.emit(false)
+    }
 
-  cancel() {
-    this.updateConfirmed.emit(false);
-  }
-
-  confirmUpdate() {
-    this.updateConfirmed.emit(true);
-  }
+    confirmUpdate() {
+        this.updateConfirmed.emit(true)
+    }
 }

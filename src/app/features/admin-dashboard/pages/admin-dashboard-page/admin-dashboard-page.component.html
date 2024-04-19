@@ -1,32 +1,53 @@
-<app-banner [title]="'Admin Dashboard'" [subTitle]="'Auto Mechanic Booking Statistics'"></app-banner>
+<app-banner
+    [title]="'Admin Dashboard'"
+    [subTitle]="'Auto Mechanic Booking Statistics'"
+></app-banner>
 <app-background [hasBanner]="true">
-  <div class="container default-container">
-    <div class="col-xs-12" style="height:50px;"></div>
-    <div class="row h-25">
-      <div class="col-sm my-2">
-        <app-stat-card statTitle="Bookings Active:" [statValue]="data.totalBookingsActive.toString()"
-                       routeUrl="/bookings"
-                       routeText="View Bookings" statIconClass="pi-book">
-        </app-stat-card>
-      </div>
-      <div class="col-sm my-2">
-        <app-stat-card statTitle="Total Clients:" [statValue]="data.totalClients.toString()" routeUrl="/clients"
-                       routeText="View Clients" statIconClass="pi-users">
-        </app-stat-card>
-      </div>
+    <div class="container default-container">
+        <div class="col-xs-12" style="height: 50px"></div>
+        <div class="row h-25">
+            <div class="col-sm my-2">
+                <app-stat-card
+                    statTitle="Bookings Active:"
+                    [statValue]="data.totalBookingsActive.toString()"
+                    routeUrl="/bookings"
+                    routeText="View Bookings"
+                    statIconClass="pi-book"
+                >
+                </app-stat-card>
+            </div>
+            <div class="col-sm my-2">
+                <app-stat-card
+                    statTitle="Total Clients:"
+                    [statValue]="data.totalClients.toString()"
+                    routeUrl="/clients"
+                    routeText="View Clients"
+                    statIconClass="pi-users"
+                >
+                </app-stat-card>
+            </div>
+        </div>
+        <div class="row h-25">
+            <div class="col-sm my-2">
+                <app-stat-card
+                    statTitle="Total Autos:"
+                    [statValue]="data.totalAutos.toString()"
+                    statIconClass="pi-car"
+                >
+                </app-stat-card>
+            </div>
+            <div class="col-sm my-2">
+                <app-stat-card
+                    statTitle="Total Earnings:"
+                    [statValue]="
+                        (data.totalIncome
+                            | currency: 'EUR' : 'symbol' : '1.0-0')!
+                    "
+                    statIconClass="pi-credit-card"
+                >
+                </app-stat-card>
+            </div>
+        </div>
     </div>
-    <div class="row h-25">
-      <div class="col-sm my-2">
-        <app-stat-card statTitle="Total Autos:" [statValue]="data.totalAutos.toString()" statIconClass="pi-car">
-        </app-stat-card>
-      </div>
-      <div class="col-sm my-2">
-        <app-stat-card statTitle="Total Earnings:"
-                       [statValue]="(data.totalIncome | currency:'EUR' : 'symbol' : '1.0-0')!"
-                       statIconClass="pi-credit-card">
-        </app-stat-card>
-      </div>
-    </div>
-  </div>
 </app-background>
 <alert></alert>

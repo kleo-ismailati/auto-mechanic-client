@@ -1,16 +1,24 @@
 <app-background>
-  <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
-  </app-breadcrumb>
-  <div class="container crumb-container-no-banner">
-    <app-back-button [relativeUrl]="'../../'"/>
-    <!-- Auto details -->
-    <app-auto-details *ngIf="this.auto" [auto]="this.auto" [image]="this.imageToShow"
-                      (updateAuto)="onUpdateAuto($event)" (isAddingBooking)="onIsAddingBooking($event)"
-                      (changeImage)="onChangeImage($event)"/>
-  </div>
+    <app-breadcrumb
+        [parentsList]="breadcrumbParentsList"
+        [currentPage]="'Details'"
+    >
+    </app-breadcrumb>
+    <div class="container crumb-container-no-banner">
+        <app-back-button [relativeUrl]="'../../'" />
+        <!-- Auto details -->
+        <app-auto-details
+            *ngIf="this.auto"
+            [auto]="this.auto"
+            [image]="this.imageToShow"
+            (updateAuto)="onUpdateAuto($event)"
+            (isAddingBooking)="onIsAddingBooking($event)"
+            (changeImage)="onChangeImage($event)"
+        />
+    </div>
 </app-background>
 <alert></alert>
 <ng-template #addBookingModal>
-  <!-- Add booking modal -->
-  <app-add-booking-modal (addBooking)="onAddBooking($event)"/>
+    <!-- Add booking modal -->
+    <app-add-booking-modal (addBooking)="onAddBooking($event)" />
 </ng-template>

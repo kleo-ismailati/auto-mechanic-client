@@ -1,12 +1,12 @@
 .bg-wrapper {
-  margin: 6vh auto 2vh;
+    margin: 6vh auto 2vh;
 }
 
 .bg-wrapper-banner {
-  margin: 22vh auto 2vh;
+    margin: 22vh auto 2vh;
 }
 
 .bg-image {
-  background-image: url("../../../../assets/galaxy-transparent.png");
-  background-size: 100vw 90vh;
+    background-image: url('../../../../assets/galaxy-transparent.png');
+    background-size: 100vw 90vh;
 }

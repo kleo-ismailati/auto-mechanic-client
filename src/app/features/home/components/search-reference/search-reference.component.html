@@ -1,14 +1,28 @@
 <div class="row col-sm-4 mx-auto pt-5">
-  <h1 class="lead fw-bold text-center mt-2 pb-4">View booking status</h1>
-  <div class="input-group mb-3">
-    <input type="search" class="form-control bg-light rounded-3"
-           placeholder="Reference code" aria-label="Search" aria-describedby="button-search"
-           [(ngModel)]="referenceId" (keyup.enter)="viewBooking()">
-    <button class="btn btn-outline-success rounded-3 ms-2" type="button" id="button-search" (click)="viewBooking()">
-      <i class="pi pi-search"></i>
-    </button>
-  </div>
-  <div class="text-danger small" *ngIf="(referenceId!= '') && (referenceId.length <= 30)">Please enter a valid
-    reference code
-  </div>
+    <h1 class="lead fw-bold text-center mt-2 pb-4">View booking status</h1>
+    <div class="input-group mb-3">
+        <input
+            type="search"
+            class="form-control bg-light rounded-3"
+            placeholder="Reference code"
+            aria-label="Search"
+            aria-describedby="button-search"
+            [(ngModel)]="referenceId"
+            (keyup.enter)="viewBooking()"
+        />
+        <button
+            class="btn btn-outline-success rounded-3 ms-2"
+            type="button"
+            id="button-search"
+            (click)="viewBooking()"
+        >
+            <i class="pi pi-search"></i>
+        </button>
+    </div>
+    <div
+        class="text-danger small"
+        *ngIf="referenceId != '' && referenceId.length <= 30"
+    >
+        Please enter a valid reference code
+    </div>
 </div>

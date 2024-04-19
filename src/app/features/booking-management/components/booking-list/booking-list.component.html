@@ -1,70 +1,113 @@
 <div class="container-fluid card p-2">
-  <div class="table-container-bookings">
-    <p-table [value]="bookings.result" styleClass="p-datatable-gridlines" #dataTable
-             [globalFilterFields]="['firstName', 'lastName', 'totalPrice' ,'date' ,'autoModel', 'autoType']"
-             [scrollable]="true" scrollHeight="48vh">
-      <ng-template pTemplate="caption">
-        <div class="d-flex justify-content-between">
-          <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                  (click)="clear(dataTable)"></button>
-          <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input #searchInput pInputText type="text" (input)="filter(dataTable, $event)"
-                       placeholder="Search keyword"/>
-            </span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="header">
-        <tr>
-          <th>No.</th>
-          <th pSortableColumn="firstName" style="width:20%">Name
-            <p-sortIcon field="firstName"></p-sortIcon>
-          </th>
-          <th pSortableColumn="autoModel" style="width:20%">Auto
-            <p-sortIcon field="firstName"></p-sortIcon>
-          </th>
-          <th pSortableColumn="totalPrice" style="width:15%">Repair Cost
-            <p-sortIcon field="totalPrice"></p-sortIcon>
-          </th>
-          <th pSortableColumn="date" style="width:15%">Date added
-            <p-sortIcon field="date"></p-sortIcon>
-          </th>
-          <th pSortableColumn="status" style="width:10%">Repair Status
-            <p-sortIcon field="status"></p-sortIcon>
-          </th>
-          <th style="width:20%">Actions</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-booking let-index="rowIndex">
-        <tr>
-          <td>{{ index + 1 }}</td>
-          <td>
-              <span>
-                {{ booking.firstName }} {{ booking.lastName }}
-              </span>
-          </td>
-          <td>{{ booking.autoModel }} {{ booking.autoType }}</td>
-          <td>{{ booking.totalPrice | currency:'USD' }}</td>
-          <td>{{ booking.date | date }}</td>
-          <td class="text-center">
-            <p-tag [value]="RepairStatus[booking.status]"
-                   [severity]="getSeverity(RepairStatus[booking.status])"></p-tag>
-          </td>
-          <td style="width:20%">
-            <a routerLink="./booking-details/{{booking.id}}">
-              <button type="button" class="btn btn-sm btn-outline-primary btn-table mx-1">View</button>
-            </a>
-            <button (click)="confirmDelete(booking.id)" type="button"
-                    class="btn btn-sm btn-outline-danger btn-table mx-1">Delete
-            </button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
-  <div class="paginator-container">
-    <p-paginator [rows]="bookings.size" [totalRecords]="(bookings.size * bookings.total)"
-                 [first]="bookings.pageNo * bookings.size"
-                 (onPageChange)="changePage($event)"></p-paginator>
-  </div>
+    <div class="table-container-bookings">
+        <p-table
+            [value]="bookings.result"
+            styleClass="p-datatable-gridlines"
+            #dataTable
+            [globalFilterFields]="[
+                'firstName',
+                'lastName',
+                'totalPrice',
+                'date',
+                'autoModel',
+                'autoType'
+            ]"
+            [scrollable]="true"
+            scrollHeight="48vh"
+        >
+            <ng-template pTemplate="caption">
+                <div class="d-flex justify-content-between">
+                    <button
+                        pButton
+                        label="Clear"
+                        class="p-button-outlined"
+                        icon="pi pi-filter-slash"
+                        (click)="clear(dataTable)"
+                    ></button>
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input
+                            #searchInput
+                            pInputText
+                            type="text"
+                            (input)="filter(dataTable, $event)"
+                            placeholder="Search keyword"
+                        />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No.</th>
+                    <th pSortableColumn="firstName" style="width: 20%">
+                        Name
+                        <p-sortIcon field="firstName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="autoModel" style="width: 20%">
+                        Auto
+                        <p-sortIcon field="firstName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="totalPrice" style="width: 15%">
+                        Repair Cost
+                        <p-sortIcon field="totalPrice"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="date" style="width: 15%">
+                        Date added
+                        <p-sortIcon field="date"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="status" style="width: 10%">
+                        Repair Status
+                        <p-sortIcon field="status"></p-sortIcon>
+                    </th>
+                    <th style="width: 20%">Actions</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-booking let-index="rowIndex">
+                <tr>
+                    <td>{{ index + 1 }}</td>
+                    <td>
+                        <span>
+                            {{ booking.firstName }} {{ booking.lastName }}
+                        </span>
+                    </td>
+                    <td>{{ booking.autoModel }} {{ booking.autoType }}</td>
+                    <td>{{ booking.totalPrice | currency: 'USD' }}</td>
+                    <td>{{ booking.date | date }}</td>
+                    <td class="text-center">
+                        <p-tag
+                            [value]="RepairStatus[booking.status]"
+                            [severity]="
+                                getSeverity(RepairStatus[booking.status])
+                            "
+                        ></p-tag>
+                    </td>
+                    <td style="width: 20%">
+                        <a routerLink="./booking-details/{{ booking.id }}">
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-primary btn-table mx-1"
+                            >
+                                View
+                            </button>
+                        </a>
+                        <button
+                            (click)="confirmDelete(booking.id)"
+                            type="button"
+                            class="btn btn-sm btn-outline-danger btn-table mx-1"
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="paginator-container">
+        <p-paginator
+            [rows]="bookings.size"
+            [totalRecords]="bookings.size * bookings.total"
+            [first]="bookings.pageNo * bookings.size"
+            (onPageChange)="changePage($event)"
+        ></p-paginator>
+    </div>
 </div>

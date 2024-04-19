@@ -1,12 +1,25 @@
 <div class="modal-header">
-  <h5 class="modal-title">Confirm action</h5>
-  <button type="button" (click)="cancelDelete()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+    <h5 class="modal-title">Confirm action</h5>
+    <button
+        type="button"
+        (click)="cancelDelete()"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+    ></button>
 </div>
 <div class="modal-body">
-  <p>Are you sure you want to delete this booking?</p>
+    <p>Are you sure you want to delete this booking?</p>
 </div>
 <div class="modal-footer">
-  <button type="submit" (click)="delete()" class="btn btn-sm btn-success">Yes</button>
-  <button type="button" (click)="cancelDelete()" class="btn btn-sm btn-secondary">No</button>
+    <button type="submit" (click)="delete()" class="btn btn-sm btn-success">
+        Yes
+    </button>
+    <button
+        type="button"
+        (click)="cancelDelete()"
+        class="btn btn-sm btn-secondary"
+    >
+        No
+    </button>
 </div>

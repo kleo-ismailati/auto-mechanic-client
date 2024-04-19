@@ -1,31 +1,35 @@
 <div class="container pt-md-5">
-  <table class="table table-bordered w-auto mx-auto">
-    <thead class="table-secondary text-center">
-    <tr>
-      <th colspan="2">Booking Summary</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td class="fw-bold w-50 text-end">Client</td>
-      <td>{{ bookingSummary.firstName }} {{ bookingSummary.lastName }}</td>
-    </tr>
-    <tr>
-      <td class="fw-bold text-end">Auto details</td>
-      <td>{{ bookingSummary.autoModel }} {{ bookingSummary.autoType }}</td>
-    </tr>
-    <tr>
-      <td class="fw-bold text-end">Repair cost</td>
-      <td>{{ bookingSummary.totalPrice | currency:'USD' }}</td>
-    </tr>
-    <tr>
-      <td class="fw-bold text-end">Booking date</td>
-      <td>{{ bookingSummary.date | date }}</td>
-    </tr>
-    <tr>
-      <td class="fw-bold text-end">Repair status</td>
-      <td>{{ repairStatus[bookingSummary.status] }}</td>
-    </tr>
-    </tbody>
-  </table>
+    <table class="table table-bordered w-auto mx-auto">
+        <thead class="table-secondary text-center">
+            <tr>
+                <th colspan="2">Booking Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="fw-bold w-50 text-end">Client</td>
+                <td>
+                    {{ bookingSummary.firstName }} {{ bookingSummary.lastName }}
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-bold text-end">Auto details</td>
+                <td>
+                    {{ bookingSummary.autoModel }} {{ bookingSummary.autoType }}
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-bold text-end">Repair cost</td>
+                <td>{{ bookingSummary.totalPrice | currency: 'USD' }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold text-end">Booking date</td>
+                <td>{{ bookingSummary.date | date }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold text-end">Repair status</td>
+                <td>{{ repairStatus[bookingSummary.status] }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -1,95 +1,160 @@
 <div class="modal-header">
-  <h5 class="modal-title">Add Auto</h5>
-  <button type="button" (click)="cancelNewAuto()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+    <h5 class="modal-title">Add Auto</h5>
+    <button
+        type="button"
+        (click)="cancelNewAuto()"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+    ></button>
 </div>
 <div class="modal-body modal-can-scroll">
-  <form [formGroup]="newAutoForm">
-    <div class="form-group mb-3">
-      <label class="form-label">Auto type</label>
-      <div class="input-group">
-        <input formControlName="autoType" placeholder="Auto type" type="text" class="form-control"
-               [ngClass]="{'is-invalid': f.autoType.errors && f.autoType.touched}" aria-label="Auto type">
-      </div>
-      <div *ngIf="f.autoType.invalid && (f.autoType.dirty || f.autoType.touched)"
-           class="text-danger small">
-        <div *ngIf="f.autoType.errors?.['required']">
-          Auto type is required.
+    <form [formGroup]="newAutoForm">
+        <div class="form-group mb-3">
+            <label class="form-label">Auto type</label>
+            <div class="input-group">
+                <input
+                    formControlName="autoType"
+                    placeholder="Auto type"
+                    type="text"
+                    class="form-control"
+                    [ngClass]="{
+                        'is-invalid': f.autoType.errors && f.autoType.touched
+                    }"
+                    aria-label="Auto type"
+                />
+            </div>
+            <div
+                *ngIf="
+                    f.autoType.invalid &&
+                    (f.autoType.dirty || f.autoType.touched)
+                "
+                class="text-danger small"
+            >
+                <div *ngIf="f.autoType.errors?.['required']">
+                    Auto type is required.
+                </div>
+                <div *ngIf="f.autoType.errors?.['minlength']">
+                    Auto type must be at least 3 characters long.
+                </div>
+                <div *ngIf="f.autoType.errors?.['maxlength']">
+                    Auto type must be at most 15 characters long.
+                </div>
+            </div>
         </div>
-        <div *ngIf="f.autoType.errors?.['minlength']">
-          Auto type must be at least 3 characters long.
+        <div class="form-group mb-3">
+            <label class="form-label">Auto model</label>
+            <div class="input-group">
+                <input
+                    formControlName="autoModel"
+                    placeholder="Auto model"
+                    type="text"
+                    class="form-control"
+                    [ngClass]="{
+                        'is-invalid': f.autoModel.errors && f.autoModel.touched
+                    }"
+                    aria-label="Auto model"
+                />
+            </div>
+            <div
+                *ngIf="
+                    f.autoModel.invalid &&
+                    (f.autoModel.dirty || f.autoModel.touched)
+                "
+                class="text-danger small"
+            >
+                <div *ngIf="f.autoModel.errors?.['required']">
+                    Auto model is required.
+                </div>
+                <div *ngIf="f.autoModel.errors?.['minlength']">
+                    Auto model must be at least 3 characters long.
+                </div>
+                <div *ngIf="f.autoModel.errors?.['maxlength']">
+                    Auto model must be at most 15 characters long.
+                </div>
+            </div>
         </div>
-        <div *ngIf="f.autoType.errors?.['maxlength']">
-          Auto type must be at most 15 characters long.
+        <div class="form-group mb-3">
+            <label class="form-label">Year</label>
+            <div class="input-group">
+                <input
+                    formControlName="year"
+                    placeholder="Year"
+                    type="text"
+                    class="form-control"
+                    [ngClass]="{
+                        'is-invalid': f.year.errors && f.year.touched
+                    }"
+                    aria-label="Year"
+                />
+            </div>
+            <div
+                *ngIf="f.year.invalid && (f.year.dirty || f.year.touched)"
+                class="text-danger small"
+            >
+                <div *ngIf="f.year.errors?.['required']">Year is required.</div>
+                <div *ngIf="f.year.errors?.['pattern']">
+                    Year must be a valid year.
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="form-group mb-3">
-      <label class="form-label">Auto model</label>
-      <div class="input-group">
-        <input formControlName="autoModel" placeholder="Auto model" type="text" class="form-control"
-               [ngClass]="{'is-invalid': f.autoModel.errors && f.autoModel.touched}" aria-label="Auto model">
-      </div>
-      <div *ngIf="f.autoModel.invalid && (f.autoModel.dirty || f.autoModel.touched)"
-           class="text-danger small">
-        <div *ngIf="f.autoModel.errors?.['required']">
-          Auto model is required.
+        <div class="form-group mb-3">
+            <label class="form-label">Color</label>
+            <div class="input-group">
+                <input
+                    formControlName="color"
+                    placeholder="Color"
+                    type="text"
+                    class="form-control"
+                    [ngClass]="{
+                        'is-invalid': f.color.errors && f.color.touched
+                    }"
+                    aria-label="Color"
+                />
+            </div>
+            <div
+                *ngIf="f.color.invalid && (f.color.dirty || f.color.touched)"
+                class="text-danger small"
+            >
+                <div *ngIf="f.color.errors?.['required']">
+                    Auto color is required.
+                </div>
+                <div *ngIf="f.color.errors?.['minlength']">
+                    Auto color must be at least 3 characters long.
+                </div>
+                <div *ngIf="f.color.errors?.['maxlength']">
+                    Auto color must be at most 15 characters long.
+                </div>
+            </div>
         </div>
-        <div *ngIf="f.autoModel.errors?.['minlength']">
-          Auto model must be at least 3 characters long.
+        <div class="form-group mb-3">
+            <label class="form-label">Auto description</label>
+            <div class="input-group">
+                <input
+                    formControlName="autoDescription"
+                    placeholder="Auto description"
+                    type="text"
+                    class="form-control"
+                    aria-label="Auto description"
+                />
+            </div>
         </div>
-        <div *ngIf="f.autoModel.errors?.['maxlength']">
-          Auto model must be at most 15 characters long.
-        </div>
-      </div>
-    </div>
-    <div class="form-group mb-3">
-      <label class="form-label">Year</label>
-      <div class="input-group">
-        <input formControlName="year" placeholder="Year" type="text" class="form-control"
-               [ngClass]="{'is-invalid': f.year.errors && f.year.touched}" aria-label="Year">
-      </div>
-      <div *ngIf="f.year.invalid && (f.year.dirty || f.year.touched)"
-           class="text-danger small">
-        <div *ngIf="f.year.errors?.['required']">
-          Year is required.
-        </div>
-        <div *ngIf="f.year.errors?.['pattern']">
-          Year must be a valid year.
-        </div>
-      </div>
-    </div>
-    <div class="form-group mb-3">
-      <label class="form-label">Color</label>
-      <div class="input-group">
-        <input formControlName="color" placeholder="Color" type="text" class="form-control"
-               [ngClass]="{'is-invalid': f.color.errors && f.color.touched}" aria-label="Color">
-      </div>
-      <div *ngIf="f.color.invalid && (f.color.dirty || f.color.touched)"
-           class="text-danger small">
-        <div *ngIf="f.color.errors?.['required']">
-          Auto color is required.
-        </div>
-        <div *ngIf="f.color.errors?.['minlength']">
-          Auto color must be at least 3 characters long.
-        </div>
-        <div *ngIf="f.color.errors?.['maxlength']">
-          Auto color must be at most 15 characters long.
-        </div>
-      </div>
-    </div>
-    <div class="form-group mb-3">
-      <label class="form-label">Auto description</label>
-      <div class="input-group">
-        <input formControlName="autoDescription" placeholder="Auto description" type="text" class="form-control"
-               aria-label="Auto description">
-      </div>
-    </div>
-  </form>
+    </form>
 </div>
 <div class="modal-footer">
-  <button [disabled]="newAutoForm.invalid" type="submit" (click)="submitNewAuto()" class="btn btn-sm btn-success">
-    Add
-  </button>
-  <button type="button" (click)="cancelNewAuto()" class="btn btn-sm btn-secondary">Cancel</button>
+    <button
+        [disabled]="newAutoForm.invalid"
+        type="submit"
+        (click)="submitNewAuto()"
+        class="btn btn-sm btn-success"
+    >
+        Add
+    </button>
+    <button
+        type="button"
+        (click)="cancelNewAuto()"
+        class="btn btn-sm btn-secondary"
+    >
+        Cancel
+    </button>
 </div>

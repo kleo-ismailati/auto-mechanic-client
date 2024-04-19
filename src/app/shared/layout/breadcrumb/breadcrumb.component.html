@@ -1,14 +1,18 @@
 <div class="crumb-bar container-fluid py-md-2 py-4">
-  <div class="row">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item" *ngFor="let parent of parentsList;">
-          <a class="fw-bold text-decoration-none text-success" [routerLink]="[parent.link]">{{ parent.label }}</a>
-        </li>
-        <li class="breadcrumb-item active">
-          <span class="fw-bold">{{ currentPage }}</span>
-        </li>
-      </ol>
-    </nav>
-  </div>
+    <div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" *ngFor="let parent of parentsList">
+                    <a
+                        class="fw-bold text-decoration-none text-success"
+                        [routerLink]="[parent.link]"
+                        >{{ parent.label }}</a
+                    >
+                </li>
+                <li class="breadcrumb-item active">
+                    <span class="fw-bold">{{ currentPage }}</span>
+                </li>
+            </ol>
+        </nav>
+    </div>
 </div>

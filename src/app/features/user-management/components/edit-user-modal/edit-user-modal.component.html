@@ -1,11 +1,25 @@
 <div class="modal-header">
-  <h5 class="modal-title">Confirm action</h5>
-  <button type="button" (click)="cancel()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title">Confirm action</h5>
+    <button
+        type="button"
+        (click)="cancel()"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+    ></button>
 </div>
 <div class="modal-body">
-  <p>Are you sure you want to edit user?</p>
+    <p>Are you sure you want to edit user?</p>
 </div>
 <div class="modal-footer">
-  <button type="submit" (click)="confirmUpdate()" class="btn btn-sm btn-success">Yes</button>
-  <button type="button" (click)="cancel()" class="btn btn-sm btn-secondary">No</button>
+    <button
+        type="submit"
+        (click)="confirmUpdate()"
+        class="btn btn-sm btn-success"
+    >
+        Yes
+    </button>
+    <button type="button" (click)="cancel()" class="btn btn-sm btn-secondary">
+        No
+    </button>
 </div>

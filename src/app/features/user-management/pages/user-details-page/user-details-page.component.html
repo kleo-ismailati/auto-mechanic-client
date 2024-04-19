@@ -1,12 +1,19 @@
 <app-background>
-  <app-breadcrumb [parentsList]="breadcrumbParentsList" [currentPage]="'Details'">
-  </app-breadcrumb>
-  <div class="container crumb-container-no-banner">
-    <app-back-button/>
-    <app-user-form *ngIf="this.user" [user]="this.user" (updatingUser)="onUpdateUser($event)"/>
-  </div>
-  <ng-template #confirmModal>
-    <app-edit-user-modal (updateConfirmed)="onUpdateConfirmed($event)"/>
-  </ng-template>
+    <app-breadcrumb
+        [parentsList]="breadcrumbParentsList"
+        [currentPage]="'Details'"
+    >
+    </app-breadcrumb>
+    <div class="container crumb-container-no-banner">
+        <app-back-button />
+        <app-user-form
+            *ngIf="this.user"
+            [user]="this.user"
+            (updatingUser)="onUpdateUser($event)"
+        />
+    </div>
+    <ng-template #confirmModal>
+        <app-edit-user-modal (updateConfirmed)="onUpdateConfirmed($event)" />
+    </ng-template>
 </app-background>
 <alert></alert>

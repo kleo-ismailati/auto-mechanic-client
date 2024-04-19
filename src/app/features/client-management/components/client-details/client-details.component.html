@@ -1,73 +1,126 @@
 <div class="container card my-2 py-2">
-  <div class="row">
-    <h1 class="lead fw-bold text-center">Client Details</h1>
-  </div>
-  <div class="row">
-    <form #clientForm=ngForm>
-      <table class="table table-bordered w-75 mx-auto">
-        <tbody>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Firstname</td>
-          <td *ngIf="!isEdit">{{ this.clientInfo.firstName }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedClient.firstName" name="firstName" type="text" required minlength="3"
-                   maxlength="15"
-                   #firstName=ngModel [ngClass]="{'is-invalid': firstName.invalid}"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Lastname</td>
-          <td *ngIf="!isEdit">{{ this.clientInfo.lastName }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedClient.lastName" name="lastName" type="text" required minlength="3"
-                   maxlength="15"
-                   #lastName=ngModel [ngClass]="{'is-invalid': lastName.invalid}"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Email</td>
-          <td *ngIf="!isEdit">{{ this.clientInfo.email }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedClient.email" name="email" type="email" required email
-                   #email=ngModel [ngClass]="{'is-invalid': email.invalid}"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Phone</td>
-          <td *ngIf="!isEdit">{{ this.clientInfo.phoneNumber }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedClient.phoneNumber" name="phoneNumber" type="tel" required
-                   pattern="^\d{10}$"
-                   #phoneNumber=ngModel [ngClass]="{'is-invalid': phoneNumber.invalid}"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Address</td>
-          <td *ngIf="!isEdit">{{ this.clientInfo.address }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedClient.address" name="address" type="text" required minlength="3"
-                   maxlength="100"
-                   #address=ngModel [ngClass]="{'is-invalid': address.invalid}"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </form>
-  </div>
-  <div class="row mx-auto my-2 w-75">
-    <div class="d-flex justify-content-end">
-      <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">
-        Edit Client
-      </button>
-      <button *ngIf="isEdit" [disabled]="clientForm.invalid" class="btn btn-sm btn-success me-2"
-              (click)="editClient()">Save
-      </button>
-      <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
+    <div class="row">
+        <h1 class="lead fw-bold text-center">Client Details</h1>
     </div>
-  </div>
+    <div class="row">
+        <form #clientForm="ngForm">
+            <table class="table table-bordered w-75 mx-auto">
+                <tbody>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Firstname</td>
+                        <td *ngIf="!isEdit">{{ this.clientInfo.firstName }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedClient.firstName"
+                                name="firstName"
+                                type="text"
+                                required
+                                minlength="3"
+                                maxlength="15"
+                                #firstName="ngModel"
+                                [ngClass]="{ 'is-invalid': firstName.invalid }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Lastname</td>
+                        <td *ngIf="!isEdit">{{ this.clientInfo.lastName }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedClient.lastName"
+                                name="lastName"
+                                type="text"
+                                required
+                                minlength="3"
+                                maxlength="15"
+                                #lastName="ngModel"
+                                [ngClass]="{ 'is-invalid': lastName.invalid }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Email</td>
+                        <td *ngIf="!isEdit">{{ this.clientInfo.email }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedClient.email"
+                                name="email"
+                                type="email"
+                                required
+                                email
+                                #email="ngModel"
+                                [ngClass]="{ 'is-invalid': email.invalid }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Phone</td>
+                        <td *ngIf="!isEdit">
+                            {{ this.clientInfo.phoneNumber }}
+                        </td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedClient.phoneNumber"
+                                name="phoneNumber"
+                                type="tel"
+                                required
+                                pattern="^\d{10}$"
+                                #phoneNumber="ngModel"
+                                [ngClass]="{
+                                    'is-invalid': phoneNumber.invalid
+                                }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Address</td>
+                        <td *ngIf="!isEdit">{{ this.clientInfo.address }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedClient.address"
+                                name="address"
+                                type="text"
+                                required
+                                minlength="3"
+                                maxlength="100"
+                                #address="ngModel"
+                                [ngClass]="{ 'is-invalid': address.invalid }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="row mx-auto my-2 w-75">
+        <div class="d-flex justify-content-end">
+            <button
+                *ngIf="!isEdit"
+                class="btn btn-sm btn-success me-2"
+                (click)="enableEdit()"
+            >
+                Edit Client
+            </button>
+            <button
+                *ngIf="isEdit"
+                [disabled]="clientForm.invalid"
+                class="btn btn-sm btn-success me-2"
+                (click)="editClient()"
+            >
+                Save
+            </button>
+            <button
+                *ngIf="isEdit"
+                class="btn btn-sm btn-secondary me-2"
+                (click)="cancel()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
 </div>

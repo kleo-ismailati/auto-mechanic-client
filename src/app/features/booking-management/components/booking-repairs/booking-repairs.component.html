@@ -1,67 +1,135 @@
 <div class="container card my-2 py-2">
-  <h1 class="lead fw-bold text-center py-2">List of repairs</h1>
-  <div class="row" *ngFor="let repair of repairs; let i = index">
-    <hr>
-    <table class="table table-bordered w-75 mx-auto">
-      <thead class="table-light">
-      <tr>
-        <th class="fw-bold col-sm-2 text-end">Repair #{{ i + 1 }}</th>
-        <th>Description</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Repair type</td>
-        <td *ngIf="!isRepairEdit(repair.id)">{{ repair.repairType }}</td>
-        <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="updatedRepair.repairType"
-               [ngClass]="{ 'is-invalid': updatedRepair.repairType.length < 3 || updatedRepair.repairType.length > 30}"
-               type="text" class="form-control bg-light" aria-label="Repair Type">
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Repair details</td>
-        <td *ngIf="!isRepairEdit(repair.id)">{{ repair.repairDetails }}</td>
-        <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="updatedRepair.repairDetails"
-               [ngClass]="{ 'is-invalid': updatedRepair.repairDetails.length < 3 || updatedRepair.repairDetails.length > 200}"
-               type="text" class="form-control bg-light" aria-label="Repair Details">
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Repair cost</td>
-        <td *ngIf="!isRepairEdit(repair.id)">{{ repair.repairCost | currency:'USD' }}</td>
-        <input *ngIf="isRepairEdit(repair.id)" [(ngModel)]="updatedRepair.repairCost"
-               [ngClass]="{ 'is-invalid': updatedRepair.repairCost < 0 || updatedRepair.repairCost > 99999 || updatedRepair.repairCost == null}"
-               type="number" class="form-control bg-light" aria-label="Repair Cost">
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Repair status</td>
-        <td *ngIf="!isRepairEdit(repair.id)">{{ repairStatus[repair.repairStatus] }}</td>
-        <select *ngIf="isRepairEdit(repair.id)" [(ngModel)]="updatedRepair.repairStatus" class="form-select bg-light"
-                aria-label="Set status">
-          <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
-                  [selected]="updatedRepair.repairStatus == symbol">
-            {{ repairStatus[symbol] }}
-          </option>
-        </select>
-      </tr>
-      </tbody>
-    </table>
+    <h1 class="lead fw-bold text-center py-2">List of repairs</h1>
+    <div class="row" *ngFor="let repair of repairs; let i = index">
+        <hr />
+        <table class="table table-bordered w-75 mx-auto">
+            <thead class="table-light">
+                <tr>
+                    <th class="fw-bold col-sm-2 text-end">
+                        Repair #{{ i + 1 }}
+                    </th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Repair type</td>
+                    <td *ngIf="!isRepairEdit(repair.id)">
+                        {{ repair.repairType }}
+                    </td>
+                    <input
+                        *ngIf="isRepairEdit(repair.id)"
+                        [(ngModel)]="updatedRepair.repairType"
+                        [ngClass]="{
+                            'is-invalid':
+                                updatedRepair.repairType.length < 3 ||
+                                updatedRepair.repairType.length > 30
+                        }"
+                        type="text"
+                        class="form-control bg-light"
+                        aria-label="Repair Type"
+                    />
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Repair details</td>
+                    <td *ngIf="!isRepairEdit(repair.id)">
+                        {{ repair.repairDetails }}
+                    </td>
+                    <input
+                        *ngIf="isRepairEdit(repair.id)"
+                        [(ngModel)]="updatedRepair.repairDetails"
+                        [ngClass]="{
+                            'is-invalid':
+                                updatedRepair.repairDetails.length < 3 ||
+                                updatedRepair.repairDetails.length > 200
+                        }"
+                        type="text"
+                        class="form-control bg-light"
+                        aria-label="Repair Details"
+                    />
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Repair cost</td>
+                    <td *ngIf="!isRepairEdit(repair.id)">
+                        {{ repair.repairCost | currency: 'USD' }}
+                    </td>
+                    <input
+                        *ngIf="isRepairEdit(repair.id)"
+                        [(ngModel)]="updatedRepair.repairCost"
+                        [ngClass]="{
+                            'is-invalid':
+                                updatedRepair.repairCost < 0 ||
+                                updatedRepair.repairCost > 99999 ||
+                                updatedRepair.repairCost == null
+                        }"
+                        type="number"
+                        class="form-control bg-light"
+                        aria-label="Repair Cost"
+                    />
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Repair status</td>
+                    <td *ngIf="!isRepairEdit(repair.id)">
+                        {{ repairStatus[repair.repairStatus] }}
+                    </td>
+                    <select
+                        *ngIf="isRepairEdit(repair.id)"
+                        [(ngModel)]="updatedRepair.repairStatus"
+                        class="form-select bg-light"
+                        aria-label="Set status"
+                    >
+                        <option
+                            *ngFor="let symbol of repairStatusKeys"
+                            [value]="symbol"
+                            [selected]="updatedRepair.repairStatus == symbol"
+                        >
+                            {{ repairStatus[symbol] }}
+                        </option>
+                    </select>
+                </tr>
+            </tbody>
+        </table>
 
-    <div class="mx-auto my-2 w-75">
-      <div class="d-flex justify-content-end">
-        <button *ngIf="!isRepairEdit(repair.id) && this.repairEditId == -1" class="btn btn-sm btn-success me-2"
-                (click)="enableRepairEdit(repair)">Edit Repair
-        </button>
-        <button *ngIf="!isRepairEdit(repair.id) && this.repairEditId == -1" class="btn btn-sm btn-danger me-2"
-                (click)="confirmDeleteRepair(repair.id)">Delete Repair
-        </button>
-        <button [disabled]="(repair.repairType.length < 3) || (repair.repairType.length > 30) ||
-                                (repair.repairDetails.length < 3) || (repair.repairDetails.length > 200) ||
-                                (repair.repairCost < 0) || (repair.repairCost == null) || (repair.repairCost > 99999)"
-                *ngIf="isRepairEdit(repair.id)" class="btn btn-sm btn-success me-2"
-                (click)="submitRepair(updatedRepair)">Save
-        </button>
-        <button *ngIf="isRepairEdit(repair.id)" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel
-        </button>
-      </div>
+        <div class="mx-auto my-2 w-75">
+            <div class="d-flex justify-content-end">
+                <button
+                    *ngIf="!isRepairEdit(repair.id) && this.repairEditId == -1"
+                    class="btn btn-sm btn-success me-2"
+                    (click)="enableRepairEdit(repair)"
+                >
+                    Edit Repair
+                </button>
+                <button
+                    *ngIf="!isRepairEdit(repair.id) && this.repairEditId == -1"
+                    class="btn btn-sm btn-danger me-2"
+                    (click)="confirmDeleteRepair(repair.id)"
+                >
+                    Delete Repair
+                </button>
+                <button
+                    [disabled]="
+                        repair.repairType.length < 3 ||
+                        repair.repairType.length > 30 ||
+                        repair.repairDetails.length < 3 ||
+                        repair.repairDetails.length > 200 ||
+                        repair.repairCost < 0 ||
+                        repair.repairCost == null ||
+                        repair.repairCost > 99999
+                    "
+                    *ngIf="isRepairEdit(repair.id)"
+                    class="btn btn-sm btn-success me-2"
+                    (click)="submitRepair(updatedRepair)"
+                >
+                    Save
+                </button>
+                <button
+                    *ngIf="isRepairEdit(repair.id)"
+                    class="btn btn-sm btn-secondary me-2"
+                    (click)="cancel()"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

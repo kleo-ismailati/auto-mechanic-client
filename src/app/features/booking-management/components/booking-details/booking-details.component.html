@@ -1,49 +1,83 @@
 <div class="container card my-2 py-2">
-  <div class="row">
-    <h1 class="lead fw-bold text-center">Booking Details</h1>
-  </div>
-  <div class="row">
-    <table class="table table-bordered w-75 mx-auto">
-      <tbody>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Client</td>
-        <td>{{ bookingInfo.firstName }} {{ bookingInfo.lastName }}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Auto</td>
-        <td>{{ bookingInfo.autoModel }} {{ bookingInfo.autoType }}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Full repair cost</td>
-        <td>{{ bookingInfo.totalPrice | currency:'USD' }}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Booking date</td>
-        <td>{{ bookingInfo.date | date }}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold col-sm-2 text-end">Repair status</td>
-        <td *ngIf="!isEdit">{{ repairStatus[bookingInfo.status] }}</td>
-        <select *ngIf="isEdit" [(ngModel)]="updatedBookingInfo.status" class="form-select bg-light"
-                aria-label="Set status">
-          <option *ngFor="let symbol of repairStatusKeys" [value]="symbol"
-                  [selected]="bookingInfo.status == symbol">
-            {{ repairStatus[symbol] }}
-          </option>
-        </select>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row mx-auto my-2 w-75">
-    <div class="d-flex justify-content-end">
-      <button *ngIf="(!isEdit)" class="btn btn-sm btn-primary me-2" (click)="addRepair()">Add
-        Repair
-      </button>
-      <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">Edit Booking</button>
-      <button *ngIf="isEdit" class="btn btn-sm btn-success me-2" (click)="bookingUpdate()">Save</button>
-      <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancelUpdate()">Cancel</button>
+    <div class="row">
+        <h1 class="lead fw-bold text-center">Booking Details</h1>
     </div>
-  </div>
+    <div class="row">
+        <table class="table table-bordered w-75 mx-auto">
+            <tbody>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Client</td>
+                    <td>
+                        {{ bookingInfo.firstName }} {{ bookingInfo.lastName }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Auto</td>
+                    <td>
+                        {{ bookingInfo.autoModel }} {{ bookingInfo.autoType }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Full repair cost</td>
+                    <td>{{ bookingInfo.totalPrice | currency: 'USD' }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Booking date</td>
+                    <td>{{ bookingInfo.date | date }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-sm-2 text-end">Repair status</td>
+                    <td *ngIf="!isEdit">
+                        {{ repairStatus[bookingInfo.status] }}
+                    </td>
+                    <select
+                        *ngIf="isEdit"
+                        [(ngModel)]="updatedBookingInfo.status"
+                        class="form-select bg-light"
+                        aria-label="Set status"
+                    >
+                        <option
+                            *ngFor="let symbol of repairStatusKeys"
+                            [value]="symbol"
+                            [selected]="bookingInfo.status == symbol"
+                        >
+                            {{ repairStatus[symbol] }}
+                        </option>
+                    </select>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row mx-auto my-2 w-75">
+        <div class="d-flex justify-content-end">
+            <button
+                *ngIf="!isEdit"
+                class="btn btn-sm btn-primary me-2"
+                (click)="addRepair()"
+            >
+                Add Repair
+            </button>
+            <button
+                *ngIf="!isEdit"
+                class="btn btn-sm btn-success me-2"
+                (click)="enableEdit()"
+            >
+                Edit Booking
+            </button>
+            <button
+                *ngIf="isEdit"
+                class="btn btn-sm btn-success me-2"
+                (click)="bookingUpdate()"
+            >
+                Save
+            </button>
+            <button
+                *ngIf="isEdit"
+                class="btn btn-sm btn-secondary me-2"
+                (click)="cancelUpdate()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
 </div>
-

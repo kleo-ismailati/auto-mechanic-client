@@ -1,40 +1,89 @@
 <div class="modal-header">
-  <h5 class="modal-title">Add Booking</h5>
-  <button type="button" (click)="cancelNewBooking()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+    <h5 class="modal-title">Add Booking</h5>
+    <button
+        type="button"
+        (click)="cancelNewBooking()"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+    ></button>
 </div>
 <div class="modal-body modal-can-scroll">
-  <form #newRepairsForm=ngForm>
-    <div *ngFor="let repair of newBooking.repairs; let idx=index" class="container card my-2 py-2">
-      <div class="row">
-        <button *ngIf="this.newBooking.repairs.length > 1" type="button" (click)="removeRepair(idx)"
-                class="btn-close ms-auto me-2" aria-label="Close"></button>
-        <div class="card-title"><h1 class="lead fw-bold text-center">Auto repair no.{{ idx + 1 }}</h1></div>
-        <div class="form-group col">
-          <label for="repairType{{idx}}">Repair Type</label>
-          <input [(ngModel)]="repair.repairType" required minlength="3" maxlength="30" type="text"
-                 class="form-control"
-                 id="repairType{{idx}}" name="repairType{{idx}}" #repairType=ngModel
-                 [ngClass]="{'is-invalid' : repairType.invalid}">
+    <form #newRepairsForm="ngForm">
+        <div
+            *ngFor="let repair of newBooking.repairs; let idx = index"
+            class="container card my-2 py-2"
+        >
+            <div class="row">
+                <button
+                    *ngIf="this.newBooking.repairs.length > 1"
+                    type="button"
+                    (click)="removeRepair(idx)"
+                    class="btn-close ms-auto me-2"
+                    aria-label="Close"
+                ></button>
+                <div class="card-title">
+                    <h1 class="lead fw-bold text-center">
+                        Auto repair no.{{ idx + 1 }}
+                    </h1>
+                </div>
+                <div class="form-group col">
+                    <label for="repairType{{ idx }}">Repair Type</label>
+                    <input
+                        [(ngModel)]="repair.repairType"
+                        required
+                        minlength="3"
+                        maxlength="30"
+                        type="text"
+                        class="form-control"
+                        id="repairType{{ idx }}"
+                        name="repairType{{ idx }}"
+                        #repairType="ngModel"
+                        [ngClass]="{ 'is-invalid': repairType.invalid }"
+                    />
+                </div>
+                <div class="form-group col">
+                    <label>Repair Cost</label>
+                    <input
+                        [(ngModel)]="repair.repairCost"
+                        min="0"
+                        max="99999"
+                        required
+                        type="number"
+                        class="form-control"
+                        name="repairCost{{ idx }}"
+                        #repairCost="ngModel"
+                        [ngClass]="{ 'is-invalid': repairCost.invalid }"
+                    />
+                </div>
+                <div class="form-group">
+                    <label>Repair Details</label>
+                    <textarea
+                        [(ngModel)]="repair.repairDetails"
+                        minlength="3"
+                        maxlength="200"
+                        required
+                        type="text"
+                        rows="2"
+                        class="form-control"
+                        name="repairDetails{{ idx }}"
+                        #repairDetails="ngModel"
+                        [ngClass]="{ 'is-invalid': repairDetails.invalid }"
+                    ></textarea>
+                </div>
+            </div>
         </div>
-        <div class="form-group col">
-          <label>Repair Cost</label>
-          <input [(ngModel)]="repair.repairCost" min="0" max="99999" required type="number" class="form-control"
-                 name="repairCost{{idx}}" #repairCost=ngModel [ngClass]="{'is-invalid' : repairCost.invalid}">
-        </div>
-        <div class="form-group">
-          <label>Repair Details</label>
-          <textarea [(ngModel)]="repair.repairDetails" minlength="3" maxlength="200" required type="text" rows="2"
-                    class="form-control" name="repairDetails{{idx}}" #repairDetails=ngModel
-                    [ngClass]="{'is-invalid' : repairDetails.invalid}"></textarea>
-        </div>
-      </div>
-    </div>
-  </form>
+    </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-sm btn-primary me-2" (click)="addOtherRepair()">Add Repair</button>
-  <button [disabled]="newRepairsForm.invalid" class="btn btn-sm btn-success me-2" (click)="submitNewBooking()">
-    Save Booking
-  </button>
+    <button class="btn btn-sm btn-primary me-2" (click)="addOtherRepair()">
+        Add Repair
+    </button>
+    <button
+        [disabled]="newRepairsForm.invalid"
+        class="btn btn-sm btn-success me-2"
+        (click)="submitNewBooking()"
+    >
+        Save Booking
+    </button>
 </div>

@@ -1,91 +1,181 @@
 <div class="container card my-2 py-2">
-  <div class="row">
-    <h1 class="lead fw-bold text-center">Auto Details</h1>
-  </div>
-  <div class="row">
-    <form #editAutoForm=ngForm>
-      <table class="table table-bordered w-75 mx-auto">
-        <tbody>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Model</td>
-          <td *ngIf="!isEdit">{{ this.auto.autoModel }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedAuto.autoModel" type="text" name="editAutoModel" required minlength="3"
-                   maxlength="15"
-                   #editAutoModel=ngModel [ngClass]="{'is-invalid' : editAutoModel.invalid}"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Type</td>
-          <td *ngIf="!isEdit">{{ this.auto.autoType }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedAuto.autoType" type="text" name="editAutoType" required minlength="3"
-                   maxlength="15"
-                   #editAutoType=ngModel [ngClass]="{'is-invalid' : editAutoType.invalid}"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Year</td>
-          <td *ngIf="!isEdit">{{ this.auto.year }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedAuto.year" #year=ngModel name="year" type="text" required
-                   pattern="^(19|20)\d{2}$"
-                   [ngClass]="{'is-invalid' : year.invalid }" class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Color</td>
-          <td *ngIf="!isEdit">{{ this.auto.color }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedAuto.color" name="color" type="text" required minlength="3" maxlength="15"
-                   #color=ngModel [ngClass]="{'is-invalid' : color.invalid}"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Description</td>
-          <td *ngIf="!isEdit">{{ this.auto.autoDescription }}</td>
-          <td *ngIf="isEdit">
-            <input [(ngModel)]="this.updatedAuto.autoDescription" type="text" name="editAutoDescription"
-                   class="form-control form-control-sm bg-light">
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold col-sm-2 text-end">Image</td>
-          <td *ngIf="!isEdit && (this.auto.imageId!=null)" class="text-start">
-            <img [src]="this.image" width="200" height="200" alt="autoImage" class="img-thumbnail">
-          </td>
-          <td *ngIf="!isEdit && (this.auto.imageId==null)" class="fw-lighter fst-italic">No image set</td>
-          <td *ngIf="isEdit" class="text-center">
-            <form (ngSubmit)="onSubmitImage()" enctype="multipart/form-data" class="row needs-validation" novalidate>
-              <div class="mb-3">
-                <label for="image" class="form-label">Choose an image:</label>
-                <input type="file" name="image" id="image" (change)="onFileSelected($event)" class="form-control"
-                       required>
-                <div class="invalid-feedback">Please choose an image.</div>
-                <button type="submit" class="btn btn-primary my-2">Upload</button>
-              </div>
-            </form>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </form>
-  </div>
-  <div class="row mx-auto my-2 w-75">
-    <div class="d-flex justify-content-end">
-      <button *ngIf="!isEdit" class="btn btn-sm btn-primary me-2" (click)="addNewBooking()">
-        Add Booking
-      </button>
-      <button *ngIf="!isEdit" class="btn btn-sm btn-success me-2" (click)="enableEdit()">
-        Edit Auto
-      </button>
-      <button [disabled]="editAutoForm.invalid" *ngIf="isEdit" class="btn btn-sm btn-success me-2"
-              (click)="autoUpdate()">Save
-      </button>
-      <button *ngIf="isEdit" class="btn btn-sm btn-secondary me-2" (click)="cancel()">Cancel</button>
+    <div class="row">
+        <h1 class="lead fw-bold text-center">Auto Details</h1>
     </div>
-  </div>
+    <div class="row">
+        <form #editAutoForm="ngForm">
+            <table class="table table-bordered w-75 mx-auto">
+                <tbody>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Model</td>
+                        <td *ngIf="!isEdit">{{ this.auto.autoModel }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedAuto.autoModel"
+                                type="text"
+                                name="editAutoModel"
+                                required
+                                minlength="3"
+                                maxlength="15"
+                                #editAutoModel="ngModel"
+                                [ngClass]="{
+                                    'is-invalid': editAutoModel.invalid
+                                }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Type</td>
+                        <td *ngIf="!isEdit">{{ this.auto.autoType }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedAuto.autoType"
+                                type="text"
+                                name="editAutoType"
+                                required
+                                minlength="3"
+                                maxlength="15"
+                                #editAutoType="ngModel"
+                                [ngClass]="{
+                                    'is-invalid': editAutoType.invalid
+                                }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Year</td>
+                        <td *ngIf="!isEdit">{{ this.auto.year }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedAuto.year"
+                                #year="ngModel"
+                                name="year"
+                                type="text"
+                                required
+                                pattern="^(19|20)\d{2}$"
+                                [ngClass]="{ 'is-invalid': year.invalid }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Color</td>
+                        <td *ngIf="!isEdit">{{ this.auto.color }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedAuto.color"
+                                name="color"
+                                type="text"
+                                required
+                                minlength="3"
+                                maxlength="15"
+                                #color="ngModel"
+                                [ngClass]="{ 'is-invalid': color.invalid }"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Description</td>
+                        <td *ngIf="!isEdit">{{ this.auto.autoDescription }}</td>
+                        <td *ngIf="isEdit">
+                            <input
+                                [(ngModel)]="this.updatedAuto.autoDescription"
+                                type="text"
+                                name="editAutoDescription"
+                                class="form-control form-control-sm bg-light"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold col-sm-2 text-end">Image</td>
+                        <td
+                            *ngIf="!isEdit && this.auto.imageId != null"
+                            class="text-start"
+                        >
+                            <img
+                                [src]="this.image"
+                                width="200"
+                                height="200"
+                                alt="autoImage"
+                                class="img-thumbnail"
+                            />
+                        </td>
+                        <td
+                            *ngIf="!isEdit && this.auto.imageId == null"
+                            class="fw-lighter fst-italic"
+                        >
+                            No image set
+                        </td>
+                        <td *ngIf="isEdit" class="text-center">
+                            <form
+                                (ngSubmit)="onSubmitImage()"
+                                enctype="multipart/form-data"
+                                class="row needs-validation"
+                                novalidate
+                            >
+                                <div class="mb-3">
+                                    <label for="image" class="form-label"
+                                        >Choose an image:</label
+                                    >
+                                    <input
+                                        type="file"
+                                        name="image"
+                                        id="image"
+                                        (change)="onFileSelected($event)"
+                                        class="form-control"
+                                        required
+                                    />
+                                    <div class="invalid-feedback">
+                                        Please choose an image.
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary my-2"
+                                    >
+                                        Upload
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="row mx-auto my-2 w-75">
+        <div class="d-flex justify-content-end">
+            <button
+                *ngIf="!isEdit"
+                class="btn btn-sm btn-primary me-2"
+                (click)="addNewBooking()"
+            >
+                Add Booking
+            </button>
+            <button
+                *ngIf="!isEdit"
+                class="btn btn-sm btn-success me-2"
+                (click)="enableEdit()"
+            >
+                Edit Auto
+            </button>
+            <button
+                [disabled]="editAutoForm.invalid"
+                *ngIf="isEdit"
+                class="btn btn-sm btn-success me-2"
+                (click)="autoUpdate()"
+            >
+                Save
+            </button>
+            <button
+                *ngIf="isEdit"
+                class="btn btn-sm btn-secondary me-2"
+                (click)="cancel()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
 </div>
