@@ -30,6 +30,7 @@
                 <div class="form-group col">
                     <label for="repairType{{ idx }}">Repair Type</label>
                     <input
+                        #repairTypeInput
                         [(ngModel)]="repair.repairType"
                         required
                         minlength="3"
@@ -39,7 +40,10 @@
                         id="repairType{{ idx }}"
                         name="repairType{{ idx }}"
                         #repairType="ngModel"
-                        [ngClass]="{ 'is-invalid': repairType.invalid }"
+                        [ngClass]="{
+                            'is-invalid':
+                                repairType.invalid && repairType.touched
+                        }"
                     />
                 </div>
                 <div class="form-group col">
@@ -53,7 +57,10 @@
                         class="form-control"
                         name="repairCost{{ idx }}"
                         #repairCost="ngModel"
-                        [ngClass]="{ 'is-invalid': repairCost.invalid }"
+                        [ngClass]="{
+                            'is-invalid':
+                                repairCost.invalid && repairCost.touched
+                        }"
                     />
                 </div>
                 <div class="form-group">
@@ -68,7 +75,10 @@
                         class="form-control"
                         name="repairDetails{{ idx }}"
                         #repairDetails="ngModel"
-                        [ngClass]="{ 'is-invalid': repairDetails.invalid }"
+                        [ngClass]="{
+                            'is-invalid':
+                                repairDetails.invalid && repairDetails.touched
+                        }"
                     ></textarea>
                 </div>
             </div>

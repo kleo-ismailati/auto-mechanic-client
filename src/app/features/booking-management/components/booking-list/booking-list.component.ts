@@ -5,11 +5,11 @@ import {
     Input,
     Output,
     ViewChild,
-} from '@angular/core'
-import { PagedResponse } from '../../../../core/models/paged.response.model'
-import { RepairStatus } from '../../../../shared/enums/repair-status-enum'
-import { BookingItem } from '../../models/booking-item.model'
-import { Table } from 'primeng/table'
+} from '@angular/core';
+import { PagedResponse } from '../../../../core/models/paged.response.model';
+import { RepairStatus } from '../../../../shared/enums/repair-status-enum';
+import { BookingItem } from '../../models/booking-item.model';
+import { Table } from 'primeng/table';
 
 @Component({
     selector: 'app-booking-list',
@@ -17,44 +17,44 @@ import { Table } from 'primeng/table'
     styleUrls: ['./booking-list.component.css'],
 })
 export class BookingListComponent {
-    @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>
+    @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-    @Output() deleteBooking = new EventEmitter<number>()
-    @Output() switchToPage = new EventEmitter<number>()
-    @Input() bookings!: PagedResponse<BookingItem>
+    @Output() deleteBooking = new EventEmitter<number>();
+    @Output() switchToPage = new EventEmitter<number>();
+    @Input() bookings!: PagedResponse<BookingItem>;
 
-    protected readonly RepairStatus = RepairStatus
+    protected readonly RepairStatus = RepairStatus;
 
     changePage(event: any) {
-        this.switchToPage.emit(+event.page)
+        this.switchToPage.emit(+event.page);
     }
 
     getSeverity(repairStatus: string) {
         switch (repairStatus) {
             case 'Done':
-                return 'success'
+                return 'success';
             case 'In Progress':
-                return 'info'
+                return 'info';
             case 'To Be Done':
-                return 'warning'
+                return 'warning';
             default:
-                return 'danger'
+                return 'danger';
         }
     }
 
     filter(dataTable: Table, event: Event | null) {
         if (event) {
-            const element: HTMLInputElement = event?.target as HTMLInputElement
-            dataTable.filterGlobal(element.value, 'contains')
+            const element: HTMLInputElement = event?.target as HTMLInputElement;
+            dataTable.filterGlobal(element.value, 'contains');
         }
     }
 
     clear(table: Table) {
-        this.searchInput.nativeElement.value = ''
-        table.clear()
+        this.searchInput.nativeElement.value = '';
+        table.clear();
     }
 
     confirmDelete(id: number) {
-        this.deleteBooking.emit(id)
+        this.deleteBooking.emit(id);
     }
 }

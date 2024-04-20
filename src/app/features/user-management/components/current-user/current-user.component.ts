@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core'
-import { UserSession } from '../../models/user-session.model'
+import { Component, Input } from '@angular/core';
+import { UserSession } from '../../models/user-session.model';
 
 @Component({
     selector: 'app-current-user',
@@ -7,5 +7,5 @@ import { UserSession } from '../../models/user-session.model'
     styleUrls: ['./current-user.component.css'],
 })
 export class CurrentUserComponent {
-    @Input() loggedUser!: UserSession
+    @Input() loggedUser!: UserSession;
 }

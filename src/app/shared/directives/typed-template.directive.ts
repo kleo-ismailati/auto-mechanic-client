@@ -1,10 +1,10 @@
-import { Directive, Input, TemplateRef } from '@angular/core'
+import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({ selector: 'ng-template[typedTemplate]' })
 export class TypedTemplateDirective<TypeToken> {
     // how you tell the directive what the type should be
     @Input('typedTemplate')
-    typeToken!: TypeToken
+    typeToken!: TypeToken;
 
     // the directive gets the template from Angular
     constructor(private contentTemplate: TemplateRef<TypeToken>) {}
@@ -14,6 +14,6 @@ export class TypedTemplateDirective<TypeToken> {
         dir: TypedTemplateDirective<TypeToken>,
         ctx: unknown
     ): ctx is TypeToken {
-        return true
+        return true;
     }
 }

@@ -1,9 +1,9 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core'
-import { PagedResponse } from '../../../../core/models/paged.response.model'
-import { BookingItem } from '../../models/booking-item.model'
-import { BookingManagementService } from '../../booking-management.service'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { AlertService } from '../../../../core/services/alert.service'
+import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { PagedResponse } from '../../../../core/models/paged.response.model';
+import { BookingItem } from '../../models/booking-item.model';
+import { BookingManagementService } from '../../booking-management.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from '../../../../core/services/alert.service';
 
 @Component({
     selector: 'app-booking-management-page',
@@ -11,16 +11,16 @@ import { AlertService } from '../../../../core/services/alert.service'
     styleUrls: ['./booking-management-page.component.css'],
 })
 export class BookingManagementPageComponent {
-    @ViewChild('confirmModal') confirmModal!: TemplateRef<any>
+    @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;
 
     bookings: PagedResponse<BookingItem> = {
         pageNo: 0,
         size: 0,
         total: 0,
         result: [],
-    }
+    };
 
-    deleteId: number = -1
+    deleteId: number = -1;
 
     constructor(
         private bookingManagementService: BookingManagementService,
@@ -32,17 +32,17 @@ export class BookingManagementPageComponent {
         this.bookingManagementService
             .getBookingList()
             .subscribe((data: PagedResponse<BookingItem>) => {
-                this.bookings = data
-            })
+                this.bookings = data;
+            });
     }
 
     onDeleteBooking(bookingId: number) {
-        this.deleteId = bookingId
-        this.modalService.open(this.confirmModal)
+        this.deleteId = bookingId;
+        this.modalService.open(this.confirmModal);
     }
 
     onDeleteBookingConfirmed(isConfirmed: boolean) {
-        this.modalService.dismissAll()
+        this.modalService.dismissAll();
         if (isConfirmed) {
             this.bookingManagementService
                 .deleteBooking(this.deleteId)
@@ -50,12 +50,12 @@ export class BookingManagementPageComponent {
                     this.alertService.warn(
                         'Booking with id ' + this.deleteId + ' deleted!',
                         { autoClose: true }
-                    )
-                    this.deleteId = -1
-                    this.ngOnInit()
-                })
+                    );
+                    this.deleteId = -1;
+                    this.ngOnInit();
+                });
         } else {
-            this.deleteId = -1
+            this.deleteId = -1;
         }
     }
 
@@ -63,7 +63,7 @@ export class BookingManagementPageComponent {
         this.bookingManagementService
             .getBookingPage(pageNo)
             .subscribe((data: PagedResponse<BookingItem>) => {
-                this.bookings = data
-            })
+                this.bookings = data;
+            });
     }
 }

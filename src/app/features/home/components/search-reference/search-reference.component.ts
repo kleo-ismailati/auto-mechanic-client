@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'app-search-reference',
@@ -6,18 +6,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
     styleUrls: ['./search-reference.component.css'],
 })
 export class SearchReferenceComponent implements OnInit {
-    @Output() inputReferenceId = new EventEmitter<string>()
+    @Output() inputReferenceId = new EventEmitter<string>();
 
-    referenceId: string = ''
+    referenceId: string = '';
 
     ngOnInit(): void {
-        this.referenceId = ''
+        this.referenceId = '';
     }
 
     viewBooking() {
         if (this.referenceId && this.referenceId.length >= 30) {
-            this.inputReferenceId.emit(this.referenceId)
-            this.ngOnInit()
+            this.inputReferenceId.emit(this.referenceId);
+            this.ngOnInit();
         }
     }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { Stats } from '../../models/stats.model'
-import { AdminDashboardService } from '../../admin-dashboard.service'
+import { Component, OnInit } from '@angular/core';
+import { Stats } from '../../models/stats.model';
+import { AdminDashboardService } from '../../admin-dashboard.service';
 
 @Component({
     selector: 'app-admin-dashboard-page',
@@ -13,13 +13,13 @@ export class AdminDashboardPageComponent implements OnInit {
         totalIncome: 0,
         totalClients: 0,
         totalBookingsActive: 0,
-    }
+    };
 
     constructor(private adminDashboardService: AdminDashboardService) {}
 
     ngOnInit(): void {
         this.adminDashboardService.getStats().subscribe((stats: Stats) => {
-            this.data = stats
-        })
+            this.data = stats;
+        });
     }
 }

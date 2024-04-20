@@ -25,22 +25,6 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto me-2">
                         <li
-                            *ngIf="!(loggedUser | async)?.token"
-                            class="nav-item"
-                        >
-                            <a
-                                class="nav-link"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#navbarNavDropdown.show"
-                                routerLink="/"
-                            >
-                                <i
-                                    class="pi align-baseline small pi-home mx-1"
-                                ></i>
-                                Home
-                            </a>
-                        </li>
-                        <li
                             *ngIf="(loggedUser | async)?.token"
                             class="nav-item"
                         >
@@ -49,6 +33,7 @@
                                 data-bs-toggle="collapse"
                                 data-bs-target="#navbarNavDropdown.show"
                                 routerLink="/dashboard"
+                                routerLinkActive="active"
                             >
                                 <i
                                     class="pi align-baseline small pi-chart-bar mx-1"
@@ -65,6 +50,7 @@
                                 data-bs-toggle="collapse"
                                 data-bs-target="#navbarNavDropdown.show"
                                 routerLink="/bookings"
+                                routerLinkActive="active"
                             >
                                 <i
                                     class="pi align-baseline small pi-book mx-1"
@@ -81,6 +67,7 @@
                                 data-bs-toggle="collapse"
                                 data-bs-target="#navbarNavDropdown.show"
                                 routerLink="/clients"
+                                routerLinkActive="active"
                             >
                                 <i
                                     class="pi align-baseline small pi-users mx-1"
@@ -97,6 +84,7 @@
                                 data-bs-toggle="collapse"
                                 data-bs-target="#navbarNavDropdown.show"
                                 routerLink="/users"
+                                routerLinkActive="active"
                             >
                                 <i
                                     class="pi align-baseline small pi-user mx-1"

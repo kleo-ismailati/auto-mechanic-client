@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { Auto } from '../../models/auto.model'
-import { Client } from '../../models/client.model'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Auto } from '../../models/auto.model';
+import { Client } from '../../models/client.model';
 
 @Component({
     selector: 'app-auto-details',
@@ -8,17 +8,17 @@ import { Client } from '../../models/client.model'
     styleUrls: ['./auto-details.component.css'],
 })
 export class AutoDetailsComponent implements OnInit {
-    @Input() auto!: Auto
-    @Input() image!: Client
-    @Output() changeImage = new EventEmitter<FormData>()
-    @Output() updateAuto = new EventEmitter<Auto>()
-    @Output() isAddingBooking = new EventEmitter<boolean>()
+    @Input() auto!: Auto;
+    @Input() image!: Client;
+    @Output() changeImage = new EventEmitter<FormData>();
+    @Output() updateAuto = new EventEmitter<Auto>();
+    @Output() isAddingBooking = new EventEmitter<boolean>();
 
-    updatedAuto!: Auto
+    updatedAuto!: Auto;
 
-    selectedFile: File | null = null
+    selectedFile: File | null = null;
 
-    isEdit: boolean = false
+    isEdit: boolean = false;
 
     ngOnInit(): void {
         this.updatedAuto = {
@@ -28,16 +28,16 @@ export class AutoDetailsComponent implements OnInit {
             autoModel: this.auto.autoModel,
             year: this.auto.year,
             color: this.auto.color,
-        }
+        };
     }
 
     autoUpdate() {
-        this.isEdit = false
-        this.updateAuto.emit(this.updatedAuto)
+        this.isEdit = false;
+        this.updateAuto.emit(this.updatedAuto);
     }
 
     enableEdit() {
-        this.isEdit = true
+        this.isEdit = true;
 
         this.updatedAuto = {
             id: this.auto.id,
@@ -46,30 +46,30 @@ export class AutoDetailsComponent implements OnInit {
             autoModel: this.auto.autoModel,
             year: this.auto.year,
             color: this.auto.color,
-        }
+        };
     }
 
     cancel() {
-        this.isEdit = false
-        this.ngOnInit()
+        this.isEdit = false;
+        this.ngOnInit();
     }
 
     onFileSelected(event: any) {
-        this.selectedFile = event.target.files[0] as File
+        this.selectedFile = event.target.files[0] as File;
     }
 
     onSubmitImage() {
         if (this.selectedFile) {
-            const formData = new FormData()
-            formData.append('image', this.selectedFile)
+            const formData = new FormData();
+            formData.append('image', this.selectedFile);
 
-            this.changeImage.emit(formData)
+            this.changeImage.emit(formData);
 
-            this.isEdit = false
+            this.isEdit = false;
         }
     }
 
     addNewBooking() {
-        this.isAddingBooking.emit(true)
+        this.isAddingBooking.emit(true);
     }
 }

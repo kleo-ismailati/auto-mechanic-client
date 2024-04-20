@@ -1,12 +1,12 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core'
-import { Breadcrumb } from '../../../../shared/models/breadcrumb.model'
-import { Auto } from '../../models/auto.model'
-import { HttpHeaders } from '@angular/common/http'
-import { ClientManagementService } from '../../client-management.service'
-import { ActivatedRoute, Router } from '@angular/router'
-import { AlertService } from '../../../../core/services/alert.service'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { BookingCreate } from '../../../booking-management/models/booking-create.model'
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Breadcrumb } from '../../../../shared/models/breadcrumb.model';
+import { Auto } from '../../models/auto.model';
+import { HttpHeaders } from '@angular/common/http';
+import { ClientManagementService } from '../../client-management.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../../../core/services/alert.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BookingCreate } from '../../../booking-management/models/booking-create.model';
 
 @Component({
     selector: 'app-auto-details-page',
@@ -14,7 +14,7 @@ import { BookingCreate } from '../../../booking-management/models/booking-create
     styleUrls: ['./auto-details-page.component.css'],
 })
 export class AutoDetailsPageComponent implements OnInit {
-    @ViewChild('addBookingModal') addBookingModal!: TemplateRef<any>
+    @ViewChild('addBookingModal') addBookingModal!: TemplateRef<any>;
 
     breadcrumbParentsList: Breadcrumb[] = [
         {
@@ -25,7 +25,7 @@ export class AutoDetailsPageComponent implements OnInit {
             link: '/clients/0',
             label: '',
         },
-    ]
+    ];
 
     auto: Auto = {
         autoDescription: '',
@@ -35,13 +35,13 @@ export class AutoDetailsPageComponent implements OnInit {
         id: 0,
         year: '',
         imageId: '',
-    }
+    };
 
-    autoId: number = -1
-    clientId: number = -1
+    autoId: number = -1;
+    clientId: number = -1;
 
-    headers: HttpHeaders = new HttpHeaders().set('Accept', 'image/*')
-    imageToShow: any
+    headers: HttpHeaders = new HttpHeaders().set('Accept', 'image/*');
+    imageToShow: any;
 
     constructor(
         private clientManagementService: ClientManagementService,
@@ -52,39 +52,39 @@ export class AutoDetailsPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.clientId = +this.route.snapshot.paramMap.get('id')!
-        this.autoId = +this.route.snapshot.paramMap.get('autoId')!
+        this.clientId = +this.route.snapshot.paramMap.get('id')!;
+        this.autoId = +this.route.snapshot.paramMap.get('autoId')!;
         this.clientManagementService
             .getAuto(this.autoId)
             .subscribe((data: Auto) => {
-                this.auto = data
+                this.auto = data;
                 if (this.auto.imageId != null) {
                     this.clientManagementService
                         .getImage(this.auto.imageId, this.headers)
                         .subscribe((image) => {
-                            this.createImageFromBlob(image)
-                        })
+                            this.createImageFromBlob(image);
+                        });
                 }
-            })
+            });
 
         this.breadcrumbParentsList[1] = {
             link: `/clients/${this.clientId}`,
             label: 'Current client',
-        }
+        };
     }
 
     createImageFromBlob(image: Blob) {
-        let reader = new FileReader()
+        let reader = new FileReader();
         reader.addEventListener(
             'load',
             () => {
-                this.imageToShow = reader.result
+                this.imageToShow = reader.result;
             },
             false
-        )
+        );
 
         if (image) {
-            reader.readAsDataURL(image)
+            reader.readAsDataURL(image);
         }
     }
 
@@ -94,14 +94,14 @@ export class AutoDetailsPageComponent implements OnInit {
             .subscribe(() => {
                 this.alertService.success('Auto was updated successfully!', {
                     autoClose: true,
-                })
-                this.ngOnInit()
-            })
+                });
+                this.ngOnInit();
+            });
     }
 
     onIsAddingBooking(isAddingBooking: boolean) {
         if (isAddingBooking) {
-            this.modalService.open(this.addBookingModal)
+            this.modalService.open(this.addBookingModal);
         }
     }
 
@@ -116,34 +116,34 @@ export class AutoDetailsPageComponent implements OnInit {
                             autoClose: true,
                             keepAfterRouteChange: false,
                         }
-                    )
-                    this.ngOnInit()
+                    );
+                    this.ngOnInit();
                 },
                 error: () => {
                     this.alertService.error('Image could not be changed!', {
                         autoClose: true,
                         keepAfterRouteChange: false,
-                    })
+                    });
                 },
-            })
+            });
     }
 
     onAddBooking(booking: BookingCreate | null) {
-        this.modalService.dismissAll()
+        this.modalService.dismissAll();
         if (booking) {
-            booking.clientId = this.clientId
-            booking.autoId = this.autoId
+            booking.clientId = this.clientId;
+            booking.autoId = this.autoId;
             this.clientManagementService
                 .createBooking(booking)
                 .subscribe(() => {
                     this.alertService.success(
                         'Booking was added successfully! Redirecting to Bookings...',
                         { autoClose: true, keepAfterRouteChange: true }
-                    )
+                    );
                     setTimeout(() => {
-                        this.router.navigate(['bookings']).then((r) => r)
-                    }, 3000)
-                })
+                        this.router.navigate(['bookings']).then((r) => r);
+                    }, 3000);
+                });
         }
     }
 }

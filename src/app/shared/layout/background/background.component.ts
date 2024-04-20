@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-background',
@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core'
     styleUrls: ['./background.component.css'],
 })
 export class BackgroundComponent {
-    @Input() hasBanner: boolean = false
+    @Input() hasBanner: boolean = false;
 }

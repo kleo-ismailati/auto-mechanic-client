@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { Client } from '../../models/client.model'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Client } from '../../models/client.model';
 
 @Component({
     selector: 'app-client-details',
@@ -7,12 +7,12 @@ import { Client } from '../../models/client.model'
     styleUrls: ['./client-details.component.css'],
 })
 export class ClientDetailsComponent implements OnInit {
-    @Input() clientInfo!: Client
-    @Output() updateClient = new EventEmitter<Client>()
+    @Input() clientInfo!: Client;
+    @Output() updateClient = new EventEmitter<Client>();
 
-    updatedClient!: Client
+    updatedClient!: Client;
 
-    isEdit: boolean = false
+    isEdit: boolean = false;
 
     ngOnInit(): void {
         this.updatedClient = {
@@ -22,11 +22,11 @@ export class ClientDetailsComponent implements OnInit {
             firstName: this.clientInfo.firstName,
             lastName: this.clientInfo.lastName,
             phoneNumber: this.clientInfo.phoneNumber,
-        }
+        };
     }
 
     enableEdit() {
-        this.isEdit = true
+        this.isEdit = true;
         this.updatedClient = {
             id: this.clientInfo.id,
             address: this.clientInfo.address,
@@ -34,17 +34,17 @@ export class ClientDetailsComponent implements OnInit {
             firstName: this.clientInfo.firstName,
             lastName: this.clientInfo.lastName,
             phoneNumber: this.clientInfo.phoneNumber,
-        }
+        };
     }
 
     editClient() {
-        this.isEdit = false
+        this.isEdit = false;
 
-        this.updateClient.emit(this.updatedClient)
+        this.updateClient.emit(this.updatedClient);
     }
 
     cancel() {
-        this.isEdit = false
-        this.ngOnInit()
+        this.isEdit = false;
+        this.ngOnInit();
     }
 }

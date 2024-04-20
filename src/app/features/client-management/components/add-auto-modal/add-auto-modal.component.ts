@@ -1,22 +1,31 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
-import { AutoCreate } from '../../models/auto-create.model'
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    OnInit,
+    Output,
+    ViewChild,
+} from '@angular/core';
+import { AutoCreate } from '../../models/auto-create.model';
 import {
     AbstractControl,
     FormBuilder,
     FormControl,
     FormGroup,
     Validators,
-} from '@angular/forms'
+} from '@angular/forms';
 
 @Component({
     selector: 'app-add-auto-modal',
     templateUrl: './add-auto-modal.component.html',
     styleUrls: ['./add-auto-modal.component.css'],
 })
-export class AddAutoModalComponent implements OnInit {
-    @Output() addAuto = new EventEmitter<AutoCreate | null>()
+export class AddAutoModalComponent implements OnInit, AfterViewInit {
+    @ViewChild('autoType') autoType!: ElementRef;
+    @Output() addAuto = new EventEmitter<AutoCreate | null>();
 
-    newAutoForm: FormGroup
+    newAutoForm: FormGroup;
 
     newAuto: AutoCreate = {
         autoType: '',
@@ -24,7 +33,7 @@ export class AddAutoModalComponent implements OnInit {
         autoModel: '',
         color: '',
         year: '',
-    }
+    };
 
     constructor(private formBuilder: FormBuilder) {
         this.newAutoForm = this.formBuilder.group({
@@ -48,7 +57,7 @@ export class AddAutoModalComponent implements OnInit {
                 Validators.pattern('^(19|20)\\d{2}$'),
             ]),
             autoDescription: new FormControl(''),
-        })
+        });
     }
 
     ngOnInit(): void {
@@ -58,12 +67,12 @@ export class AddAutoModalComponent implements OnInit {
             autoModel: '',
             color: '',
             year: '',
-        }
-        this.newAutoForm.reset()
+        };
+        this.newAutoForm.reset();
     }
 
     get f(): { [key: string]: AbstractControl } {
-        return this.newAutoForm.controls
+        return this.newAutoForm.controls;
     }
 
     submitNewAuto() {
@@ -73,12 +82,16 @@ export class AddAutoModalComponent implements OnInit {
             color: this.newAutoForm.value['color'],
             autoDescription: this.newAutoForm.value['autoDescription'],
             year: this.newAutoForm.value['year'],
-        }
-        this.addAuto.emit(this.newAuto)
+        };
+        this.addAuto.emit(this.newAuto);
     }
 
     cancelNewAuto() {
-        this.addAuto.emit(null)
-        this.ngOnInit()
+        this.addAuto.emit(null);
+        this.ngOnInit();
+    }
+
+    ngAfterViewInit(): void {
+        this.autoType.nativeElement.focus();
     }
 }

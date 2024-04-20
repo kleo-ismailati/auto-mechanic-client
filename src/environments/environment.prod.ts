@@ -14,4 +14,4 @@ export const environment = {
     users_url: '/users',
     stats_url: '/api/stats',
     auth_url: '/auth/login',
-}
+};

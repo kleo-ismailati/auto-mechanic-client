@@ -1,13 +1,22 @@
-import { Component, EventEmitter, Output } from '@angular/core'
-import { BookingCreate } from '../../../booking-management/models/booking-create.model'
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Output,
+    QueryList,
+    ViewChildren,
+} from '@angular/core';
+import { BookingCreate } from '../../../booking-management/models/booking-create.model';
 
 @Component({
     selector: 'app-add-booking-modal',
     templateUrl: './add-booking-modal.component.html',
     styleUrls: ['./add-booking-modal.component.css'],
 })
-export class AddBookingModalComponent {
-    @Output() addBooking = new EventEmitter<BookingCreate | null>()
+export class AddBookingModalComponent implements AfterViewInit {
+    @ViewChildren('repairTypeInput') repairTypeInputs!: QueryList<ElementRef>;
+    @Output() addBooking = new EventEmitter<BookingCreate | null>();
 
     newBooking: BookingCreate = {
         autoId: 0,
@@ -19,11 +28,11 @@ export class AddBookingModalComponent {
                 repairType: '',
             },
         ],
-    }
+    };
 
     submitNewBooking() {
-        this.addBooking.emit(this.newBooking)
-        this.resetBooking()
+        this.addBooking.emit(this.newBooking);
+        this.resetBooking();
     }
 
     addOtherRepair() {
@@ -31,12 +40,12 @@ export class AddBookingModalComponent {
             repairCost: 0,
             repairDetails: '',
             repairType: '',
-        })
+        });
     }
 
     cancelNewBooking() {
-        this.resetBooking()
-        this.addBooking.emit(null)
+        this.resetBooking();
+        this.addBooking.emit(null);
     }
 
     resetBooking() {
@@ -50,14 +59,18 @@ export class AddBookingModalComponent {
                     repairType: '',
                 },
             ],
-        }
+        };
     }
 
     removeRepair(idx: number) {
         if (this.newBooking.repairs.length > 1) {
             this.newBooking.repairs = this.newBooking.repairs.filter(
                 (repair, index) => index !== idx
-            )
+            );
         }
+    }
+
+    ngAfterViewInit(): void {
+        this.repairTypeInputs.first.nativeElement.focus();
     }
 }

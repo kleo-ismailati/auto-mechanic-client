@@ -1,22 +1,31 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    OnInit,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
     FormControl,
     FormGroup,
     Validators,
-} from '@angular/forms'
-import { ClientCreate } from '../../models/client-create.model'
+} from '@angular/forms';
+import { ClientCreate } from '../../models/client-create.model';
 
 @Component({
     selector: 'app-add-client-modal',
     templateUrl: './add-client-modal.component.html',
     styleUrls: ['./add-client-modal.component.css'],
 })
-export class AddClientModalComponent implements OnInit {
-    @Output() addClient = new EventEmitter<ClientCreate | null>()
+export class AddClientModalComponent implements OnInit, AfterViewInit {
+    @ViewChild('firstName') firstName!: ElementRef;
+    @Output() addClient = new EventEmitter<ClientCreate | null>();
 
-    newClientForm: FormGroup
+    newClientForm: FormGroup;
 
     newClient: ClientCreate = {
         address: '',
@@ -24,7 +33,7 @@ export class AddClientModalComponent implements OnInit {
         firstName: '',
         lastName: '',
         phoneNumber: '',
-    }
+    };
 
     constructor(private formBuilder: FormBuilder) {
         this.newClientForm = this.formBuilder.group({
@@ -48,27 +57,27 @@ export class AddClientModalComponent implements OnInit {
                 Validators.minLength(3),
                 Validators.maxLength(100),
             ]),
-        })
+        });
     }
 
     ngOnInit(): void {
-        this.newClientForm.reset()
+        this.newClientForm.reset();
         this.newClient = {
             address: '',
             email: '',
             firstName: '',
             lastName: '',
             phoneNumber: '',
-        }
+        };
     }
 
     get f(): { [key: string]: AbstractControl } {
-        return this.newClientForm.controls
+        return this.newClientForm.controls;
     }
 
     cancelAddNewClient() {
-        this.newClientForm.reset()
-        this.addClient.emit(null)
+        this.newClientForm.reset();
+        this.addClient.emit(null);
     }
 
     addNewClient() {
@@ -78,8 +87,12 @@ export class AddClientModalComponent implements OnInit {
             phoneNumber: this.newClientForm.value['phoneNumber'],
             email: this.newClientForm.value['email'],
             address: this.newClientForm.value['address'],
-        }
-        this.addClient.emit(this.newClient)
-        this.ngOnInit()
+        };
+        this.addClient.emit(this.newClient);
+        this.ngOnInit();
+    }
+
+    ngAfterViewInit(): void {
+        this.firstName.nativeElement.focus();
     }
 }

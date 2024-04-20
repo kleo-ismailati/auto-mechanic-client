@@ -1,3 +1,3 @@
 export interface BookingItemRepair {
-    repairCost: number
+    repairCost: number;
 }

@@ -1,28 +1,36 @@
-import { Component, EventEmitter, Output } from '@angular/core'
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
     FormControl,
     FormGroup,
     Validators,
-} from '@angular/forms'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { RepairCreate } from '../../../../shared/models/repair.model'
+} from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RepairCreate } from '../../../../shared/models/repair.model';
 
 @Component({
     selector: 'app-add-repair-modal',
     templateUrl: './add-repair-modal.component.html',
     styleUrls: ['./add-repair-modal.component.css'],
 })
-export class AddRepairModalComponent {
-    @Output() addRepair = new EventEmitter<RepairCreate | null>()
+export class AddRepairModalComponent implements AfterViewInit {
+    @ViewChild('repairType') repairType!: ElementRef;
+    @Output() addRepair = new EventEmitter<RepairCreate | null>();
 
-    newRepairForm: FormGroup
+    newRepairForm: FormGroup;
     newRepair: RepairCreate = {
         repairCost: 0,
         repairDetails: '',
         repairType: '',
-    }
+    };
 
     constructor(
         private formBuilder: FormBuilder,
@@ -44,11 +52,11 @@ export class AddRepairModalComponent {
                 Validators.minLength(3),
                 Validators.maxLength(200),
             ]),
-        })
+        });
     }
 
     get f(): { [key: string]: AbstractControl } {
-        return this.newRepairForm.controls
+        return this.newRepairForm.controls;
     }
 
     submitNewRepair() {
@@ -56,13 +64,13 @@ export class AddRepairModalComponent {
             repairType: this.newRepairForm.value['repairType'],
             repairDetails: this.newRepairForm.value['repairDetails'],
             repairCost: this.newRepairForm.value['repairCost'],
-        }
-        this.addRepair.emit(this.newRepair)
+        };
+        this.addRepair.emit(this.newRepair);
     }
 
     cancelNewRepair() {
-        this.resetNewRepairForm()
-        this.addRepair.emit(null)
+        this.resetNewRepairForm();
+        this.addRepair.emit(null);
     }
 
     resetNewRepairForm() {
@@ -70,8 +78,12 @@ export class AddRepairModalComponent {
             repairCost: 0,
             repairDetails: '',
             repairType: '',
-        }
+        };
 
-        this.newRepairForm.reset(this.newRepair)
+        this.newRepairForm.reset(this.newRepair);
+    }
+
+    ngAfterViewInit(): void {
+        this.repairType.nativeElement.focus();
     }
 }

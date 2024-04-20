@@ -19,7 +19,12 @@
     >
         Yes
     </button>
-    <button type="button" (click)="cancel()" class="btn btn-sm btn-secondary">
+    <button
+        #cancelButton
+        type="button"
+        (click)="cancel()"
+        class="btn btn-sm btn-secondary"
+    >
         No
     </button>
 </div>
