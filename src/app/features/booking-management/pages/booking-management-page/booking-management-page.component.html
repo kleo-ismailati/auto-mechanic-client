@@ -5,14 +5,17 @@
 <app-background [hasBanner]="true">
     <app-breadcrumb [currentPage]="'Bookings'"></app-breadcrumb>
     <div class="container crumb-container">
-        <div class="container card my-2 py-2" *ngIf="!this.bookings">
+        <div
+            class="container card py-2"
+            *ngIf="!this.bookings || this.bookings.total == 0"
+        >
             <div class="row">
                 <h1 class="lead text-center">Bookings not found</h1>
             </div>
         </div>
         <!--  Booking list  -->
         <app-booking-list
-            *ngIf="this.bookings"
+            *ngIf="this.bookings && this.bookings.total != 0"
             (deleteBooking)="onDeleteBooking($event)"
             (switchToPage)="onSwitchToPage($event)"
             [bookings]="this.bookings"

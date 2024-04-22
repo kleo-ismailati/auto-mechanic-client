@@ -11,7 +11,10 @@
             </button>
         </div>
     </div>
-    <div class="table-container-autos">
+    <div class="row" *ngIf="!autos || autos.length == 0">
+        <h1 class="lead text-center">Autos not found</h1>
+    </div>
+    <div class="table-container-autos" *ngIf="autos && autos.length != 0">
         <p-table
             [value]="autos"
             styleClass="p-datatable-gridlines"
@@ -36,7 +39,7 @@
                             pInputText
                             type="text"
                             (input)="filter(dataTable, $event)"
-                            placeholder="Search keyword"
+                            placeholder="Filter keyword"
                         />
                     </span>
                 </div>
